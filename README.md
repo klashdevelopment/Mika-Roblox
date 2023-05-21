@@ -8,6 +8,7 @@ Mika is an advanced utility client made for [Roblox](https://github.com/klashdev
 <br>
 Simply head over to the [Saved Copy Loaders](https://github.com/klashdevelopment/Mika-Roblox/tree/main/loaders/doors/Saved%20Copies) and pick the latest one.
 Then, add this into your scripting software and load it up!<br>
+
 | Pros      | Cons |
 | ----------- | ----------- |
 | Prevents deadlinks      | You will have to manually update it every time it updates.       |
