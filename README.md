@@ -56,6 +56,7 @@ A this into your scripting software, inject, and load it up!
 | Always recive the latest version.      | If the link changes on any of the scripts, you will get a deadlink. We try to keep our links updated       |
 | Recive the latest bypasses.   | Features may be removed in future updates.        |
 </details>
+
 ## Unsaved Scripts
 
 Some scripts are not savable due to being protected. We respect this.  Due to this, they are not included in our loader. If you choose to use these scripts they are below.
