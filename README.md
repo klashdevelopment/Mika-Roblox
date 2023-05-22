@@ -1,8 +1,19 @@
 # Mika-Roblox
 Mika is an advanced utility client made for [Roblox](https://github.com/klashdevelopment/Mika-Roblox) and [Muck](https://github.com/klashdevelopment/Mika)
 
-## Doors
-### Choosing & Using
+## I need an executor/scripting software/injector!
+Alrighty! No problem. I personally use Fluxus (fluxteam.net, not ANYTHING ELSE)
+You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer" or "LinkVertize Intaller"**)
+
+| Name | Download | Features | Reason to use |
+| --- | --- | --- | --- |
+| ~~Mika~~ | none | ~~Easy to use with nice UI and system~~ | Not released |
+| ~~Comet 5~~ | none | ~~Amazing UI, easy keys, byfron bypass~~ | Not released |
+| [Comet 3](https://cometrbx.xyz) | [WAD](https://wearedevs.net/d/Comet) or [Official](https://cometrbx.xyz/download.html) | Nice UI, easy keys, byfron bypass (Requires MS Store) | Free & Easy |
+| [Fluxus](https://fluxteam.net) | [Windows](https://fluxteam.net/dl) or [Android](https://fluxteam.net/android) | Simple&Fast inject, bypass byfron, android support | Free (my personal favorite) |
+| [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
+
+### DOORS - Choosing & Using
 <details>
 <summary>Use a saved copy to prevent dead-links</summary>
 
