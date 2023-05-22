@@ -1,5 +1,11 @@
-# Mika-Roblox
-Mika is an advanced utility client made for [Roblox](https://github.com/klashdevelopment/Mika-Roblox) and [Muck](https://github.com/klashdevelopment/Mika)
+# MikaClient for Roblox
+Mika is an advanced utility client made for [Roblox](https://github.com/klashdevelopment/Mika-Roblox) and [Muck](https://github.com/klashdevelopment/Mika).
+
+*Supported Games*
+| Name | Script List | Script Roadmap |
+| ---- | ----------- | -------------- |
+| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtility | Doors's Mikamod, **M**Biside |
+| [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Muck's Mikamod | MitchClient |
 
 ## I need an executor/scripting software/injector!
 Alrighty! No problem. I personally use Fluxus (fluxteam.net, not ANYTHING ELSE)
