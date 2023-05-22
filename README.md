@@ -18,6 +18,13 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 <summary>Use a saved copy to prevent dead-links</summary>
 
 Simply head over to the [Saved Copy Loaders](https://github.com/klashdevelopment/Mika-Roblox/tree/main/loaders/doors/Saved%20Copies) and pick the latest one.
+In this example we will use "4-21-23".
+  
+Change "4-21-23" at the end of this command with your picked version.
+```lua
+loadString(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Saved%20Copies/Load-4-21-23.lua"))()
+```
+  
 Then, add this into your scripting software and load it up!<br>
 
 | Pros      | Cons |
