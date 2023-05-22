@@ -36,12 +36,17 @@ Then, add this into your scripting software and load it up!<br>
   
 <summary>Use the latest versions of the script bundle</summary>
 
-Simply head over to the [one main Loader](https://github.com/klashdevelopment/Mika-Roblox/tree/main/loaders/doors/Loader.lua).
-Then, add this into your scripting software and load it up!
+Simply use the [one main Loader](https://github.com/klashdevelopment/Mika-Roblox/tree/main/loaders/doors/Loader.lua) as the link in your script!
+
+```lua
+loadString(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
+```
+
+A this into your scripting software, inject, and load it up!
   
   
 | Pros      | Cons |
 | ----------- | ----------- |
-| Always recive the latest version.      | If the link changes, you will get a deadlink.       |
+| Always recive the latest version.      | If the link changes on any of the scripts, you will get a deadlink. We try to keep our links updated       |
 | Recive the latest bypasses.   | Features may be removed in future updates.        |
 </details>
