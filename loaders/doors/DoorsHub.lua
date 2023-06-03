@@ -1,0 +1,99 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+OrionLib:MakeNotification({
+	Name = "Mika",
+	Content = "Doors Injection",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+
+local Window = OrionLib:MakeWindow({Name = "Mika Doors Injector", HidePremium = false, SaveConfig = true, ConfigFolder = "mikadoorsinjectionservice"})
+
+--Player Tab--
+
+local PlayerTab2 = Window:MakeTab({
+	Name = "Latest",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerSection2 = PlayerTab2:AddSection({
+	Name = "Scripts"
+})
+PlayerSection2:AddButton({
+	Name = "MikaBundle",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
+  	end    
+})
+PlayerSection2:AddButton({
+	Name = "PlamenUtil",
+	Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI'))()
+  	end    
+})
+PlayerSection2:AddButton({
+	Name = "Vynixius",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Loader.lua"))()
+  	end    
+})
+PlayerSection2:AddButton({
+	Name = "Darkrai-X",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Doors"))()
+  	end    
+})
+PlayerSection2:AddButton({
+	Name = "Destroy",
+	Callback = function()
+        OrionLib:Destroy()
+  	end    
+})
+
+
+local PlayerTab = Window:MakeTab({
+	Name = "4-21-23",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerSection = PlayerTab:AddSection({
+	Name = "Saved Bundle"
+})
+PlayerSection:AddButton({
+	Name = "MikaBundle",
+	Callback = function()
+		update = "4-21-23"
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Saved%20Copies/Load-4-21-23.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "PlamenUtil",
+	Callback = function()
+		update = "4-21-23"
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/doors/" .. update .. "%20Update/PlamenUtil.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "Vynixius",
+	Callback = function()
+		update = "4-21-23"
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/doors/" .. update .. "%20Update/Vynixius.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "Darkrai-X",
+	Callback = function()
+		update = "4-21-23"
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/doors/" .. update .. "%20Update/Darkrai-X.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "Destroy",
+	Callback = function()
+        OrionLib:Destroy()
+  	end    
+})
+OrionLib:Init()
