@@ -21,6 +21,16 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 
 ### DOORS - Choosing & Using
 <details>
+  <summary><b>Use the brand new Doors Loader Hub</b></summary>
+  
+  From this new hub, you can access all the scripts in one!
+  
+  ```lua
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/DoorsHub.lua"))()
+  ```
+  
+</details>
+<details>
 <summary>Use a saved copy to prevent dead-links</summary>
 
 Simply head over to the [Saved Copy Loaders](https://github.com/klashdevelopment/Mika-Roblox/tree/main/loaders/doors/Saved%20Copies) and pick the latest one.
