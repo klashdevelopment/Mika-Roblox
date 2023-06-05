@@ -1,4 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Fly = loadstring(game:HttpGet(('https://raw.githubusercontent.com/KlashDevelopment/Mika-Roblox/main/libraries/Fly.lua')))()
+
 local Window = OrionLib:MakeWindow({Name = "Simple Walkspeed", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
 local PlayerTab = Window:MakeTab({
 	Name = "Config",
@@ -88,6 +90,13 @@ PlayerSection:AddToggle({
 		else
 			clip()
 		end
+	end    
+})
+PlayerSection:AddToggle({
+	Name = "Simple Flight",
+	Default = false,
+	Callback = function(Value)
+		Fly(Value)
 	end    
 })
 
