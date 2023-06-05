@@ -13,6 +13,40 @@ game.Players.LocalPlayer.Character.Humanoid.Changed:Connect(function(property)
 	    end
     end
 end)
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+	OrionLib:MakeNotification({
+		Name = "NoClip",
+		Content = "Enabled",
+		Image = "rbxassetid://4483345998",
+		Time = 3
+	})
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+	OrionLib:MakeNotification({
+		Name = "NoClip",
+		Content = "Disabled",
+		Image = "rbxassetid://4483345998",
+		Time = 3
+	})
+end
 
 local PlayerSection = PlayerTab:AddSection({
 	Name = "Player"
@@ -28,7 +62,7 @@ PlayerSection:AddSlider({
 	Increment = 1,
 	ValueName = "Walkspeed",
 	Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 	end    
 })
 
@@ -41,7 +75,19 @@ PlayerSection:AddSlider({
 	Increment = 1,
 	ValueName = "Jump Height",
 	Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        	game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+PlayerSection:AddToggle({
+	Name = "Simple NoClip",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+			noclip()
+		else
+			clip()
+		end
 	end    
 })
 
