@@ -92,7 +92,25 @@ PlayerSection:AddToggle({
 	end    
 })
 
---Player Tab End--
+
+local SCR = PlayerTab:AddSection({
+	Name = "Scripting"
+})
+local ScriptSaved = "print(\"Hello, World!\")"
+local SCRText = SCR:AddTextbox({
+	Name = "Script Text",
+	Default = "print(\"Hello, World!\")",
+	TextDisappear = true,
+	Callback = function(Value)
+		ScriptSaved = Value
+	end
+})
+SCR:AddButton({
+	Name = "Execute",
+	Callback = function()
+		loadstring(ScriptSaved)()
+	end
+})
 
 local PlayerSection2 = PlayerTab:AddSection({
 	Name = "GUI"
