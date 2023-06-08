@@ -53,6 +53,12 @@ Game:AddButton({
 		loadstring(game:HttpGet(DoorsHub))()
 	end
 })
+Game:AddButton({
+	Name = "Notoriety (Closes Hub)",
+	Callback = function()
+		loadstring(game:HttpGet(("https://raw.githubusercontent.com/ValoddVSC/NtrietyGUI/main/ValoddVSC"), true))()
+	end
+})
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
