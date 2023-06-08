@@ -19,6 +19,20 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 | [Fluxus](https://fluxteam.net) | [Windows](https://fluxteam.net/dl) or [Android](https://fluxteam.net/android) | Simple&Fast inject, bypass byfron, android support | Free (my personal favorite) |
 | [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
 
+
+## Using
+if you want individual games/scripts, see below.
+
+To use, please inject the game-specific HUB (See below), or the Mika Script (RECCOMENDED):
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/MikaHub.lua"))()
+```
+
+
+
+
+
+
 ### DOORS - Choosing & Using
 <details>
   <summary><b>Use the brand new Doors Loader Hub</b></summary>
