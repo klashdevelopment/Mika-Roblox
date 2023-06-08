@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Mika Sitewide", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "SimpleWalkspeed", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS"})
 local PlayerTab = Window:MakeTab({
 	Name = "Config",
 	Icon = "rbxassetid://4483345998",
