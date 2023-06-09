@@ -4,7 +4,8 @@ Mika is an advanced utility client made for [Roblox](https://github.com/klashdev
 *Supported Games*
 | Name | Script List | Script Roadmap |
 | ---- | ----------- | -------------- |
-| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtility | Doors's Mikamod, **M**Biside |
+| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtility | Doors's Mikamod |
+| [Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | NotoMikamod |
 | [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Muck's Mikamod | MitchClient |
 
 ## I need an executor/scripting software/injector!
@@ -28,8 +29,16 @@ To use, please inject the game-specific HUB (See below), or the Mika Script (REC
 loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/MikaHub.lua"))()
 ```
 
-
-
+### NOTORIETY - Using
+**Using saved copy**
+The latest copy is **6-8-23**.
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Load-6-08-23.lua"))()
+```
+**Latest Copy**
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
+```
 
 
 
