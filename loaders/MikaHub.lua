@@ -56,7 +56,7 @@ Game:AddButton({
 Game:AddButton({
 	Name = "Notoriety (Closes Hub)",
 	Callback = function()
-		loadstring(game:HttpGet(("https://raw.githubusercontent.com/ValoddVSC/NtrietyGUI/main/ValoddVSC"), true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
 	end
 })
 
