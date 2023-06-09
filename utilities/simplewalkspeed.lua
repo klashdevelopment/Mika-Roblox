@@ -123,6 +123,21 @@ PlayerSection2:AddButton({
         OrionLib:Destroy()
   	end    
 })
+local Visuals = Window:MakeTab({
+	Name = "Visual",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Sitewide = Visuals:AddSection({
+	Name = "All-Game"
+})
+Sitewide:AddToggle({
+	Name = "Hitboxes",
+	Default = settings():GetService("RenderSettings").ShowBoundingBoxes,
+	Callback = function(Value)
+		settings():GetService("RenderSettings").ShowBoundingBoxes = Value
+	end
+})
 
 --Settings End--
 
