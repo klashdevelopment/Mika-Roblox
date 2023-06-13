@@ -27,8 +27,8 @@ PlayerSection2:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
   	end    
 })
-PlayerSection:AddButton({
-	Name = "Doors's Mikamod",
+PlayerSection2:AddButton({
+	Name = "Doors Mikamod",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
   	end    
