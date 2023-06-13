@@ -1,5 +1,7 @@
 # MikaClient for Roblox
-Mika is an advanced utility client made for [Roblox](https://github.com/klashdevelopment/Mika-Roblox) and [Muck](https://github.com/klashdevelopment/Mika).
+Mika is the #1 fully open-sourced utility client for [Roblox](https://github.com/klashdevelopment/Mika-Roblox) and [Muck](https://github.com/klashdevelopment/Mika).
+
+We provide Injectors, Scripts, and most importantly: **NO KEY SYSTEM OR OBFUSCATION on our handmade scripts.**
 
 *Supported Games*
 | Name | Script List | Script Roadmap |
