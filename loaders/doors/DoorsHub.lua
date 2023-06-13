@@ -27,6 +27,12 @@ PlayerSection2:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
   	end    
 })
+PlayerSection:AddButton({
+	Name = "Doors's Mikamod",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
+  	end    
+})
 PlayerSection2:AddButton({
 	Name = "PlamenUtil",
 	Callback = function()
@@ -67,6 +73,12 @@ PlayerSection:AddButton({
 	Callback = function()
 		update = "4-21-23"
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Saved%20Copies/Load-4-21-23.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "Doors's Mikamod",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
   	end    
 })
 PlayerSection:AddButton({
