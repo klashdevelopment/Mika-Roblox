@@ -6,7 +6,7 @@ We provide Injectors, Scripts, and most importantly: **NO KEY SYSTEM OR OBFUSCAT
 *Supported Games*
 | Name | Script List | Script Roadmap |
 | ---- | ----------- | -------------- |
-| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtility | Doors's Mikamod |
+| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod | Better Mikamod and more scripts |
 | [Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | NotoMikamod |
 | [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Muck's Mikamod | MitchClient |
 
