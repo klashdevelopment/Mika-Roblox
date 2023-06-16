@@ -34,6 +34,12 @@ PlayerSection2:AddButton({
   	end    
 })
 PlayerSection2:AddButton({
+	Name = "Rooms Auto-Farm",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/DaRealGeo/roblox/master/rooms-autowalk"))()
+  	end    
+})
+PlayerSection2:AddButton({
 	Name = "PlamenUtil",
 	Callback = function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI'))()
@@ -76,9 +82,16 @@ PlayerSection:AddButton({
   	end    
 })
 PlayerSection:AddButton({
-	Name = "Doors's Mikamod",
+	Name = "Doors Mikamod",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
+  	end    
+})
+PlayerSection:AddButton({
+	Name = "Rooms Autowalk",
+	Callback = function()
+		update = "4-21-23"
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/doors/" .. update .. "%20Update/RoomsAuto.lua"))()
   	end    
 })
 PlayerSection:AddButton({

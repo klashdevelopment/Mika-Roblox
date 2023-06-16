@@ -6,8 +6,8 @@ We provide Injectors, Scripts, and most importantly: **NO KEY SYSTEM OR OBFUSCAT
 *Supported Games*
 | Name | Script List | Script Roadmap |
 | ---- | ----------- | -------------- |
-| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod | Better Mikamod and more scripts |
-| [Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | NotoMikamod |
+| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod, Rooms Autofarm | Doors Autofarm, Better Mikamod |
+| [Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | Noto's Mikamod |
 | [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Muck's Mikamod | MitchClient |
 
 ## I need an executor/scripting software/injector!
@@ -23,7 +23,7 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 | [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
 
 
-## Using
+# Using
 if you want individual games/scripts, see below.
 
 To use, please inject the game-specific HUB (See below), or the Mika Script (RECCOMENDED):
@@ -31,6 +31,9 @@ To use, please inject the game-specific HUB (See below), or the Mika Script (REC
 loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/MikaHub.lua"))()
 ```
 
+**The scripts below are game specific, but all included in the mika script above.**
+
+## Gamespecifics & More
 ### NOTORIETY - Using
 **Using saved copy**
 The latest copy is **6-8-23**.
