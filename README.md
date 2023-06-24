@@ -16,8 +16,8 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
-| ~~Mika~~ | none | ~~Easy to use with nice UI and system~~ | Not released |
-| ~~Comet 5~~ | none | ~~Amazing UI, easy keys, byfron bypass~~ | Not released |
+| [Mikan](https://mika.fly.dev) | [Web Client](https://mika.fly.dev)([Web Source](https://github.com/klashdevelopment/Mikan)) [Windows Client](https://github.com/klashdevelopment/Mikan-Desktop/releases/latest)([Windows Source](https://github.com/klashdevelopment/Mikan-Desktop)) | **SCRIPT EDITOR ONLY** | Custom-made script editor, fully open sourced. |
+| ~~Comet 5~~ | none | ~~Amazing UI, easy keys, byfron bypass~~ | Bugged atm lmao |
 | [Comet 3](https://cometrbx.xyz) | [WAD](https://wearedevs.net/d/Comet) or [Official](https://cometrbx.xyz/download.html) | Nice UI, easy keys, byfron bypass (Requires MS Store) | Free & Easy |
 | [Fluxus](https://fluxteam.net) | [Windows](https://fluxteam.net/dl) or [Android](https://fluxteam.net/android) | Simple&Fast inject, bypass byfron, android support | Free (my personal favorite) |
 | [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
