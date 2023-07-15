@@ -24,7 +24,7 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 | [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
 | [Hydrogen](https://hydrogen.sh/) | [MacOs/Android Download](https://hydrogen.sh/download) | Mac OS & Android support | Free |
 | PAID [Script-Ware](https://script-ware.com/) | [purchasable](https://script-ware.com/) | Paid version for Mac, Windows | works well |
-| [Script-Ware iOS](https://script-ware.com/ios) | [Download]([https://script-ware.com/ios](https://dev.script-ware.com/docs/iOS/install-guide)) | FREE, and the only ios executor | Free |
+| [Script-Ware iOS](https://script-ware.com/ios) | [Download](https://dev.script-ware.com/docs/iOS/install-guide) | FREE, and the only ios executor | Free |
 
 
 # Using
