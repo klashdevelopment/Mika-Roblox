@@ -9,7 +9,7 @@ We provide Injectors, Scripts, and most importantly: **NO KEY SYSTEM OR OBFUSCAT
 | [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod, Rooms Autofarm | Doors Autofarm, Better Mikamod |
 | [Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | Noto's Mikamod |
 | [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Muck's Mikamod | MitchClient |
-| [Unity/Itch.io games](https://github.com/klashdevelopment/Mika-Others) | Karlson (Dani), MinecraftClone (SamHogan), Jelly Drift (Dani) | Off the Balls (Dani), Balls? (Dani) |
+| [Unity/Itch.io games](https://github.com/klashdevelopment/Mika-Others) | Karlson (Dani), MinecraftClone (SamHogan), Jelly Drift (Dani), Balls? (Dani) | Slime Rancher, Subnautica |
 
 ## I need an executor/scripting software/injector!
 Alrighty! No problem. I personally use Fluxus (fluxteam.net, not ANYTHING ELSE)
@@ -22,6 +22,9 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 | [Comet 3](https://cometrbx.xyz) | [WAD](https://wearedevs.net/d/Comet) or [Official](https://cometrbx.xyz/download.html) | Nice UI, easy keys, byfron bypass (Requires MS Store) | Free & Easy |
 | [Fluxus](https://fluxteam.net) | [Windows](https://fluxteam.net/dl) or [Android](https://fluxteam.net/android) | Simple&Fast inject, bypass byfron, android support | Free (my personal favorite) |
 | [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
+| [Hydrogen](https://hydrogen.sh/) | [MacOs/Android Download](https://hydrogen.sh/download) | Mac OS & Android support | Free |
+| PAID [Script-Ware](https://script-ware.com/) | [purchasable](https://script-ware.com/) | Paid version for Mac, Windows | works well |
+| [Script-Ware iOS](https://script-ware.com/ios) | [Download]([https://script-ware.com/ios](https://dev.script-ware.com/docs/iOS/install-guide)) | FREE, and the only ios executor | Free |
 
 
 # Using
