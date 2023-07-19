@@ -59,7 +59,7 @@ PlayerSection:AddSlider({
 	Min = 16,
 	Max = 100,
 	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
-	Color = Color3.fromRGB(255,255,255),
+	Color = Color3.fromRGB(255,0,0),
 	Increment = 1,
 	ValueName = "Walkspeed",
 	Callback = function(Value)
@@ -68,20 +68,32 @@ PlayerSection:AddSlider({
 })
 
 PlayerSection:AddSlider({
-	Name = "Jump Height",
+	Name = "Jump Power",
 	Min = 40,
 	Max = 400,
 	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
-	Color = Color3.fromRGB(255,255,255),
+	Color = Color3.fromRGB(0,255,0),
 	Increment = 1,
-	ValueName = "Jump Height",
+	ValueName = "Jump Power",
 	Callback = function(Value)
         	game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
 	end    
 })
+PlayerSection:AddSlider({
+	Name = "Jump Height",
+	Min = 40,
+	Max = 400,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpHeight,
+	Color = Color3.fromRGB(0,0,255),
+	Increment = 1,
+	ValueName = "Jump Height",
+	Callback = function(Value)
+        	game.Players.LocalPlayer.Character.Humanoid.JumpHeight = Value
+	end    
+})
 
 PlayerSection:AddToggle({
-	Name = "Simple NoClip",
+	Name = "No-Clip",
 	Default = false,
 	Callback = function(Value)
 		if Value then
