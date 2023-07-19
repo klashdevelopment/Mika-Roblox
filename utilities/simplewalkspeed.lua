@@ -1,7 +1,7 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "SimpleWalkspeed", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS"})
-local PlayerTab = Window:MakeTab({
+local sws = OrionLib:MakeWindow({Name = "SimpleWalkspeed", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS"})
+local PlayerTab = sws:MakeTab({
 	Name = "Config",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
@@ -95,33 +95,28 @@ PlayerSection:AddToggle({
 local PlayerSection2 = PlayerTab:AddSection({
 	Name = "GUI"
 })
-PlayerSection2:AddButton({
-	Name = "Toggle Infinite HP",
-	Callback = function()
-		if x == 1 then
-			x = 0
+PlayerSection2:AddToggle({
+	Name = "InfiniteHP Beta",
+	Default = false,
+	Callback = function(Value)
+		if Value then
 			OrionLib:MakeNotification({
-				Name = "INFINITEHP",
-				Content = "Disabled",
-				Image = "rbxassetid://4483345998",
-				Time = 3
-			})
-		else
-			x = 1
-			OrionLib:MakeNotification({
-				Name = "INFINITEHP",
+				Name = "InfiniteHP",
 				Content = "Enabled",
 				Image = "rbxassetid://4483345998",
 				Time = 3
 			})
+			x = 1
+		else
+			OrionLib:MakeNotification({
+				Name = "InfiniteHP",
+				Content = "Disabled",
+				Image = "rbxassetid://4483345998",
+				Time = 3
+			})
+			x = 0
 		end
-  	end    
-})
-PlayerSection2:AddButton({
-	Name = "Destroy UI",
-	Callback = function()
-        OrionLib:Destroy()
-  	end    
+	end    
 })
 local Visuals = Window:MakeTab({
 	Name = "Visual",
@@ -137,6 +132,12 @@ Sitewide:AddToggle({
 	Callback = function(Value)
 		settings():GetService("RenderSettings").ShowBoundingBoxes = Value
 	end
+})
+Sitewide:AddButton({
+	Name = "Destroy UI",
+	Callback = function()
+        OrionLib:Destroy()
+  	end    
 })
 
 --Settings End--
