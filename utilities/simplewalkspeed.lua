@@ -118,7 +118,7 @@ PlayerSection2:AddToggle({
 		end
 	end    
 })
-local Visuals = Window:MakeTab({
+local Visuals = sws:MakeTab({
 	Name = "Visual",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
