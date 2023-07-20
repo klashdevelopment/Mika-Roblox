@@ -16,7 +16,33 @@ game.Players.LocalPlayer.Character.Humanoid.Changed:Connect(function(property)
 end)
 local Noclip = nil
 local Clip = nil
+function addEsp(player, part)
 
+        local esp = Instance.new("BillboardGui", part)
+        esp.Name = "ESP"
+        esp.AlwaysOnTop = true
+        esp.Size = UDim2.new(1,0,1,0)	
+
+        local espframe = Instance.new("Frame", esp)
+        espframe.BackgroundColor = player.TeamColor
+        espframe.Size = UDim2.new(1,0,1,0)
+        espframe.BackgroundColor = player.TeamColor
+
+        local namesp = Instance.new("BillboardGui", part)
+        namesp.Name = "NAME"
+        namesp.AlwaysOnTop = true
+        namesp.Size = UDim2.new(1,0,1,0)
+        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
+
+        local name = Instance.new("TextLabel", namesp)
+        name.Text = player.Name
+        name.Size = UDim2.new(2, 0,1, 0)
+        name.TextColor3 = Color3.new(0, 0, 0)
+        name.TextScaled = true
+        name.BackgroundTransparency = 1
+    end
+
+    
 function noclip()
 	Clip = false
 	local function Nocl()
@@ -91,6 +117,18 @@ PlayerSection:AddSlider({
         	game.Players.LocalPlayer.Character.Humanoid.JumpHeight = Value
 	end    
 })
+PlayerSection:AddSlider({
+	Name = "Jump Gravity",
+	Min = 40,
+	Max = 400,
+	Default = ,
+	Color = Color3.fromRGB(0,0,255),
+	Increment = 1,
+	ValueName = "Jump Height",
+	Callback = function(Value)
+        	game.Workspace.Gravity = Value
+	end    
+})
 
 PlayerSection:AddToggle({
 	Name = "No-Clip",
@@ -105,7 +143,7 @@ PlayerSection:AddToggle({
 })
 
 local PlayerSection2 = PlayerTab:AddSection({
-	Name = "GUI"
+	Name = "Others"
 })
 PlayerSection2:AddToggle({
 	Name = "InfiniteHP Beta",
@@ -139,7 +177,39 @@ local Sitewide = Visuals:AddSection({
 	Name = "All-Game"
 })
 Sitewide:AddToggle({
-	Name = "Hitboxes",
+	Name = "PlayerESP",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+			while wait(0.1) do
+		        for _, player in pairs(game:GetService("Players"):GetChildren()) do
+		            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
+		                if (game.Players.LocalPlayer ~= player) then
+		                    if not (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
+		                        addEsp(player, player.Character.HumanoidRootPart)
+		                    end
+		                end
+		            end
+		        end
+		    end
+		else
+			while wait(0.1) do
+		        for _, player in pairs(game:GetService("Players"):GetChildren()) do
+		            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
+		                if (game.Players.LocalPlayer ~= player) then
+		                    if (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
+		                        player.Character.HumanoidRootPart:FindFirstChild("ESP"):Destroy()
+		                        player.Character.HumanoidRootPart:FindFirstChild("NAME"):Destroy()
+		                    end
+		                end
+		            end
+		        end
+		    end
+		end
+	end    
+})
+Sitewide:AddToggle({
+	Name = "ShowHitboxes",
 	Default = settings():GetService("RenderSettings").ShowBoundingBoxes,
 	Callback = function(Value)
 		settings():GetService("RenderSettings").ShowBoundingBoxes = Value
