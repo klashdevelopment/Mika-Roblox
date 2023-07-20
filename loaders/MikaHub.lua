@@ -36,7 +36,7 @@ local Utils = PlayerTab:AddSection({
 	Name = "Miscellaneous"
 })
 Utils:AddButton({
-	Name = "SimpleWalkspeed (Closes Hub)",
+	Name = "Mikate (Closes Hub)",
 	Callback = function()
 		loadstring(game:HttpGet(SWS))()
 	end
