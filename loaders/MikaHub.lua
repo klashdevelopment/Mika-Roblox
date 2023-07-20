@@ -4,6 +4,7 @@ local DarkDexV5 = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblo
 local InfiniteYield = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/InfiniteYield.lua"
 local DoorsHub = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/DoorsHub.lua"
 local SWS = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/simplewalkspeed.lua"
+local CJRP = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRP.lua"
 local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/StreamSniper.lua"
 
 local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB"})
@@ -65,6 +66,12 @@ Game:AddButton({
 	Name = "Doors (Closes Hub)",
 	Callback = function()
 		loadstring(game:HttpGet(DoorsHub))()
+	end
+})
+Game:AddButton({
+	Name = "CountyJailRP",
+	Callback = function()
+		loadstring(game:HttpGet(CJRP))()
 	end
 })
 Game:AddButton({
