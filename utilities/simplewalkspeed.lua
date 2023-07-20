@@ -16,31 +16,6 @@ game.Players.LocalPlayer.Character.Humanoid.Changed:Connect(function(property)
 end)
 local Noclip = nil
 local Clip = nil
-function addEsp(player, part)
-
-        local esp = Instance.new("BillboardGui", part)
-        esp.Name = "ESP"
-        esp.AlwaysOnTop = true
-        esp.Size = UDim2.new(1,0,1,0)	
-
-        local espframe = Instance.new("Frame", esp)
-        espframe.BackgroundColor = player.TeamColor
-        espframe.Size = UDim2.new(1,0,1,0)
-        espframe.BackgroundColor = player.TeamColor
-
-        local namesp = Instance.new("BillboardGui", part)
-        namesp.Name = "NAME"
-        namesp.AlwaysOnTop = true
-        namesp.Size = UDim2.new(1,0,1,0)
-        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
-
-        local name = Instance.new("TextLabel", namesp)
-        name.Text = player.Name
-        name.Size = UDim2.new(2, 0,1, 0)
-        name.TextColor3 = Color3.new(0, 0, 0)
-        name.TextScaled = true
-        name.BackgroundTransparency = 1
-    end
 
     
 function noclip()
