@@ -53,6 +53,12 @@ Utils:AddButton({
 		loadstring(game:HttpGet(SynapseXSniper))()
 	end
 })
+Utils:AddButton({
+	Name = "SiriusDomainX",
+	Callback = function()
+		loadstring(game:HttpGet('https://sirius.menu/domainx'))() 
+	end
+})
 
 local GameTab = Window:MakeTab({
 	Name = "Game-Specific",
