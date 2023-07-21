@@ -85,13 +85,13 @@ PlayerSection:AddSlider({
 	end    
 })
 PlayerSection:AddSlider({
-	Name = "Jump Gravity",
+	Name = "Gravity",
 	Min = 0,
 	Max = 500,
 	Default = game.Workspace.Gravity,
-	Color = Color3.fromRGB(0,0,255),
+	Color = Color3.fromRGB(255,140,0),
 	Increment = 1,
-	ValueName = "Jump Height",
+	ValueName = "Gravity",
 	Callback = function(Value)
         	game.Workspace.Gravity = Value
 	end    
