@@ -20,7 +20,7 @@ local PlayerSection = PlayerTab:AddSection({
 
 
 PlayerSection:AddButton({
-	Name = "Dark Dex V5",
+	Name = "Dex (Closes Hub & Other Scripts)",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
 	end
