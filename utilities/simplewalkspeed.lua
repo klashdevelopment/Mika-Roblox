@@ -49,8 +49,8 @@ local PlayerSection = PlayerTab:AddSection({
 
 PlayerSection:AddSlider({
 	Name = "Walkspeed",
-	Min = 16,
-	Max = 100,
+	Min = 0,
+	Max = 500,
 	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
 	Color = Color3.fromRGB(255,0,0),
 	Increment = 1,
@@ -62,8 +62,8 @@ PlayerSection:AddSlider({
 
 PlayerSection:AddSlider({
 	Name = "Jump Power",
-	Min = 40,
-	Max = 400,
+	Min = 0,
+	Max = 500,
 	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
 	Color = Color3.fromRGB(0,255,0),
 	Increment = 1,
@@ -74,8 +74,8 @@ PlayerSection:AddSlider({
 })
 PlayerSection:AddSlider({
 	Name = "Jump Height",
-	Min = 40,
-	Max = 400,
+	Min = 0,
+	Max = 500,
 	Default = game.Players.LocalPlayer.Character.Humanoid.JumpHeight,
 	Color = Color3.fromRGB(0,0,255),
 	Increment = 1,
@@ -86,9 +86,9 @@ PlayerSection:AddSlider({
 })
 PlayerSection:AddSlider({
 	Name = "Jump Gravity",
-	Min = 40,
-	Max = 400,
-	Default = ,
+	Min = 0,
+	Max = 500,
+	Default = game.Workspace.Gravity,
 	Color = Color3.fromRGB(0,0,255),
 	Increment = 1,
 	ValueName = "Jump Height",
