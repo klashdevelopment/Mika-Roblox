@@ -6,14 +6,6 @@ local PlayerTab = sws:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-local x = 0
-game.Players.LocalPlayer.Character.Humanoid.Changed:Connect(function(property)
-     if x == 1 then
-	    if property == "Health" then
-	    	game.Players.LocalPlayer.Character.Humanoid.Health = 99999
-	    end
-    end
-end)
 local Noclip = nil
 local Clip = nil
 
@@ -119,29 +111,6 @@ PlayerSection:AddToggle({
 
 local PlayerSection2 = PlayerTab:AddSection({
 	Name = "Others"
-})
-PlayerSection2:AddToggle({
-	Name = "InfiniteHP Beta",
-	Default = false,
-	Callback = function(Value)
-		if Value then
-			OrionLib:MakeNotification({
-				Name = "InfiniteHP",
-				Content = "Enabled",
-				Image = "rbxassetid://4483345998",
-				Time = 3
-			})
-			x = 1
-		else
-			OrionLib:MakeNotification({
-				Name = "InfiniteHP",
-				Content = "Disabled",
-				Image = "rbxassetid://4483345998",
-				Time = 3
-			})
-			x = 0
-		end
-	end    
 })
 local Visuals = sws:MakeTab({
 	Name = "Visual",
