@@ -1,8 +1,10 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local sws = OrionLib:MakeWindow({Name = "Mikate (formerly SimpleWalkspeed)", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS", IntroText = "KlashDevelopment", IntroIcon = "rbxassetid://4483345998"})
+local sws = OrionLib:MakeWindow({Name = "Mikate", Icon = "rbxassetid://8834748103", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS", IntroText = "KlashDevelopment", IntroIcon = "rbxassetid://4483345998"})
+
+
 local PlayerTab = sws:MakeTab({
-	Name = "Config",
+	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -46,16 +48,21 @@ local PlayerSection = PlayerTab:AddSection({
 	Name = "Player"
 })
 
+local setwalkspeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+local setjumpheight = game.Players.LocalPlayer.Character.Humanoid.JumpHeight
+local setjumppower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
+local setgravity = game.Workspace.Gravity
 
 PlayerSection:AddSlider({
 	Name = "Walkspeed",
 	Min = 0,
 	Max = 500,
-	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Default = setwalkspeed,
 	Color = Color3.fromRGB(255,0,0),
 	Increment = 1,
 	ValueName = "Walkspeed",
 	Callback = function(Value)
+		setwalkspeed = Value
 		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 	end    
 })
@@ -64,11 +71,12 @@ PlayerSection:AddSlider({
 	Name = "Jump Power",
 	Min = 0,
 	Max = 500,
-	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Default = setjumppower,
 	Color = Color3.fromRGB(0,255,0),
 	Increment = 1,
 	ValueName = "Jump Power",
 	Callback = function(Value)
+			setjumppower = Value
         	game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
 	end    
 })
@@ -76,11 +84,12 @@ PlayerSection:AddSlider({
 	Name = "Jump Height",
 	Min = 0,
 	Max = 500,
-	Default = game.Players.LocalPlayer.Character.Humanoid.JumpHeight,
+	Default = setjumpheight,
 	Color = Color3.fromRGB(0,0,255),
 	Increment = 1,
 	ValueName = "Jump Height",
 	Callback = function(Value)
+			setjumpheight = Value
         	game.Players.LocalPlayer.Character.Humanoid.JumpHeight = Value
 	end    
 })
@@ -88,11 +97,12 @@ PlayerSection:AddSlider({
 	Name = "Gravity",
 	Min = 0,
 	Max = 500,
-	Default = game.Workspace.Gravity,
+	Default = setgravity,
 	Color = Color3.fromRGB(255,140,0),
 	Increment = 1,
 	ValueName = "Gravity",
 	Callback = function(Value)
+			setgravity = Value
         	game.Workspace.Gravity = Value
 	end    
 })
@@ -112,6 +122,49 @@ PlayerSection:AddToggle({
 local PlayerSection2 = PlayerTab:AddSection({
 	Name = "Others"
 })
+
+local Loops = sws:MakeTab({
+	Name = "Loops",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local playerlps = Loops:AddSection({
+	Name = "Player Loops"
+})
+local loopWalkspeed = false
+local loopJumpPower = false
+local loopJumpHeight = false
+local loopGravity = false
+
+playerlps:AddToggle({
+	Name = "Loop-Set Walkspeed",
+	Default = loopWalkspeed,
+	Callback = function(Value)
+		loopWalkspeed = Value
+	end
+})
+playerlps:AddToggle({
+	Name = "Loop-Set JumpHeight",
+	Default = loopJumpHeight,
+	Callback = function(Value)
+		loopJumpHeight = Value
+	end
+})
+playerlps:AddToggle({
+	Name = "Loop-Set JumpPower",
+	Default = loopJumpPower,
+	Callback = function(Value)
+		loopJumpPower = Value
+	end
+})
+playerlps:AddToggle({
+	Name = "Loop-Set Gravity",
+	Default = loopGravity,
+	Callback = function(Value)
+		loopGravity = Value
+	end
+})
+
 local Visuals = sws:MakeTab({
 	Name = "Visual",
 	Icon = "rbxassetid://4483345998",
@@ -121,7 +174,7 @@ local Sitewide = Visuals:AddSection({
 	Name = "All-Game"
 })
 Sitewide:AddButton({
-	Name = "PlayerESP",
+	Name = "(Broken) PlayerESP",
 	Callback = function() 
 	    function addEsp(player, part)
 	
@@ -179,6 +232,30 @@ Sitewide:AddButton({
         OrionLib:Destroy()
   	end    
 })
+
+local Credits = sws:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+Credits:AddLabel("Scripting - GavinGoGaming (Klash CEO)")
+Credits:AddLabel("Playtest - Reality (Klash Dev)")
+
+while true do
+	if loopWalkspeed then
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = setwalkspeed
+	end
+	if loopJumpPower then
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = setjumppower
+	end
+	if loopJumpHeight then
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = setjumpheight
+	end
+	if loopGravity then
+		game.Workspace.Gravity = setgravity
+	end
+	wait(0.01)
+end
 
 --Settings End--
 
