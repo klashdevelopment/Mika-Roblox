@@ -10,7 +10,13 @@ local PlayerTab = sws:MakeTab({
 })
 local Noclip = nil
 local Clip = nil
-
+function UnlockParts(character)
+	for _, part in ipairs(character:GetDescendants()) do
+		if part:IsA("BasePart") then
+			part.Locked = true
+		end
+	end
+end
     
 function noclip()
 	Clip = false
@@ -136,8 +142,12 @@ PlayerSection2:AddToggle({
 })
 PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
 PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
-            
-            
+PlayerSection2:AddButton({
+	Name = "Unlock Player Parts",
+	Callback = function()
+		UnlockParts(game.Players.LocalPlayer.Character)
+	end
+})
             
 local function connect(signal, callback)
     local connection = signal:Connect(callback);
