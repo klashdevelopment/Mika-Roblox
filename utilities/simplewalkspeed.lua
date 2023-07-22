@@ -108,6 +108,14 @@ PlayerSection:AddSlider({
 })
 
 PlayerSection:AddToggle({
+	Name = "Use JumpPower not JumpHeight",
+	Default = game.Players.LocalPlayer.Character.Humanoid.UseJumpPower,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.UseJumpPower = Value
+	end    
+})
+
+PlayerSection:AddToggle({
 	Name = "No-Clip",
 	Default = false,
 	Callback = function(Value)
@@ -122,7 +130,168 @@ PlayerSection:AddToggle({
 local PlayerSection2 = PlayerTab:AddSection({
 	Name = "Others"
 })
+PlayerSection2:AddToggle({ Name = "Fake Lag", Default = false, Save = true, Flag = "other_exploits_fakelag", Callback = function(value)
+                game:GetService("NetworkClient"):SetOutgoingKBPSLimit(value and 1 or 0);
+            end });
+            
+local invisRunning = false;
+local invisDied;
+local invisFix;
+	local Player = game.Players.LocalPlayer
+	repeat wait(.1) until Player.Character
+	local Character = Player.Character
+	local IsInvis = false
+	local IsRunning = true
+	local CF
+	local Void = workspace.FallenPartsDestroyHeight
+	local InvisibleCharacter
+	
+function Respawn()
+		IsRunning = false
+		if IsInvis == true then
+			pcall(function()
+				Player.Character = Character
+				wait()
+				Character.Parent = workspace
+				Character:FindFirstChildWhichIsA'Humanoid':Destroy()
+				IsInvis = false
+				InvisibleCharacter.Parent = nil
+				invisRunning = false
+			end)
+		elseif IsInvis == false then
+			pcall(function()
+				Player.Character = Character
+				wait()
+				Character.Parent = workspace
+				Character:FindFirstChildWhichIsA'Humanoid':Destroy()
+				TurnVisible()
+			end)
+		end
+	end
+	function TurnVisible()
+		if IsInvis == false then return end
+		invisFix:Disconnect()
+		invisDied:Disconnect()
+		CF = workspace.CurrentCamera.CFrame
+		Character = Character
+		local CF_1 = Player.Character.HumanoidRootPart.CFrame
+		Character.HumanoidRootPart.CFrame = CF_1
+		InvisibleCharacter:Destroy()
+		Player.Character = Character
+		Character.Parent = workspace
+		IsInvis = false
+		Player.Character.Animate.Disabled = true
+		Player.Character.Animate.Disabled = false
+		invisDied = Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+			Respawn()
+			invisDied:Disconnect()
+		end)
+		invisRunning = false
+	end
+function Invisible()
+	if invisRunning then return end
+	invisRunning = true
+	-- Full credit to AmokahFox @V3rmillion
+	Character.Archivable = true
+	InvisibleCharacter = Character:Clone()
+	InvisibleCharacter.Parent = game:GetService'Lighting'
+	InvisibleCharacter.Name = ""
 
+	invisFix = game:GetService("RunService").Stepped:Connect(function()
+		pcall(function()
+			local IsInteger
+			if tostring(Void):find'-' then
+				IsInteger = true
+			else
+				IsInteger = false
+			end
+			local Pos = Player.Character.HumanoidRootPart.Position
+			local Pos_String = tostring(Pos)
+			local Pos_Seperate = Pos_String:split(', ')
+			local X = tonumber(Pos_Seperate[1])
+			local Y = tonumber(Pos_Seperate[2])
+			local Z = tonumber(Pos_Seperate[3])
+			if IsInteger == true then
+				if Y <= Void then
+					Respawn()
+				end
+			elseif IsInteger == false then
+				if Y >= Void then
+					Respawn()
+				end
+			end
+		end)
+	end)
+
+	for i,v in pairs(InvisibleCharacter:GetDescendants())do
+		if v:IsA("BasePart") then
+			if v.Name == "HumanoidRootPart" then
+				v.Transparency = 1
+			else
+				v.Material = Enum.Material.ForceField
+				v.Color = Color3.fromRGB(25,25,25)
+			end
+		end
+	end
+
+	
+	invisDied = InvisibleCharacter:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+		Respawn()
+		invisDied:Disconnect()
+	end)
+
+	if IsInvis == true then return end
+	IsInvis = true
+	CF = workspace.CurrentCamera.CFrame
+	local CF_1 = Player.Character.HumanoidRootPart.CFrame
+	Character:MoveTo(Vector3.new(0,math.pi*1000000,0))
+	workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+	wait(.2)
+	workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+	InvisibleCharacter = InvisibleCharacter
+	Character.Parent = game:GetService'Lighting'
+	InvisibleCharacter.Parent = workspace
+	InvisibleCharacter.HumanoidRootPart.CFrame = CF_1
+	Player.Character = InvisibleCharacter
+	workspace.CurrentCamera:remove()
+	wait(.1)
+	repeat wait() until Player.Character ~= nil
+	workspace.CurrentCamera.CameraSubject = Player.Character:FindFirstChildWhichIsA('Humanoid')
+	workspace.CurrentCamera.CameraType = "Custom"
+	Player.CameraMinZoomDistance = 0.5
+	Player.CameraMaxZoomDistance = 400
+	Player.CameraMode = "Classic"
+	Player.Character.Head.Anchored = false
+	Player.Character.Animate.Disabled = true
+	Player.Character.Animate.Disabled = false
+end
+local flightEnabled = false
+local expi = sws:MakeTab({
+	Name = "Exploits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+expi:AddToggle({
+	Name = "Flight",
+	Default = flightEnabled,
+	Callback = function(Value)
+		flightEnabled = Value
+	end
+})
+expi:AddSlider({ Name = "Flight Speed", Min = 10, Max = 200, Default = 100, ValueName = "studs/s", Save = true, Flag = "flyspeed" });
+
+expi:AddButton({
+	Name = "Invisible",
+	Callback = function()
+		Invisible()
+	end
+})
+expi:AddButton({
+	Name = "Visible",
+	Callback = function()
+		TurnVisible()
+	end
+})
 local Loops = sws:MakeTab({
 	Name = "Loops",
 	Icon = "rbxassetid://4483345998",
@@ -236,6 +405,31 @@ while true do
 	end
 	if loopGravity then
 		game.Workspace.Gravity = setgravity
+	end
+	if flightEnabled then
+		local rootPart = game.Players.LocalPlayer.Character.Humanoid.RootPart;
+		local camera = workspace.CurrentCamera;
+		local inputService = game:GetService("UserInputService");
+            local velocity = Vector3.zero;
+            if inputService:IsKeyDown(Enum.KeyCode.W) then
+                velocity += camera.CFrame.LookVector;
+            end
+            if inputService:IsKeyDown(Enum.KeyCode.S) then
+                velocity += -camera.CFrame.LookVector;
+            end
+            if inputService:IsKeyDown(Enum.KeyCode.D) then
+                velocity += camera.CFrame.RightVector;
+            end
+            if inputService:IsKeyDown(Enum.KeyCode.A) then
+                velocity += -camera.CFrame.RightVector;
+            end
+            if inputService:IsKeyDown(Enum.KeyCode.Space) then
+                velocity += rootPart.CFrame.UpVector;
+            end
+            if inputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+                velocity += -rootPart.CFrame.UpVector;
+            end
+            rootPart.Velocity = velocity * OrionLib.Flags["flyspeed"].Value;
 	end
 	wait(0.01)
 end
