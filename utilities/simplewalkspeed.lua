@@ -309,6 +309,14 @@ expi:AddToggle({
 	end
 })
 local xray = {};
+local function isCharacterPart(part)
+    for _, player in next, game.Players:GetPlayers() do
+        if player.Character and part:IsDescendantOf(player.Character) then
+            return true;
+        end
+    end
+    return false;
+end
 expi:AddToggle({ Name = "X-Ray", Default = false, Save = true, Flag = "other_game_xray", Callback = function(value)
                 if value then
                     for _, part in next, workspace:GetDescendants() do
@@ -329,7 +337,7 @@ expi:AddToggle({ Name = "X-Ray", Default = false, Save = true, Flag = "other_gam
             end });
 
             expi:AddButton({ Name = "Rejoin Game", Callback = function()
-                teleportService:Teleport(game.PlaceId);
+                game:GetService("TeleportService"):Teleport(game.PlaceId);
             end });
 expi:AddSlider({ Name = "Flight Speed", Min = 10, Max = 200, Default = 100, ValueName = "studs/s", Save = true, Flag = "flyspeed" });
 
