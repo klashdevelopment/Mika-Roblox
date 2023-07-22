@@ -317,7 +317,7 @@ local function isCharacterPart(part)
     end
     return false;
 end
-expi:AddToggle({ Name = "X-Ray", Default = false, Save = true, Flag = "other_game_xray", Callback = function(value)
+expi:AddToggle({ Name = "X-Ray", Default = false, Callback = function(value)
                 if value then
                     for _, part in next, workspace:GetDescendants() do
                         if part:IsA("BasePart") and part.Transparency ~= 1 and not part:IsDescendantOf(workspace.CurrentCamera) and not isCharacterPart(part) then
