@@ -115,7 +115,15 @@ PlayerSection:AddToggle({
 	end    
 })
 
-PlayerSection:AddToggle({
+
+
+local PlayerSection2 = PlayerTab:AddSection({
+	Name = "Others"
+})
+PlayerSection2:AddToggle({ Name = "Fake Lag", Default = false, Save = true, Flag = "other_exploits_fakelag", Callback = function(value)
+                game:GetService("NetworkClient"):SetOutgoingKBPSLimit(value and 1 or 0);
+            end });
+PlayerSection2:AddToggle({
 	Name = "No-Clip",
 	Default = false,
 	Callback = function(Value)
@@ -126,14 +134,36 @@ PlayerSection:AddToggle({
 		end
 	end    
 })
-
-local PlayerSection2 = PlayerTab:AddSection({
-	Name = "Others"
-})
-PlayerSection2:AddToggle({ Name = "Fake Lag", Default = false, Save = true, Flag = "other_exploits_fakelag", Callback = function(value)
-                game:GetService("NetworkClient"):SetOutgoingKBPSLimit(value and 1 or 0);
-            end });
+PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
+PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
             
+            
+            
+local function connect(signal, callback)
+    local connection = signal:Connect(callback);
+    table.insert(OrionLib.Connections, connection);
+    return connection;
+end
+connect(game:GetService("UserInputService").InputBegan, function(input, processed)
+    if input.UserInputType.Name == "MouseButton1" and not processed and OrionLib.Flags["movement_teleporting_clicktp"].Value then
+        local character = game.Players.LocalPlayer.Character;
+        local camPos = workspace.CurrentCamera.CFrame.Position;
+		local mouse = game.Players.LocalPlayer:GetMouse();
+        local ray = Ray.new(camPos, mouse.Hit.Position - camPos);
+        local _, hit, normal = workspace:FindPartOnRayWithIgnoreList(ray, { camera });
+        if hit and normal then
+            character:PivotTo(CFrame.new(hit + normal));
+        end
+    end
+    if input.KeyCode.Name == "Space" and not processed and OrionLib.Flags["movement_character_infinitejump"].Value then
+        local character = game.Players.LocalPlayer.Character;
+        local humanoid = character and character:FindFirstChildOfClass("Humanoid");
+        if humanoid then
+            humanoid:ChangeState("Jumping");
+        end 
+    end
+end);
+
 local invisRunning = false;
 local invisDied;
 local invisFix;
@@ -278,6 +308,29 @@ expi:AddToggle({
 		flightEnabled = Value
 	end
 })
+local xray = {};
+expi:AddToggle({ Name = "X-Ray", Default = false, Save = true, Flag = "other_game_xray", Callback = function(value)
+                if value then
+                    for _, part in next, workspace:GetDescendants() do
+                        if part:IsA("BasePart") and part.Transparency ~= 1 and not part:IsDescendantOf(workspace.CurrentCamera) and not isCharacterPart(part) then
+                            if not xray[part] or xray[part] ~= part.Transparency then
+                                xray[part] = part.Transparency;
+                            end
+                            part.Transparency = 0.75;
+                        end
+                    end
+                else
+                    for _, part in next, workspace:GetDescendants() do
+                        if xray[part] then
+                            part.Transparency = xray[part];
+                        end
+                    end
+                end
+            end });
+
+            expi:AddButton({ Name = "Rejoin Game", Callback = function()
+                teleportService:Teleport(game.PlaceId);
+            end });
 expi:AddSlider({ Name = "Flight Speed", Min = 10, Max = 200, Default = 100, ValueName = "studs/s", Save = true, Flag = "flyspeed" });
 
 expi:AddButton({
