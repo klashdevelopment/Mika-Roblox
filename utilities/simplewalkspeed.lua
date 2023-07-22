@@ -173,52 +173,6 @@ local Visuals = sws:MakeTab({
 local Sitewide = Visuals:AddSection({
 	Name = "All-Game"
 })
-Sitewide:AddButton({
-	Name = "(Broken) PlayerESP",
-	Callback = function() 
-	    function addEsp(player, part)
-	
-	        local esp = Instance.new("BillboardGui", part)
-	        esp.Name = "ESP"
-	        esp.AlwaysOnTop = true
-	        esp.Size = UDim2.new(1,0,1,0)	
-	
-	        local espframe = Instance.new("Frame", esp)
-	        espframe.BackgroundColor = player.TeamColor
-	        espframe.Size = UDim2.new(1,0,1,0)
-	        espframe.BackgroundColor = player.TeamColor
-	
-	        local namesp = Instance.new("BillboardGui", part)
-	        namesp.Name = "NAME"
-	        namesp.AlwaysOnTop = true
-	        namesp.Size = UDim2.new(1,0,1,0)
-	        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
-	
-	        local name = Instance.new("TextLabel", namesp)
-	        name.Text = player.Name
-	        name.Size = UDim2.new(2, 0,1, 0)
-	        name.TextColor3 = Color3.new(0, 0, 0)
-	        name.TextScaled = true
-	        name.BackgroundTransparency = 1
-	    end
-	
-	    while wait(0.1) do
-	        for _, player in pairs(game:GetService("Players"):GetChildren()) do
-	            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
-	                if (game.Players.LocalPlayer ~= player) then
-	                    if not (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
-	                        addEsp(player, player.Character.HumanoidRootPart)
-	                        else
-	                        player.Character.HumanoidRootPart:FindFirstChild("ESP"):Destroy()
-	                        player.Character.HumanoidRootPart:FindFirstChild("NAME"):Destroy()
-	                        addEsp(player, player.Character.HumanoidRootPart)
-	                    end
-	                end
-	            end
-	        end
-	    end
-	end
-})
 Sitewide:AddToggle({
 	Name = "ShowHitboxes",
 	Default = settings():GetService("RenderSettings").ShowBoundingBoxes,
@@ -233,6 +187,33 @@ Sitewide:AddButton({
   	end    
 })
 
+local loadedesp;
+local espLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/main/library/esp/esp.lua"))();
+wait(0.1)
+local visuals = sws:MakeTab({ Name = "ESPs",
+	Icon = "rbxassetid://4483345998" });
+    do
+        local esp = visuals:AddSection({ Name = "ESP" });
+        do
+            esp:AddButton({ Name = "Enable Esp", Callback = function()
+            		if not loadedesp then
+            			espLibrary:Load();
+						espLibrary.options.enabled = true;
+						loadedesp = true;
+					end
+            	end
+            })
+            esp:AddButton({ Name = "Disable Esp", Callback = function()
+            		if loadedesp then
+						espLibrary.options.enabled = false;
+            			espLibrary:Unload();
+						loadedesp = false;
+					end
+            	end
+            })
+        end
+    end
+    
 local Credits = sws:MakeTab({
 	Name = "Credits",
 	Icon = "rbxassetid://8834748103",
@@ -240,6 +221,8 @@ local Credits = sws:MakeTab({
 })
 Credits:AddLabel("Scripting - GavinGoGaming (Klash CEO)")
 Credits:AddLabel("Playtest - Reality (Klash Dev)")
+
+OrionLib:Init()
 
 while true do
 	if loopWalkspeed then
@@ -256,7 +239,3 @@ while true do
 	end
 	wait(0.01)
 end
-
---Settings End--
-
-OrionLib:Init() --UI Lib End
