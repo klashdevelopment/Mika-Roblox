@@ -625,12 +625,12 @@ if game.PlaceId == CJRPGameId then
 	local CJRPSection = CJRP:AddSection({ Name = "County Jail Roleplay" })
 	CJRPSection:AddParagraph("                                  -- Teleportation --", "For these to work, you must stand atleast semi-close to the location for it to work.")
 	CJRPSection:AddButton({
-		Name = "Maxsec Keycard (Stand at the room's enterence)",
+		Name = "Maxsec Keycard (Works Best in Maxsec)",
 		Callback = function()
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(96, -6, -433)
 		end
 	})
-	CJRPSection:AddParagraph("                                        -- Toggles --", "")
+	CJRPSection:AddParagraph("                                   -- Destruction --", "")
 	
 	function destroyIfDoor(l)
 		if l.Name == "MetalDoor" then 
