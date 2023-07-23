@@ -1,6 +1,14 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local sws = OrionLib:MakeWindow({Name = "Mikate", Icon = "rbxassetid://8834748103", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS", IntroText = "KlashDevelopment", IntroIcon = "rbxassetid://4483345998"})
+local CJRPGameId = 6843988672
+
+local loadingText = "KlashDevelopment"
+local titleText = "Mikate"
+if game.PlaceId == CJRPGameId then
+	loadingText = "Mikate for County Jail RP"
+	titleText = "Mikate for CJRP"
+end
+local sws = OrionLib:MakeWindow({Name = titleText, Icon = "rbxassetid://8834748103", HidePremium = false, SaveConfig = true, ConfigFolder = "Mikate", IntroText = loadingText, IntroIcon = "rbxassetid://4483345998"})
 
 local PlayerTab = sws:MakeTab({
 	Name = "Main",
@@ -58,10 +66,31 @@ local setjumpheight = game.Players.LocalPlayer.Character.Humanoid.JumpHeight
 local setjumppower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
 local setgravity = game.Workspace.Gravity
 
+local minws = 0
+local minjh = 0
+local minjp = 0
+local mingr = 0
+
+local maxws = 500
+local maxjh = 500
+local maxjp = 500
+local maxgr = 500
+if game.PlaceId == CJRPGameId then
+	maxws = 20
+	minws = 16
+	maxgr = setgravity
+	mingr = setgravity
+	maxjh = setjumpheight
+	minjh = setjumpheight
+	maxjp = setjumppower
+	minjp = setjumpheight
+	PlayerSection:AddParagraph("County Jail Roleplay - Warnings", "You are in a high-anicheat game. Your options are limited. See the CJRP tab for this game's exploits. JumpHeight, JumpPower, and Gravity are locked. Walkspeed is capped, and bannable cheats are disabled.")
+end
+
 PlayerSection:AddSlider({
 	Name = "Walkspeed",
-	Min = 0,
-	Max = 500,
+	Min = minws,
+	Max = maxws,
 	Default = setwalkspeed,
 	Color = Color3.fromRGB(255,0,0),
 	Increment = 1,
@@ -74,8 +103,8 @@ PlayerSection:AddSlider({
 
 PlayerSection:AddSlider({
 	Name = "Jump Power",
-	Min = 0,
-	Max = 500,
+	Min = minjp,
+	Max = maxjp,
 	Default = setjumppower,
 	Color = Color3.fromRGB(0,255,0),
 	Increment = 1,
@@ -87,8 +116,8 @@ PlayerSection:AddSlider({
 })
 PlayerSection:AddSlider({
 	Name = "Jump Height",
-	Min = 0,
-	Max = 500,
+	Min = minjh,
+	Max = maxjh,
 	Default = setjumpheight,
 	Color = Color3.fromRGB(0,0,255),
 	Increment = 1,
@@ -100,8 +129,8 @@ PlayerSection:AddSlider({
 })
 PlayerSection:AddSlider({
 	Name = "Gravity",
-	Min = 0,
-	Max = 500,
+	Min = mingr,
+	Max = maxgr,
 	Default = setgravity,
 	Color = Color3.fromRGB(255,140,0),
 	Increment = 1,
@@ -139,8 +168,10 @@ PlayerSection2:AddToggle({
 		end
 	end    
 })
+if game.PlaceId ~= CJRPGameId then
 PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
 PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
+end
 PlayerSection2:AddButton({
 	Name = "Unlock Player Parts",
 	Callback = function()
@@ -164,12 +195,14 @@ connect(game:GetService("UserInputService").InputBegan, function(input, processe
             character:PivotTo(CFrame.new(hit + normal));
         end
     end
+    if game.PlaceId ~= CJRPGameId then
     if input.KeyCode.Name == "Space" and not processed and OrionLib.Flags["movement_character_infinitejump"].Value then
         local character = game.Players.LocalPlayer.Character;
         local humanoid = character and character:FindFirstChildOfClass("Humanoid");
         if humanoid then
             humanoid:ChangeState("Jumping");
         end 
+    end
     end
 end);
 
@@ -310,6 +343,7 @@ local expi = sws:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+if game.PlaceId ~= CJRPGameId then
 expi:AddToggle({
 	Name = "Flight",
 	Default = flightEnabled,
@@ -317,6 +351,7 @@ expi:AddToggle({
 		flightEnabled = Value
 	end
 })
+end
 local xray = {};
 local function isCharacterPart(part)
     for _, player in next, game.Players:GetPlayers() do
@@ -348,6 +383,7 @@ expi:AddToggle({ Name = "X-Ray", Default = false, Callback = function(value)
             expi:AddButton({ Name = "Rejoin Game", Callback = function()
                 game:GetService("TeleportService"):Teleport(game.PlaceId);
             end });
+            if game.PlaceId ~= CJRPGameId then
 expi:AddSlider({ Name = "Flight Speed", Min = 10, Max = 200, Default = 100, ValueName = "studs/s", Save = true, Flag = "flyspeed" });
 
 expi:AddButton({
@@ -361,7 +397,8 @@ expi:AddButton({
 	Callback = function()
 		TurnVisible()
 	end
-})
+})end
+if game.PlaceId ~= CJRPGameId then
 local Loops = sws:MakeTab({
 	Name = "Loops",
 	Icon = "rbxassetid://4483345998",
@@ -403,6 +440,7 @@ playerlps:AddToggle({
 		loopGravity = Value
 	end
 })
+end
 
 local Visuals = sws:MakeTab({
 	Name = "Visual",
@@ -434,6 +472,7 @@ local visuals = sws:MakeTab({ Name = "ESPs",
     do
         local esp = visuals:AddSection({ Name = "ESP" });
         do
+        	if game.PlaceId ~= CJRPGameId then
             esp:AddButton({ Name = "Enable Esp", Callback = function()
             		if not loadedesp then
             			espLibrary:Load();
@@ -450,6 +489,54 @@ local visuals = sws:MakeTab({ Name = "ESPs",
 					end
             	end
             })
+            else
+            esp:AddButton({
+				Name = "Enable JailRP ESP",
+				Callback = function()
+					function addEsp(player, part)
+				
+				        local esp = Instance.new("BillboardGui", part)
+				        esp.Name = "ESP"
+				        esp.AlwaysOnTop = true
+				        esp.Size = UDim2.new(1,0,1,0)	
+				
+				        local espframe = Instance.new("Frame", esp)
+				        espframe.BackgroundColor = player.TeamColor
+				        espframe.Size = UDim2.new(1,0,1,0)
+				        espframe.BackgroundColor = player.TeamColor
+				
+				        local namesp = Instance.new("BillboardGui", part)
+				        namesp.Name = "NAME"
+				        namesp.AlwaysOnTop = true
+				        namesp.Size = UDim2.new(1,0,1,0)
+				        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
+				
+				        local name = Instance.new("TextLabel", namesp)
+				        name.Text = player.Name
+				        name.Size = UDim2.new(2, 0,1, 0)
+				        name.TextColor3 = Color3.new(0, 0, 0)
+				        name.TextScaled = true
+				        name.BackgroundTransparency = 1
+				    end
+				
+				    while wait(0.1) do
+				        for _, player in pairs(game:GetService("Players"):GetChildren()) do
+				            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
+				                if (game.Players.LocalPlayer ~= player) then
+				                    if not (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
+				                        addEsp(player, player.Character.HumanoidRootPart)
+				                        else
+				                        player.Character.HumanoidRootPart:FindFirstChild("ESP"):Destroy()
+				                        player.Character.HumanoidRootPart:FindFirstChild("NAME"):Destroy()
+				                        addEsp(player, player.Character.HumanoidRootPart)
+				                    end
+				                end
+				            end
+				        end
+				    end
+				end
+			})
+			end
         end
     end
     
@@ -460,10 +547,12 @@ local clippin = sws:MakeTab({
 	PremiumOnly = false
 })
 local clipping = clippin:AddSection({ Name = "Forward-Clips" })
+if game.PlaceId ~= CJRPGameId then
 clipping:AddSlider({Name="Forward Clip Value",Min=0,Max=200,Default=5,ValueName="studs",Flag="cclipval"})
 clipping:AddButton({Name="Forward Clip", Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * OrionLib.Flags["cclipval"].Value
 end})
+end
 clipping:AddButton({Name="Clip Forward (5 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 5
 end})
@@ -476,6 +565,7 @@ end})
 clipping:AddButton({Name="Clip Forward (20 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 20
 end})
+if game.PlaceId ~= CJRPGameId then
 clipping:AddButton({Name="Clip Forward (50 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 50
 end})
@@ -485,11 +575,14 @@ end})
 clipping:AddButton({Name="Clip Forward (100 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 100
 end})
+end
 local clipping2 = clippin:AddSection({ Name = "Backward-Clips" })
+if game.PlaceId ~= CJRPGameId then
 clipping2:AddSlider({Name="Backward Clip Value",Min=0,Max=200,Default=5,ValueName="studs",Flag="cclipval2"})
 clipping2:AddButton({Name="Backward Clip", Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -OrionLib.Flags["cclipval2"].Value
 end})
+end
 clipping2:AddButton({Name="Clip Backward (5 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -5
 end})
@@ -502,6 +595,7 @@ end})
 clipping2:AddButton({Name="Clip Backward (20 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -20
 end})
+if game.PlaceId ~= CJRPGameId then
 clipping2:AddButton({Name="Clip Backward (50 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -50
 end})
@@ -511,6 +605,7 @@ end})
 clipping2:AddButton({Name="Clip Backward (100 studs)",Callback=function()
 	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -100
 end})
+end
 
 local Credits = sws:MakeTab({
 	Name = "Credits",
@@ -519,8 +614,6 @@ local Credits = sws:MakeTab({
 })
 Credits:AddLabel("Scripting - GavinGoGaming (Klash CEO)")
 Credits:AddLabel("Playtest - Reality (Klash Dev)")
-
-local CJRPGameId = 6843988672
 
 if game.PlaceId == CJRPGameId then
 	local CJRP = sws:MakeTab({
@@ -537,52 +630,7 @@ if game.PlaceId == CJRPGameId then
 		end
 	})
 	CJRPSection:AddParagraph("                                        -- Toggles --", "")
-	CJRPSection:AddButton({
-		Name = "Toggle ESP",
-		Callback = function()
-			function addEsp(player, part)
-		
-		        local esp = Instance.new("BillboardGui", part)
-		        esp.Name = "ESP"
-		        esp.AlwaysOnTop = true
-		        esp.Size = UDim2.new(1,0,1,0)	
-		
-		        local espframe = Instance.new("Frame", esp)
-		        espframe.BackgroundColor = player.TeamColor
-		        espframe.Size = UDim2.new(1,0,1,0)
-		        espframe.BackgroundColor = player.TeamColor
-		
-		        local namesp = Instance.new("BillboardGui", part)
-		        namesp.Name = "NAME"
-		        namesp.AlwaysOnTop = true
-		        namesp.Size = UDim2.new(1,0,1,0)
-		        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
-		
-		        local name = Instance.new("TextLabel", namesp)
-		        name.Text = player.Name
-		        name.Size = UDim2.new(2, 0,1, 0)
-		        name.TextColor3 = Color3.new(0, 0, 0)
-		        name.TextScaled = true
-		        name.BackgroundTransparency = 1
-		    end
-		
-		    while wait(0.1) do
-		        for _, player in pairs(game:GetService("Players"):GetChildren()) do
-		            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
-		                if (game.Players.LocalPlayer ~= player) then
-		                    if not (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
-		                        addEsp(player, player.Character.HumanoidRootPart)
-		                        else
-		                        player.Character.HumanoidRootPart:FindFirstChild("ESP"):Destroy()
-		                        player.Character.HumanoidRootPart:FindFirstChild("NAME"):Destroy()
-		                        addEsp(player, player.Character.HumanoidRootPart)
-		                    end
-		                end
-		            end
-		        end
-		    end
-		end
-	})
+	
 	function destroyIfDoor(l)
 		if l.Name == "MetalDoor" then 
 		   	l:Destroy()
