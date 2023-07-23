@@ -186,7 +186,7 @@ local function connect(signal, callback)
     return connection;
 end
 connect(game:GetService("UserInputService").InputBegan, function(input, processed)
-    if input.UserInputType.Name == "MouseButton1" and not processed and OrionLib.Flags["movement_teleporting_clicktp"].Value then
+    if input.UserInputType.Name == "MouseButton1" and not processed and OrionLib.Flags["movement_teleporting_clicktp"].Value and game.PlaceId ~= CJRPGameId then
         local character = game.Players.LocalPlayer.Character;
         local camPos = workspace.CurrentCamera.CFrame.Position;
 		local mouse = game.Players.LocalPlayer:GetMouse();
