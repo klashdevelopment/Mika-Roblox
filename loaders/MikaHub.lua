@@ -18,7 +18,6 @@ local PlayerSection = PlayerTab:AddSection({
 	Name = "Explorers"
 })
 
-
 PlayerSection:AddButton({
 	Name = "Dex (Closes Hub & Other Scripts)",
 	Callback = function()
