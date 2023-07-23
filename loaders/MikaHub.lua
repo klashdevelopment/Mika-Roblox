@@ -36,7 +36,7 @@ local Utils = PlayerTab:AddSection({
 	Name = "Miscellaneous"
 })
 Utils:AddButton({
-	Name = "Mikate (Closes Hub)",
+	Name = "Mikate",
 	Callback = function()
 		loadstring(game:HttpGet(SWS))()
 	end
@@ -54,7 +54,7 @@ Utils:AddButton({
 	end
 })
 Utils:AddButton({
-	Name = "SiriusDomainX",
+	Name = "Sirius DMNx",
 	Callback = function()
 		loadstring(game:HttpGet('https://sirius.menu/domainx'))() 
 	end
@@ -69,19 +69,14 @@ local Game = GameTab:AddSection({
 	Name = "Games"
 })
 Game:AddButton({
-	Name = "Doors (Closes Hub)",
+	Name = "Doors",
 	Callback = function()
 		loadstring(game:HttpGet(DoorsHub))()
 	end
 })
+Game:AddLabel("County Jail RP - Use Mikate")
 Game:AddButton({
-	Name = "CountyJailRP",
-	Callback = function()
-		loadstring(game:HttpGet(CJRP))()
-	end
-})
-Game:AddButton({
-	Name = "Notoriety (Closes Hub)",
+	Name = "Notoriety",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
 	end
