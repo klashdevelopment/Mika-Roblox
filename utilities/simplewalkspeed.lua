@@ -619,7 +619,7 @@ Credits:AddLabel("Playtest - Reality (Klash Dev)")
 if game.PlaceId == CJRPGameId then
 	local CJRP = sws:MakeTab({
 		Name = "CJRP",
-		Icon = "rbxassetid://14084323442",
+		Icon = "rbxassetid://14171508365",
 		PremiumOnly = false
 	})
 	local CJRPSection = CJRP:AddSection({ Name = "County Jail Roleplay" })
