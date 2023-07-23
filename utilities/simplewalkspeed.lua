@@ -2,7 +2,6 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 
 local sws = OrionLib:MakeWindow({Name = "Mikate", Icon = "rbxassetid://8834748103", HidePremium = false, SaveConfig = true, ConfigFolder = "Mika SWS", IntroText = "KlashDevelopment", IntroIcon = "rbxassetid://4483345998"})
 
-
 local PlayerTab = sws:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
@@ -454,6 +453,65 @@ local visuals = sws:MakeTab({ Name = "ESPs",
         end
     end
     
+local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+local clippin = sws:MakeTab({
+	Name = "Clipping",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local clipping = clippin:AddSection({ Name = "Forward-Clips" })
+clipping:AddSlider({Name="Forward Clip Value",Min=0,Max=200,Default=5,ValueName="studs",Flag="cclipval"})
+clipping:AddButton({Name="Forward Clip", Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * OrionLib.Flags["cclipval"].Value
+end})
+clipping:AddButton({Name="Clip Forward (5 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 5
+end})
+clipping:AddButton({Name="Clip Forward (10 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 10
+end})
+clipping:AddButton({Name="Clip Forward (15 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 15
+end})
+clipping:AddButton({Name="Clip Forward (20 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 20
+end})
+clipping:AddButton({Name="Clip Forward (50 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 50
+end})
+clipping:AddButton({Name="Clip Forward (75 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 75
+end})
+clipping:AddButton({Name="Clip Forward (100 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 100
+end})
+local clipping2 = clippin:AddSection({ Name = "Backward-Clips" })
+clipping2:AddSlider({Name="Backward Clip Value",Min=0,Max=200,Default=5,ValueName="studs",Flag="cclipval2"})
+clipping2:AddButton({Name="Backward Clip", Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -OrionLib.Flags["cclipval2"].Value
+end})
+clipping2:AddButton({Name="Clip Backward (5 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -5
+end})
+clipping2:AddButton({Name="Clip Backward (10 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -10
+end})
+clipping2:AddButton({Name="Clip Backward (15 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -15
+end})
+clipping2:AddButton({Name="Clip Backward (20 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -20
+end})
+clipping2:AddButton({Name="Clip Backward (50 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -50
+end})
+clipping2:AddButton({Name="Clip Backward (75 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -75
+end})
+clipping2:AddButton({Name="Clip Backward (100 studs)",Callback=function()
+	hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * -100
+end})
+
 local Credits = sws:MakeTab({
 	Name = "Credits",
 	Icon = "rbxassetid://8834748103",
@@ -461,6 +519,162 @@ local Credits = sws:MakeTab({
 })
 Credits:AddLabel("Scripting - GavinGoGaming (Klash CEO)")
 Credits:AddLabel("Playtest - Reality (Klash Dev)")
+
+local CJRPGameId = 6843988672
+
+if game.PlaceId == CJRPGameId then
+	local CJRP = sws:MakeTab({
+		Name = "CJRP",
+		Icon = "rbxassetid://14084323442",
+		PremiumOnly = false
+	})
+	local CJRPSection = CJRP:AddSection({ Name = "County Jail Roleplay" })
+	CJRPSection:AddParagraph("                                  -- Teleportation --", "For these to work, you must stand atleast semi-close to the location for it to work.")
+	CJRPSection:AddButton({
+		Name = "Maxsec Keycard (Stand at the room's enterence)",
+		Callback = function()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(96, -6, -433)
+		end
+	})
+	CJRPSection:AddParagraph("                                        -- Toggles --", "")
+	CJRPSection:AddButton({
+		Name = "Toggle ESP",
+		Callback = function()
+			function addEsp(player, part)
+		
+		        local esp = Instance.new("BillboardGui", part)
+		        esp.Name = "ESP"
+		        esp.AlwaysOnTop = true
+		        esp.Size = UDim2.new(1,0,1,0)	
+		
+		        local espframe = Instance.new("Frame", esp)
+		        espframe.BackgroundColor = player.TeamColor
+		        espframe.Size = UDim2.new(1,0,1,0)
+		        espframe.BackgroundColor = player.TeamColor
+		
+		        local namesp = Instance.new("BillboardGui", part)
+		        namesp.Name = "NAME"
+		        namesp.AlwaysOnTop = true
+		        namesp.Size = UDim2.new(1,0,1,0)
+		        namesp.SizeOffset = Vector2.new(-0.5, 2.5)
+		
+		        local name = Instance.new("TextLabel", namesp)
+		        name.Text = player.Name
+		        name.Size = UDim2.new(2, 0,1, 0)
+		        name.TextColor3 = Color3.new(0, 0, 0)
+		        name.TextScaled = true
+		        name.BackgroundTransparency = 1
+		    end
+		
+		    while wait(0.1) do
+		        for _, player in pairs(game:GetService("Players"):GetChildren()) do
+		            if (player.Character and player.Character:FindFirstChild("HumanoidRootPart")) then
+		                if (game.Players.LocalPlayer ~= player) then
+		                    if not (player.Character.HumanoidRootPart:FindFirstChild("ESP") and player.Character.HumanoidRootPart:FindFirstChild("NAME")) then
+		                        addEsp(player, player.Character.HumanoidRootPart)
+		                        else
+		                        player.Character.HumanoidRootPart:FindFirstChild("ESP"):Destroy()
+		                        player.Character.HumanoidRootPart:FindFirstChild("NAME"):Destroy()
+		                        addEsp(player, player.Character.HumanoidRootPart)
+		                    end
+		                end
+		            end
+		        end
+		    end
+		end
+	})
+	function destroyIfDoor(l)
+		if l.Name == "MetalDoor" then 
+		   	l:Destroy()
+		end
+		if l.Name == "BarsDoor" then 
+		    l:Destroy()
+		end
+		if l.Name == "Door" then 
+		   	l:Destroy()
+		end
+		if l.Name == "GlassDoor" then 
+		    l:Destroy()
+		end
+		if l.Name == "SolitaryDoor" then 
+		    l:Destroy()
+		end
+		if l.Name == "WindowMetalDoor" then 
+		    l:Destroy()
+		end
+		if l.Name == "WoodDoor" then 
+		    l:Destroy()
+		end
+		
+		if l.Name == "Model" then 
+			for _,v in pairs(l:GetChildren()) do
+				destroyIfDoor(v)
+			end
+		end
+	end
+	function destroyIfFence(l)
+		if l.Name == "Part" then 
+		   	l:Destroy()
+		end
+		if l.Name == "Prop/Barbed" then 
+		   	l:Destroy()
+		end
+	end
+	CJRPSection:AddButton({
+		Name = "Destroy Doors",
+		Callback = function(Value)
+		    for i, v in pairs(game.Workspace["Prop/Outside"]:GetChildren()) do
+		        destroyIfDoor(v)
+		    end
+		    for i, v in pairs(game.Workspace["Prop/Outside"].SheriffOffice:GetChildren()) do
+		        destroyIfDoor(v)
+		    end
+		    for i, v in pairs(game.Workspace.TopFloor:GetChildren()) do
+		        destroyIfDoor(v)
+		    end
+		    for i, v in pairs(game.Workspace.Doors:GetChildren()) do
+		        destroyIfDoor(v)
+		    end
+		    for i, v in pairs(game.Workspace.Map:GetChildren()) do
+		    	if v.Name == "Cell" then
+		    		for i, x in pairs(v:GetChildren()) do
+				        destroyIfDoor(x)
+				    end
+		    	else
+		    		destroyIfDoor(v)
+		    	end
+		    end
+		end
+	})
+	CJRPSection:AddButton({
+		Name = "Destroy Fences",
+		Callback = function(Value)
+		    for i, v in pairs(game.Workspace["Fence"]:GetChildren()) do
+		        destroyIfFence(v)
+		    end
+		    for i, v in pairs(game.Workspace["Fence"].BarbedHitbox:GetChildren()) do
+		        destroyIfFence(v)
+		    end
+		    for i, v in pairs(game.Workspace["Fence"].BarbedWire:GetChildren()) do
+		        destroyIfFence(v)
+		    end
+		    for i, v in pairs(game.Workspace["Fence"].FenceChain:GetChildren()) do
+		        destroyIfFence(v)
+		    end
+		    for i, v in pairs(game.Workspace["Fence"].FenceBottoms:GetChildren()) do
+		        destroyIfFence(v)
+		    end
+		end
+	})
+	CJRPSection:AddButton({
+		Name = "Destroy Exit/Enter Gate",
+		Callback = function(Value)
+		    game.Workspace.Fence["ExitGate"]:Destroy()
+		    game.Workspace.Fence["EnterenceGate"]:Destroy()
+		    game.Workspace.Fence["GateControl"]:Destroy()
+		end
+	})
+end
 
 OrionLib:Init()
 
