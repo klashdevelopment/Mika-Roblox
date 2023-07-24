@@ -33,6 +33,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika
 Alrighty! No problem. I personally use Fluxus (fluxteam.net, not ANYTHING ELSE)
 You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer" or "LinkVertize Intaller"**)
 
+If you need to rollback roblox to use one, follow these instructions [in this video.](https://www.youtube.com/watch?v=1kLGEQHzjZs) Install the msix, and then follow the fiddler steps. Roblox recently patched msix and this spoof is a workaround.
+
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
 | [Mikan](https://mika.fly.dev) | [Web Client](https://mika.fly.dev)([Web Source](https://github.com/klashdevelopment/Mikan)) [Windows Client](https://github.com/klashdevelopment/Mikan-Desktop/releases/latest)([Windows Source](https://github.com/klashdevelopment/Mikan-Desktop)) | **SCRIPT EDITOR ONLY** | Custom-made script editor, fully open sourced. |
@@ -46,6 +48,8 @@ You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer
 
 
 ## Game list 
+We support many games.
+
 | Name | Script List | Script Roadmap |
 | ---- | ----------- | -------------- |
 | [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod, Rooms Autofarm | Doors Autofarm, Better Mikamod |
