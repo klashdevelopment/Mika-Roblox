@@ -11,7 +11,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika
 ## Script List
 - MikaHub (Script Hub)
 - Mikate (Universal Script)
-- Mikate (County Jail RP)
 - DarkDex (Universal Explorer)
 - Infinite Yield (Universal Script)
 - Synapse Sniper
@@ -55,6 +54,6 @@ We support many games.
 | [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod, Rooms Autofarm | Doors Autofarm, Better Mikamod |
 | [Roblox Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | Noto's Mikamod |
 | [Roblox CountyJailRP](https://web.roblox.com/games/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | Mikate (CJRP Edition), CJRPAnticheatBypass |  |
-| [Roblox Universal](https://web.roblox.com/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | Mikate (CJRP Edition), CJRPAnticheatBypass |  |
-| [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | Mikate |  |
+| [Roblox Universal](https://web.roblox.com/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | Mikate, InfiniteYield, Dex, Sniper, Mika Hub |  |
+| [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | MikaMuck |  |
 | [Unity/Itch.io games](https://github.com/klashdevelopment/Mika-Others) | Karlson (Dani), MinecraftClone (SamHogan), Jelly Drift (Dani), Balls? (Dani) | Slime Rancher, Subnautica |
