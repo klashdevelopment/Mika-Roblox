@@ -541,7 +541,7 @@ local visuals = sws:MakeTab({ Name = "ESPs",
         end
     end
     
-local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+local hrp = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 local clippin = sws:MakeTab({
 	Name = "Clipping",
 	Icon = "rbxassetid://4483345998",
