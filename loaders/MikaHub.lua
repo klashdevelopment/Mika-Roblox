@@ -5,6 +5,7 @@ local InfiniteYield = "https://raw.githubusercontent.com/klashdevelopment/Mika-R
 local DoorsHub = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/DoorsHub.lua"
 local SWS = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/simplewalkspeed.lua"
 local CJRP = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRP.lua"
+local CFC = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CFreecam.lua"
 local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/StreamSniper.lua"
 
 local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB"})
@@ -53,9 +54,9 @@ Utils:AddButton({
 	end
 })
 Utils:AddButton({
-	Name = "Sirius DMNx",
+	Name = "Cinema Freecam (SHIFT+P TOGGLE)",
 	Callback = function()
-		loadstring(game:HttpGet('https://sirius.menu/domainx'))() 
+		loadstring(game:HttpGet(CFC))() 
 	end
 })
 
