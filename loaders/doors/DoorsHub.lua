@@ -22,11 +22,17 @@ local PlayerSection2 = PlayerTab2:AddSection({
 	Name = "Scripts"
 })
 PlayerSection2:AddButton({
-	Name = "MikaBundle",
+	Name = "Load All (minus morphs)",
 	Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
   	end    
 })
+PlayerSection2:AddButton({
+
+		Name="Doors Morphs",Callback=function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorMorph.lua"))()
+		end
+	})
 PlayerSection2:AddButton({
 	Name = "Doors Mikamod",
 	Callback = function()
@@ -75,12 +81,18 @@ local PlayerSection = PlayerTab:AddSection({
 	Name = "Saved Bundle"
 })
 PlayerSection:AddButton({
-	Name = "MikaBundle",
+	Name = "all (no morphz)",
 	Callback = function()
 		update = "4-21-23"
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Saved%20Copies/Load-4-21-23.lua"))()
   	end    
 })
+PlayerSection:AddButton({
+
+		Name="Doors Morphs",Callback=function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorMorph.lua"))()
+		end
+	})
 PlayerSection:AddButton({
 	Name = "Doors Mikamod",
 	Callback = function()
