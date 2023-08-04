@@ -7,6 +7,7 @@ local SWS = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main
 local CJRP = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRP.lua"
 local CFC = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CFreecam.lua"
 local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/StreamSniper.lua"
+local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"
 
 local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB"})
 local PlayerTab = Window:MakeTab({
@@ -74,13 +75,19 @@ Game:AddButton({
 		loadstring(game:HttpGet(DoorsHub))()
 	end
 })
-Game:AddLabel("County Jail RP - Use Mikate")
 Game:AddButton({
 	Name = "Notoriety",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
 	end
 })
+Game:AddButton({
+	Name = "BedWars",
+	Callback = function()
+		loadstring(game:HttpGet(VapeV4))()
+	end
+})
+Game:AddParagraph("BedWars Warning","Bedwars (Vape V4) is not saved in mika's database so we can NOT guarentee quality!")
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
