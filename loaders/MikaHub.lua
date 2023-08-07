@@ -22,9 +22,15 @@ local PlayerSection = PlayerTab:AddSection({
 })
 
 PlayerSection:AddButton({
-	Name = "Secure Dex",
+	Name = "Secure Dex (more uses)",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
+	end
+})
+PlayerSection:AddButton({
+	Name = "Dex V5 (cleaner)",
+	Callback = function()
+		loadstring(game:HttpGet(OldDarkDexV5))()
 	end
 })
 PlayerSection:AddButton({
@@ -59,17 +65,6 @@ Utils:AddButton({
 	Name = "Cinema Freecam (Shift+P)",
 	Callback = function()
 		loadstring(game:HttpGet(CFC))() 
-	end
-})
-local Deprecated = Window:MakeTab({
-	Name = "Deprecated",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-Deprecated:AddButton({
-	Name = "Dex V5 (Closes Any Other Scripts)",
-	Callback = function()
-		loadstring(game:HttpGet(OldDarkDexV5))()
 	end
 })
 
