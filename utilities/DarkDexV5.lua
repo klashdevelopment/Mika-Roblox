@@ -1,4 +1,3 @@
-
 -- https://github.com/LorekeeperZinnia/Dex
 
 --[[
@@ -6117,7 +6116,7 @@ local function main()
 			if not silent then
 				side.Hidden = false
 			end
-			updateWindows(silent)
+			-- updateWindows(silent)
 		end
 
 		funcs.Close = function(self)
