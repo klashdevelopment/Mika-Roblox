@@ -1,6 +1,7 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local DarkDexV5 = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/DarkDexV5.lua"
+local OldDarkDexV5 = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/DarkDexV5.lua"
+local DarkDexV5 = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/SecureDexV3.lua"
 local InfiniteYield = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/InfiniteYield.lua"
 local DoorsHub = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/DoorsHub.lua"
 local SWS = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/simplewalkspeed.lua"
@@ -21,7 +22,7 @@ local PlayerSection = PlayerTab:AddSection({
 })
 
 PlayerSection:AddButton({
-	Name = "Dex (Closes Hub & Other Scripts)",
+	Name = "Secure Dex",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
 	end
@@ -55,9 +56,20 @@ Utils:AddButton({
 	end
 })
 Utils:AddButton({
-	Name = "Cinema Freecam (SHIFT+P TOGGLE)",
+	Name = "Cinema Freecam (Shift+P)",
 	Callback = function()
 		loadstring(game:HttpGet(CFC))() 
+	end
+})
+local Deprecated = Window:MakeTab({
+	Name = "Deprecated",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Deprecated:AddButton({
+	Name = "Dex V5 (Closes Any Other Scripts)",
+	Callback = function()
+		loadstring(game:HttpGet(OldDarkDexV5))()
 	end
 })
 
