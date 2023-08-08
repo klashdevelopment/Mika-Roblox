@@ -8,7 +8,29 @@ local SWS = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main
 local CJRP = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRP.lua"
 local CFC = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CFreecam.lua"
 local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/StreamSniper.lua"
+local Quillo = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/quillo.lua"
 local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"
+
+local uix = game.Players.LocalPlayer.PlayerGui
+local screen = Instance.new("ScreenGui")
+screen.Parent = uix
+screen.Name = "MikaHubUiButtons"
+local btn = Instance.new("TextButton")
+btn.Size = UDim2.fromOffset(40, 40)
+btn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+btn.BorderSizePixel = 1
+btn.BackgroundColor3 = Color3.fromRGB(31, 31, 32)
+btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+btn.Text = "Quillo"
+btn.Parent = screen
+btn.Position = UDim2.new(1, -60, 0, -30)
+btn.MouseButton1Click:Connect(function()
+	screen:Destroy()
+	loadstring(game:HttpGet("https://x.klash.dev/quillo"))()
+end)
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = btn
 
 local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB"})
 local PlayerTab = Window:MakeTab({
