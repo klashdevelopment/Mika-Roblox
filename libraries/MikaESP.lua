@@ -66,7 +66,7 @@ end
 function MikaESP:AddPlayer(object)
 	object:SetAttribute("EspName", object.Character.Name)
 	objects[object.Character.Name] = object.Character
-	object.Humanoid.Died:Connect(function()
+	object.Character.Humanoid.Died:Connect(function()
 		self:RemovePlayer(object)
 		wait(4)
 		self:AddPlayer(object)
