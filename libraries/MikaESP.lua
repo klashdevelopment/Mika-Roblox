@@ -79,59 +79,61 @@ function MikaESP:RemovePlayer(object)
 	objects[object.Name] = nil
 end
 
-while true do
-	for _,object in pairs(objects) do
-		if MikaESP.texts then
-			local npos = nil
-			local nponscr = nil
-			if game.Players:FindFirstChild(object.Name) then
-				npos = object.HumanoidRootPart.Position
-				nponscr = wtvpOnScreen(object.HumanoidRootPart.Position)
-			else
-				npos = worldToViewportPoint(object.Position)
-				nponscr = wtvpOnScreen(object.Position)
-			end
-			local x = newTextEspObject(object:GetAttribute("EspName"), npos, Color3.fromRGB(0, 255, 0))
-			x.Visible = nponscr
-			table.insert(toRemove, x)
-		end
-		if MikaESP.tracers then
-			local npos = nil
-			local nponscr = nil
-			if game.Players:FindFirstChild(object.Name) then
-				npos = object.HumanoidRootPart.Position
-				nponscr = wtvpOnScreen(object.HumanoidRootPart.Position)
-			else
-				npos = worldToViewportPoint(object.Position)
-				nponscr = wtvpOnScreen(object.Position)
-			end
-			local y = newLineEspObject(npos, centerScreen, Color3.fromRGB(0, 255, 0), 1)
-			y.Visible = nponscr
-			table.insert(toRemove, y)
-		end
-		if MikaESP.outline then
-			if game.Players:FindFirstChild(object.Name) then
-				for _,part in pairs(object:GetChildren()) do
-					if part:IsA("MeshPart") then
-						local z = AddPartESP(part, Color3.fromRGB(0, 255, 0))
-						z.Enabled = wtvpOnScreen(part.Position)
-						table.insert(toRemove, z)
-					elseif part:IsA("Accessory") then
-						local z = AddPartESP(part.Handle, Color3.fromRGB(0, 255, 0))
-						z.Enabled = wtvpOnScreen(part.Handle.Position)
-						table.insert(toRemove, z)
-					end
+function MikaESP:InitRenderTicker()
+	while true do
+		for _,object in pairs(objects) do
+			if MikaESP.texts then
+				local npos = nil
+				local nponscr = nil
+				if game.Players:FindFirstChild(object.Name) then
+					npos = object.HumanoidRootPart.Position
+					nponscr = wtvpOnScreen(object.HumanoidRootPart.Position)
+				else
+					npos = worldToViewportPoint(object.Position)
+					nponscr = wtvpOnScreen(object.Position)
 				end
-			else
-				local z = AddPartESP(object, Color3.fromRGB(0, 255, 0))
-				z.Enabled = wtvpOnScreen(object.Position)
-				table.insert(toRemove, z)
+				local x = newTextEspObject(object:GetAttribute("EspName"), npos, Color3.fromRGB(0, 255, 0))
+				x.Visible = nponscr
+				table.insert(toRemove, x)
+			end
+			if MikaESP.tracers then
+				local npos = nil
+				local nponscr = nil
+				if game.Players:FindFirstChild(object.Name) then
+					npos = object.HumanoidRootPart.Position
+					nponscr = wtvpOnScreen(object.HumanoidRootPart.Position)
+				else
+					npos = worldToViewportPoint(object.Position)
+					nponscr = wtvpOnScreen(object.Position)
+				end
+				local y = newLineEspObject(npos, centerScreen, Color3.fromRGB(0, 255, 0), 1)
+				y.Visible = nponscr
+				table.insert(toRemove, y)
+			end
+			if MikaESP.outline then
+				if game.Players:FindFirstChild(object.Name) then
+					for _,part in pairs(object:GetChildren()) do
+						if part:IsA("MeshPart") then
+							local z = AddPartESP(part, Color3.fromRGB(0, 255, 0))
+							z.Enabled = wtvpOnScreen(part.Position)
+							table.insert(toRemove, z)
+						elseif part:IsA("Accessory") then
+							local z = AddPartESP(part.Handle, Color3.fromRGB(0, 255, 0))
+							z.Enabled = wtvpOnScreen(part.Handle.Position)
+							table.insert(toRemove, z)
+						end
+					end
+				else
+					local z = AddPartESP(object, Color3.fromRGB(0, 255, 0))
+					z.Enabled = wtvpOnScreen(object.Position)
+					table.insert(toRemove, z)
+				end
 			end
 		end
-	end
-	wait(0.01)
-	for _,obj in pairs(toRemove) do
-		obj:Remove()
+		wait(0.01)
+		for _,obj in pairs(toRemove) do
+			obj:Remove()
+		end
 	end
 end
 
