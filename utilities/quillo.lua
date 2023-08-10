@@ -18,6 +18,11 @@ if game.PlaceId == 6872265039 then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
 	end)
 end
+if game.PlaceId == 13924946576 then
+	task.spawn(function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua", true))()
+	end)
+end
 if game.PlaceId == 6839171747 then
     local floor = game:GetService("ReplicatedStorage").GameData.Floor.Value
 	print("Detecting doors...")
