@@ -23,6 +23,9 @@ if game.PlaceId == 13924946576 then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua", true))()
 	end)
 end
+if game.PlaceId == 142823291 then
+	loadstring(game:GetObjects("rbxassetid://4001118261")[1].Source)()
+end
 if game.PlaceId == 6839171747 then
     local floor = game:GetService("ReplicatedStorage").GameData.Floor.Value
 	print("Detecting doors...")
