@@ -111,12 +111,11 @@ Game:AddButton({
 	end
 })
 Game:AddButton({
-	Name = "BedWars",
+	Name = "Vape V4 Bedwars",
 	Callback = function()
 		loadstring(game:HttpGet(VapeV4))()
 	end
 })
-Game:AddParagraph("BedWars Warning","Bedwars (Vape V4) is not controlled by mika, saved in mika's database, or sourced by mika so we can NOT guarentee quality!")
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
