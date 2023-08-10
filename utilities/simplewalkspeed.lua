@@ -399,6 +399,65 @@ expi:AddButton({
 		TurnVisible()
 	end
 })end
+local chatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
+local chatFrame = game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame
+
+local Cgui = sws:MakeTab({
+	Name = "Core UI",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Chat = Cgui:AddSection({
+	Name = "Chat"
+})
+Chat:AddToggle({
+	Name = "Chat Box Visibility",
+	Default = chatFrame.ChatChannelParentFrame.Visible,
+	Callback = function(state)
+		chatFrame.ChatChannelParentFrame.Visible = state
+	end
+})
+Chat:AddToggle({
+	Name = "Chat Draggable",
+	Default = chatSettings.WindowDraggable,
+	Callback = function(state)
+		chatSettings.WindowDraggable = state
+	end
+})
+Chat:AddToggle({
+	Name = "Chat Resizable",
+	Default = chatSettings.WindowResizable,
+	Callback = function(state)
+		chatSettings.WindowResizable = state
+	end
+})
+local GenUI = Cgui:AddSection({
+	Name = "General Core UI"
+})
+GenUI:AddToggle({
+	Name = "Mouse Cursor",
+	Default = game:GetService("UserInputService").MouseIconEnabled,
+	Callback = function(state)
+		game:GetService("UserInputService").MouseIconEnabled = state
+	end
+})
+GenUI:AddToggle({
+	Name = "No Lag",
+	Default = false,
+	Callback = function(value)
+        for i,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("MeshPart") or v:IsA("BasePart") then
+                if value then
+                    v:SetAttribute("NolagMaterial", v.Material)
+                    v.Material = "SmoothPlastic"
+                else
+                    v.Material = v:GetAttribute("NolagMaterial")
+                end
+            end
+        end
+	end
+})
+
 if game.PlaceId ~= CJRPGameId then
 local Loops = sws:MakeTab({
 	Name = "Loops",
