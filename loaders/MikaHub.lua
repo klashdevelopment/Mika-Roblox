@@ -10,6 +10,7 @@ local CFC = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main
 local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/StreamSniper.lua"
 local Quillo = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/quillo.lua"
 local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"
+local dingus = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua"
 
 local uix = game.Players.LocalPlayer.PlayerGui
 local screen = Instance.new("ScreenGui")
@@ -19,11 +20,11 @@ local btn = Instance.new("TextButton")
 btn.Size = UDim2.fromOffset(40, 40)
 btn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 btn.BorderSizePixel = 1
-btn.BackgroundColor3 = Color3.fromRGB(31, 31, 32)
+btn.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
 btn.TextColor3 = Color3.fromRGB(255, 255, 255)
 btn.Text = "Quillo"
 btn.Parent = screen
-btn.Position = UDim2.new(1, -60, 0, -30)
+btn.Position = UDim2.new(1, -80, 0, -30)
 btn.MouseButton1Click:Connect(function()
 	screen:Destroy()
 	loadstring(game:HttpGet("https://x.klash.dev/quillo"))()
@@ -114,6 +115,12 @@ Game:AddButton({
 	Name = "Vape V4 Bedwars",
 	Callback = function()
 		loadstring(game:HttpGet(VapeV4))()
+	end
+})
+Game:AddButton({
+	Name = "dingus",
+	Callback = function()
+		loadstring(game:HttpGet(dingus))()
 	end
 })
 
