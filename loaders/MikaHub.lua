@@ -123,6 +123,12 @@ Game:AddButton({
 		loadstring(game:HttpGet(dingus))()
 	end
 })
+Game:AddButton({
+	Name = "MM2",
+	Callback = function()
+		loadstring(game:GetObjects("rbxassetid://4001118261")[1].Source)()
+	end
+})
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
