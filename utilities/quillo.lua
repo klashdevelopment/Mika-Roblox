@@ -13,6 +13,11 @@ wait()
 task.spawn(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/DarkDexV5.lua"))()
 end)
+if game.PlaceId == 6872265039 then
+	task.spawn(function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+	end)
+end
 if game.PlaceId == 6839171747 then
     local floor = game:GetService("ReplicatedStorage").GameData.Floor.Value
 	print("Detecting doors...")
