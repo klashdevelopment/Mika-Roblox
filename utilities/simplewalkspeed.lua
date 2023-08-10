@@ -399,14 +399,16 @@ expi:AddButton({
 		TurnVisible()
 	end
 })end
-local chatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
-local chatFrame = game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame
 
 local Cgui = sws:MakeTab({
 	Name = "Core UI",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+if game:GetService("Chat"):FindFirstChild("ClientChatModules") then
+local chatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
+local chatFrame = game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame
+
 local Chat = Cgui:AddSection({
 	Name = "Chat"
 })
@@ -431,6 +433,7 @@ Chat:AddToggle({
 		chatSettings.WindowResizable = state
 	end
 })
+end
 local GenUI = Cgui:AddSection({
 	Name = "General Core UI"
 })
@@ -451,7 +454,9 @@ GenUI:AddToggle({
                     v:SetAttribute("NolagMaterial", v.Material)
                     v.Material = "SmoothPlastic"
                 else
+					if v:GetAttribute("NolagMaterial") then
                     v.Material = v:GetAttribute("NolagMaterial")
+					end
                 end
             end
         end
