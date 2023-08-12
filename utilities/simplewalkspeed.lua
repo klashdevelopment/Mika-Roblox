@@ -9,11 +9,11 @@ if game.PlaceId == CJRPGameId then
 	titleText = "Mikate for CJRP"
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRPBypassScript.lua'))()
 end
-local sws = OrionLib:MakeWindow({Name = titleText, Icon = "rbxassetid://8834748103", HidePremium = false, SaveConfig = true, ConfigFolder = "Mikate", IntroText = loadingText, IntroIcon = "rbxassetid://4483345998"})
+local sws = OrionLib:MakeWindow({Name = titleText, Icon = "rbxassetid://7733965386", HidePremium = false, SaveConfig = true, ConfigFolder = "Mikate", IntroText = loadingText, IntroIcon = "rbxassetid://7733965386"})
 
 local PlayerTab = sws:MakeTab({
 	Name = "Main",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7733954760",
 	PremiumOnly = false
 })
 local Noclip = nil
@@ -474,7 +474,7 @@ end
 local flightEnabled = false
 local expi = sws:MakeTab({
 	Name = "Exploits",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7743872929",
 	PremiumOnly = false
 })
 if game.PlaceId ~= CJRPGameId then
@@ -535,7 +535,7 @@ expi:AddButton({
 
 local Cgui = sws:MakeTab({
 	Name = "Core UI",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7734022107",
 	PremiumOnly = false
 })
 if game:GetService("Chat"):FindFirstChild("ClientChatModules") then
@@ -599,7 +599,7 @@ GenUI:AddToggle({
 if game.PlaceId ~= CJRPGameId then
 local Loops = sws:MakeTab({
 	Name = "Loops",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7743872492",
 	PremiumOnly = false
 })
 local playerlps = Loops:AddSection({
@@ -642,7 +642,7 @@ end
 
 local Visuals = sws:MakeTab({
 	Name = "Visual",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7733774602",
 	PremiumOnly = false
 })
 local Sitewide = Visuals:AddSection({
@@ -666,7 +666,7 @@ local loadedesp;
 local espLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/main/library/esp/esp.lua"))();
 wait(0.1)
 local visuals = sws:MakeTab({ Name = "ESPs",
-	Icon = "rbxassetid://4483345998" });
+	Icon = "rbxassetid://7733799682" });
     do
         local esp = visuals:AddSection({ Name = "ESP" });
         do
@@ -741,7 +741,7 @@ local visuals = sws:MakeTab({ Name = "ESPs",
 local hrp = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 local clippin = sws:MakeTab({
 	Name = "Clipping",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7733671493",
 	PremiumOnly = false
 })
 local clipping = clippin:AddSection({ Name = "Forward-Clips" })
