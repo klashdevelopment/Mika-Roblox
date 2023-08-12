@@ -33,10 +33,10 @@ local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 12)
 corner.Parent = btn
 
-local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB"})
+local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB", IntroText="KlashDevelopment", IntroIcon = "rbxassetid://7733965313"})
 local PlayerTab = Window:MakeTab({
 	Name = "Utilities",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7733954611",
 	PremiumOnly = false
 })
 
@@ -93,7 +93,7 @@ Utils:AddButton({
 
 local GameTab = Window:MakeTab({
 	Name = "Game-Specific",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7733799795",
 	PremiumOnly = false
 })
 local Game = GameTab:AddSection({
@@ -132,7 +132,7 @@ Game:AddButton({
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7734053495",
 	PremiumOnly = false
 })
 
