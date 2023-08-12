@@ -169,6 +169,8 @@ PlayerSection2:AddToggle({
 		end
 	end    
 })
+local cesp = {}
+local todel = {}
 if game.PlaceId ~= CJRPGameId then
 PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
 PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
@@ -179,7 +181,138 @@ PlayerSection2:AddButton({
 		UnlockParts(game.Players.LocalPlayer.Character)
 	end
 })
-            
+
+if game.GameId == 4889315193 or game.GameId == 1668992109 then
+	local TRD = sws:MakeTab({
+		Name = "TotalDrama",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	TRD:AddToggle({
+		Name = "StatueESP",
+		Default = false,
+		Callback = function(value)
+			if value then
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "SafetyStatue" then
+						local hl = Instance.new("Highlight")
+						hl.Name = "StatueEsp"
+						hl.OutlineColor = Color3.fromRGB(255, 255, 0)
+						hl.FillColor = Color3.fromRGB(255, 255, 0)
+						hl.Parent = v
+					end
+				end
+			else
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "SafetyStatue" then
+						if v:FindFirstChild("StatueEsp") then
+							v:FindFirstChild("StatueEsp"):Destroy()
+						end
+					end
+				end
+			end
+		end
+	})
+	TRD:AddToggle({
+		Name = "BagESP",
+		Default = false,
+		Callback = function(value)
+			if value then
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "Bag" then
+						local hl = Instance.new("Highlight")
+						hl.Name = "BagESP"
+						hl.OutlineColor = Color3.fromRGB(255, 0, 0)
+						hl.Parent = v
+					end
+				end
+			else
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "Bag" then
+						if v:FindFirstChild("BagESP") then
+							v:FindFirstChild("BagESP"):Destroy()
+						end
+					end
+				end
+			end
+		end
+	})
+	TRD:AddButton({
+		Name = "Bag Teleport",
+		Callback = function()
+			if value then
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "Bag" then
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.MeshPart.CFrame
+					end
+				end
+			end
+		end
+	})
+	TRD:AddButton({
+		Name = "Statue Teleport",
+		Callback = function()
+			if value then
+				for k, v in pairs(workspace.Idols:GetChildren()) do
+					if v.Name == "SafetyStatue" then
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle2.CFrame
+					end
+				end
+			end
+		end
+	})
+	TRD:AddButton({
+		Name = "Skip Obby",
+		Callback = function()
+			if workspace.Assets:FindFirstChildWhichIsA("Folder") or #workspace.Assets:GetChildren()<1 then
+				game:GetService("StarterGui"):SetCore("SendNotification", {
+					Title = "Invalid",
+					Text = "Wait for an Obby!"
+				})
+				return
+			end
+			local finish = workspace.Assets:FindFirstChildWhichIsA("Folder"):FindFirstChild("Finish")
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = finish.CFrame
+		end
+	})
+	TRD:AddButton({
+		Name = "Coin TP",
+		Callback = function()
+			if workspace.Assets:FindFirstChildWhichIsA("Folder") or #workspace.Assets:GetChildren()<1 then
+				game:GetService("StarterGui"):SetCore("SendNotification", {
+					Title = "Invalid",
+					Text = "Wait for an Obby!"
+				})
+				return
+			end
+			local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+			for k, v in pairs(workspace.Assets:FindFirstChildWhichIsA("Folder"):FindFirstChild("Coins"):GetChildren()) do
+				if v.Name == "Coin" then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+				end
+			end
+		end
+	})
+	TRD:AddButton({
+		Name = "Diamond TP",
+		Callback = function()
+			if workspace.Assets:FindFirstChildWhichIsA("Folder") or #workspace.Assets:GetChildren()<1 then
+				game:GetService("StarterGui"):SetCore("SendNotification", {
+					Title = "Invalid",
+					Text = "Wait for an Obby!"
+				})
+				return
+			end
+			local currentCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+			for k, v in pairs(workspace.Assets:FindFirstChildWhichIsA("Folder"):FindFirstChild("Coins"):GetChildren()) do
+				if v.Name == "Gem" then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+				end
+			end
+		end
+	})
+end
+
 local function connect(signal, callback)
     local connection = signal:Connect(callback);
     table.insert(OrionLib.Connections, connection);
@@ -388,13 +521,13 @@ expi:AddToggle({ Name = "X-Ray", Default = false, Callback = function(value)
 expi:AddSlider({ Name = "Flight Speed", Min = 10, Max = 200, Default = 100, ValueName = "studs/s", Save = true, Flag = "flyspeed" });
 
 expi:AddButton({
-	Name = "Invisible",
+	Name = "Invisible (DO NOT USE)",
 	Callback = function()
 		Invisible()
 	end
 })
 expi:AddButton({
-	Name = "Visible",
+	Name = "Visible (DO NOT USE)",
 	Callback = function()
 		TurnVisible()
 	end
