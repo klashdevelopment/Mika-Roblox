@@ -718,6 +718,104 @@ expi:AddButton({
 })end
 local playerIcon = 7743871002
 
+local PlayerMan = sws:MakeTab({
+	Name = "Fake Players",
+	Icon = "rbxassetid://"..playerIcon,
+	PremiumOnly = false
+})
+local pname = game.Players.LocalPlayer.Name
+local pid = 0
+local latestplr = nil
+
+local HttpService = game:GetService("HttpService")
+local URL = "https://users.roblox.com/v1/usernames/users"
+local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
+local data = HttpService:JSONDecode(response)
+pid = data.data[1].id
+
+PlayerMan:AddTextbox({
+	Name = "Player Name",
+	Default = game.Players.LocalPlayer.Name,
+	TextDisappear = false,
+	Callback = function(Value)
+		pname = Value
+		local HttpService = game:GetService("HttpService")
+		local URL = "https://users.roblox.com/v1/usernames/users"
+		local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
+		local data = HttpService:JSONDecode(response)
+		pid = data.data[1].id
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Fake Name Updated",
+			Text = pname.." - "..pid
+		})
+	end	  
+})
+
+PlayerMan:AddButton({
+	Name = "Spawn Fake Player",
+	Callback = function()
+		
+		local player = game.Players.LocalPlayer
+		local character = player.Character
+		character.Archivable = true
+		local dummy = Instance.new("Part")
+		dummy.Name = "MikaDummy"
+		dummy.Size = Vector3.new(0, 0, 0)
+		dummy.Anchored = true
+		dummy.CanCollide = false
+		dummy.CFrame = character.HumanoidRootPart.CFrame
+		dummy.Parent = workspace
+		local clonedCharacter = character:Clone()
+		clonedCharacter.Parent = dummy
+		local temp_hum_desc = game.Players:GetHumanoidDescriptionFromUserId(1)
+		local hum_desc = game.Players:GetHumanoidDescriptionFromUserId(pid)
+		clonedCharacter.Humanoid:ApplyDescription(temp_hum_desc)
+		wait(0.05)
+		clonedCharacter.Humanoid:ApplyDescription(hum_desc)
+		latestplr = clonedCharacter
+	end
+})
+local PlayerMulMan = PlayerMan:AddSection({Name = "Despawns"})
+PlayerMulMan:AddButton({
+	Name = "Despawn All Fake Players",
+	Callback = function()
+		for k, v in pairs(workspace:GetChildren()) do
+			if v.Name == "MikaDummy" then
+				v:Destroy()
+			end
+		end
+	end
+})
+PlayerMulMan:AddButton({
+	Name = "Despawn Most Recent Fake Player",
+	Callback = function()
+		if latestplr then
+			latestplr:Destroy()
+		end
+	end
+})
+local PlayerManTPS = PlayerMan:AddSection({Name = "Teleport Fake Players"})
+PlayerManTPS:AddButton({
+	Name = "TP to Most Recent",
+	Callback = function()
+		if latestplr then
+			print("found")
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= latestplr.HumanoidRootPart.CFrame
+		end
+	end
+})
+PlayerManTPS:AddButton({
+	Name = "TP to All Fakes (1-by-1)",
+	Callback = function()
+		for k, v in pairs(workspace:GetChildren()) do
+			if v.Name == "MikaDummy" then
+				print("found")
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[0].HumanoidRootPart.CFrame
+			end
+		end
+	end
+})
+
 local fcRunning = false
 
 local INPUT_PRIORITY = Enum.ContextActionPriority.High.Value
@@ -982,8 +1080,9 @@ camera:AddSlider({
 	Name = "Minimum ThirdPerson Zoom",
 	Min = 0,
 	Max = 120,
-	Default = game.Players.LocalPlayer.CameraMinZoomDistance,
+	Default = 0,
 	Increment = 1,
+	Save = false,
 	ValueName = "studs",
 	Callback = function(value)
 		game.Players.LocalPlayer.CameraMinZoomDistance = value
@@ -994,6 +1093,7 @@ camera:AddSlider({
 	Min = 0,
 	Max = 120,
 	Default = game.Players.LocalPlayer.CameraMaxZoomDistance,
+	Save = false,
 	Increment = 1,
 	ValueName = "studs",
 	Callback = function(value)
@@ -1005,6 +1105,7 @@ camera:AddSlider({
 	Min = 0,
 	Max = 120,
 	Default = game.Players.LocalPlayer.CameraMinZoomDistance,
+	Save = false,
 	Increment = 1,
 	ValueName = "studs",
 	Callback = function(value)
@@ -1089,103 +1190,45 @@ camera:AddToggle({
 })
 
 local currentPartsSelected = {}
-local PartManip2 = sws:MakeTab({
-	Name = "Multi-Parts",
-	Icon = "rbxassetid://8997388430",
-	PremiumOnly = false
-})
-local partSel2 = PartManip2:AddSection({Name = "Part Selection"})
-partSel2:AddToggle({
-	Name = "Part Selector",
-	Flag = "selParts",
-	Default = false
-})
-partSel2:AddButton({
-	Name = "Remove Selected Part ESP",
-	Callback = function()
-		for k, cps in pairs(currentPartsSelected) do
-			for k, v in pairs(cps:GetChildren()) do
-				if v:IsA("Highlight") then
-					v:Destroy()
-				end
-			end
-		end
-	end
-})
-local parts2 = PartManip2:AddSection({Name = "Part Manipulation"})
-parts2:AddButton({
-	Name = "Toggle Part X-Ray",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-		if currentPartSelected ~= nil then
-			if currentPartSelected:GetAttribute("xray") then
-				currentPartSelected.Transparency = currentPartSelected:GetAttribute("prexraytsp")
-				currentPartSelected:SetAttribute("xray", false)
-			else
-				currentPartSelected:SetAttribute("prexraytsp", currentPartSelected.Transparency)
-				currentPartSelected.Transparency = 0.25
-				currentPartSelected:SetAttribute("xray", true)
-			end
-		end
-		end
-	end
-})
-parts2:AddButton({
-	Name = "Destroy Parts",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-		if currentPartSelected ~= nil then
-			currentPartSelected:Destroy()
-		end
-		end
-	end
-})
-parts2:AddButton({
-	Name = "Disable Part Collision",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-		if currentPartSelected ~= nil then
-			currentPartSelected.CanCollide = false
-		end
-		end
-	end
-})
-parts2:AddButton({
-	Name = "Enable Part Collision",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-			if currentPartSelected ~= nil then
-				currentPartSelected.CanCollide = true
-			end
-		end
-	end
-})
-parts2:AddButton({
-	Name = "Disable Part Querying",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-		if currentPartSelected ~= nil then
-			currentPartSelected.CanQuery = false
-			currentPartSelected.CanTouch = false
-		end
-		end
-	end
-})
-parts2:AddButton({
-	Name = "Enable Part Querying",
-	Callback = function()
-		for k, currentPartSelected in pairs(currentPartsSelected) do
-		if currentPartSelected ~= nil then
-			currentPartSelected.CanQuery = true
-			currentPartSelected.CanTouch = true
-		end
-		end
-	end
-})
 local PartManip = sws:MakeTab({
 	Name = "Parts",
 	Icon = "rbxassetid://8997388430",
 	PremiumOnly = false
+})
+local ipartname = "Brick"
+PartManip:AddTextbox({
+	Name = "Invispart Manip Name",
+	Default = "Brick",
+	TextDisappear = true,
+	Callback = function(value)
+		ipartname = value
+	end
+})
+PartManip:AddButton({
+	Name = "Remove Parts in Workspace",
+	Callback = function()
+		for k, v in pairs(workspace:GetChildren()) do
+			if v.Name == ipartname then
+				v:Destroy()
+			end
+		end
+	end
+})
+PartManip:AddButton({
+	Name = "Remove Parts in Workspace (recursive)",
+	Callback = function()
+		local function removePartsInObject(object)
+			for k, v in pairs(object:GetChildren()) do
+				if v.Name == ipartname then
+					v:Destroy()
+				end
+				if #v:GetChildren() > 0 then
+					removePartsInObject(v)
+				end
+			end
+		end
+		removePartsInObject(workspace)
+	end
 })
 local partSel = PartManip:AddSection({Name = "Part Selection"})
 function getMouseTarget()
@@ -1287,6 +1330,94 @@ parts:AddButton({
 		if currentPartSelected ~= nil then
 			currentPartSelected.CanQuery = true
 			currentPartSelected.CanTouch = true
+		end
+	end
+})
+local partSel2 = PartManip:AddSection({Name = "Multi-Part Selection"})
+partSel2:AddToggle({
+	Name = "Part Selector",
+	Flag = "selParts",
+	Default = false
+})
+partSel2:AddButton({
+	Name = "Remove Selected Part ESP",
+	Callback = function()
+		for k, cps in pairs(currentPartsSelected) do
+			for k, v in pairs(cps:GetChildren()) do
+				if v:IsA("Highlight") then
+					v:Destroy()
+				end
+			end
+		end
+	end
+})
+local parts2 = PartManip:AddSection({Name = "Multi-Part Manipulation"})
+parts2:AddButton({
+	Name = "Toggle Part X-Ray",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			if currentPartSelected:GetAttribute("xray") then
+				currentPartSelected.Transparency = currentPartSelected:GetAttribute("prexraytsp")
+				currentPartSelected:SetAttribute("xray", false)
+			else
+				currentPartSelected:SetAttribute("prexraytsp", currentPartSelected.Transparency)
+				currentPartSelected.Transparency = 0.25
+				currentPartSelected:SetAttribute("xray", true)
+			end
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Destroy Parts",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected:Destroy()
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Disable Part Collision",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanCollide = false
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Enable Part Collision",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+			if currentPartSelected ~= nil then
+				currentPartSelected.CanCollide = true
+			end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Disable Part Querying",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = false
+			currentPartSelected.CanTouch = false
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Enable Part Querying",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = true
+			currentPartSelected.CanTouch = true
+		end
 		end
 	end
 })
