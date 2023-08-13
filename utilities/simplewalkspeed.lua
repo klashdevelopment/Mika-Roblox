@@ -18,13 +18,6 @@ local PlayerTab = sws:MakeTab({
 })
 local Noclip = nil
 local Clip = nil
-function UnlockParts(character)
-	for _, part in ipairs(character:GetDescendants()) do
-		if part:IsA("BasePart") then
-			part.Locked = true
-		end
-	end
-end
     
 function noclip()
 	Clip = false
@@ -175,12 +168,6 @@ if game.PlaceId ~= CJRPGameId then
 PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
 PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
 end
-PlayerSection2:AddButton({
-	Name = "Unlock Player Parts",
-	Callback = function()
-		UnlockParts(game.Players.LocalPlayer.Character)
-	end
-})
 
 if game.GameId == 4889315193 or game.GameId == 1668992109 then
 	local TRD = sws:MakeTab({
@@ -532,6 +519,665 @@ expi:AddButton({
 		TurnVisible()
 	end
 })end
+local playerIcon = 7743871002
+
+local fcRunning = false
+
+local INPUT_PRIORITY = Enum.ContextActionPriority.High.Value
+Spring = {} do
+	Spring.__index = Spring
+
+	function Spring.new(freq, pos)
+		local self = setmetatable({}, Spring)
+		self.f = freq
+		self.p = pos
+		self.v = pos*0
+		return self
+	end
+
+	function Spring:Update(dt, goal)
+		local f = self.f*2*math.pi
+		local p0 = self.p
+		local v0 = self.v
+
+		local offset = goal - p0
+		local decay = math.exp(-f*dt)
+
+		local p1 = goal + (v0*dt - offset*(f*dt + 1))*decay
+		local v1 = (f*dt*(offset*f - v0) + v0)*decay
+
+		self.p = p1
+		self.v = v1
+
+		return p1
+	end
+
+	function Spring:Reset(pos)
+		self.p = pos
+		self.v = pos*0
+	end
+end
+
+local cameraPos = Vector3.new()
+local cameraRot = Vector2.new()
+local Input = {}
+	keyboard = {
+		W = 0,
+		A = 0,
+		S = 0,
+		D = 0,
+		E = 0,
+		Q = 0,
+		Up = 0,
+		Down = 0,
+		LeftShift = 0,
+	}
+
+	mouse = {
+		Delta = Vector2.new(),
+	}
+
+	NAV_KEYBOARD_SPEED = Vector3.new(1, 1, 1)
+	PAN_MOUSE_SPEED = Vector2.new(1, 1)*(math.pi/64)
+	NAV_ADJ_SPEED = 0.75
+	NAV_SHIFT_MUL = 0.25
+
+	navSpeed = 1
+
+	function Input.Vel(dt)
+		navSpeed = math.clamp(navSpeed + dt*(keyboard.Up - keyboard.Down)*NAV_ADJ_SPEED, 0.01, 4)
+
+		local kKeyboard = Vector3.new(
+			keyboard.D - keyboard.A,
+			keyboard.E - keyboard.Q,
+			keyboard.S - keyboard.W
+		)*NAV_KEYBOARD_SPEED
+
+		local shift = game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift)
+
+		return (kKeyboard)*(navSpeed*(shift and NAV_SHIFT_MUL or 1))
+	end
+
+	function Input.Pan(dt)
+		local kMouse = mouse.Delta*PAN_MOUSE_SPEED
+		mouse.Delta = Vector2.new()
+		return kMouse
+	end
+	
+
+	do
+		function Keypress(action, state, input)
+			keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+			return Enum.ContextActionResult.Sink
+		end
+
+		function MousePan(action, state, input)
+			local delta = input.Delta
+			mouse.Delta = Vector2.new(-delta.y, -delta.x)
+			return Enum.ContextActionResult.Sink
+		end
+
+		function Zero(t)
+			for k, v in pairs(t) do
+				t[k] = v*0
+			end
+		end
+
+		function Input.StartCapture()
+			game:GetService("ContextActionService"):BindActionAtPriority("FreecamKeyboard",Keypress,false,INPUT_PRIORITY,
+				Enum.KeyCode.W,
+				Enum.KeyCode.A,
+				Enum.KeyCode.S,
+				Enum.KeyCode.D,
+				Enum.KeyCode.E,
+				Enum.KeyCode.Q,
+				Enum.KeyCode.Up,
+				Enum.KeyCode.Down
+			)
+			game:GetService("ContextActionService"):BindActionAtPriority("FreecamMousePan",MousePan,false,INPUT_PRIORITY,Enum.UserInputType.MouseMovement)
+		end
+
+		function Input.StopCapture()
+			navSpeed = 1
+			Zero(keyboard)
+			Zero(mouse)
+			game:GetService("ContextActionService"):UnbindAction("FreecamKeyboard")
+			game:GetService("ContextActionService"):UnbindAction("FreecamMousePan")
+		end
+	end
+function GetFocusDistance(cameraFrame)
+	local znear = 0.1
+	local viewport = workspace.CurrentCamera.ViewportSize
+	local projy = 2*math.tan(cameraFov/2)
+	local projx = viewport.x/viewport.y*projy
+	local fx = cameraFrame.rightVector
+	local fy = cameraFrame.upVector
+	local fz = cameraFrame.lookVector
+
+	local minVect = Vector3.new()
+	local minDist = 512
+
+	for x = 0, 1, 0.5 do
+		for y = 0, 1, 0.5 do
+			local cx = (x - 0.5)*projx
+			local cy = (y - 0.5)*projy
+			local offset = fx*cx - fy*cy + fz
+			local origin = cameraFrame.p + offset*znear
+			local _, hit = workspace:FindPartOnRay(Ray.new(origin, offset.unit*minDist))
+			local dist = (hit - origin).magnitude
+			if minDist > dist then
+				minDist = dist
+				minVect = offset.unit
+			end
+		end
+	end
+
+	return fz:Dot(minVect)*minDist
+end
+local velSpring = Spring.new(5, Vector3.new())
+local panSpring = Spring.new(5, Vector2.new())
+local function StepFreecam(dt)
+	local vel = velSpring:Update(dt, Input.Vel(dt))
+	local pan = panSpring:Update(dt, Input.Pan(dt))
+
+	local zoomFactor = math.sqrt(math.tan(math.rad(70/2))/math.tan(math.rad(cameraFov/2)))
+
+	cameraRot = cameraRot + pan*Vector2.new(0.75, 1)*8*(dt/zoomFactor)
+	cameraRot = Vector2.new(math.clamp(cameraRot.x, -math.rad(90), math.rad(90)), cameraRot.y%(2*math.pi))
+
+	local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*Vector3.new(1, 1, 1)*64*dt)
+	cameraPos = cameraCFrame.p
+
+	workspace.CurrentCamera.CFrame = cameraCFrame
+	workspace.CurrentCamera.Focus = cameraCFrame*CFrame.new(0, 0, -GetFocusDistance(cameraCFrame))
+	workspace.CurrentCamera.FieldOfView = cameraFov
+end
+
+local PlayerState = {} do
+	mouseBehavior = ""
+	mouseIconEnabled = ""
+	cameraType = ""
+	cameraFocus = ""
+	cameraCFrame = ""
+	cameraFieldOfView = ""
+
+	function PlayerState.Push()
+		cameraFieldOfView = workspace.CurrentCamera.FieldOfView
+		workspace.CurrentCamera.FieldOfView = 70
+
+		cameraType = workspace.CurrentCamera.CameraType
+		workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+
+		cameraCFrame = workspace.CurrentCamera.CFrame
+		cameraFocus = workspace.CurrentCamera.Focus
+
+		mouseIconEnabled = game:GetService("UserInputService").MouseIconEnabled
+		game:GetService("UserInputService").MouseIconEnabled = true
+
+		mouseBehavior = game:GetService("UserInputService").MouseBehavior
+		game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.Default
+	end
+
+	function PlayerState.Pop()
+		workspace.CurrentCamera.FieldOfView = 70
+
+		workspace.CurrentCamera.CameraType = cameraType
+		cameraType = nil
+
+		workspace.CurrentCamera.CFrame = cameraCFrame
+		cameraCFrame = nil
+
+		workspace.CurrentCamera.Focus = cameraFocus
+		cameraFocus = nil
+
+		game:GetService("UserInputService").MouseIconEnabled = mouseIconEnabled
+		mouseIconEnabled = nil
+
+		game:GetService("UserInputService").MouseBehavior = mouseBehavior
+		mouseBehavior = nil
+	end
+end
+
+function StartFreecam(pos)
+	if fcRunning then
+		StopFreecam()
+	end
+	local cameraCFrame = workspace.CurrentCamera.CFrame
+	if pos then
+		cameraCFrame = pos
+	end
+	cameraRot = Vector2.new()
+	cameraPos = cameraCFrame.p
+	cameraFov = workspace.CurrentCamera.FieldOfView
+
+	velSpring:Reset(Vector3.new())
+	panSpring:Reset(Vector2.new())
+
+	PlayerState.Push()
+	game:GetService("RunService"):BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+	Input.StartCapture()
+	fcRunning = true
+end
+
+function StopFreecam()
+	if not fcRunning then return end
+	Input.StopCapture()
+	game:GetService("RunService"):UnbindFromRenderStep("Freecam")
+	PlayerState.Pop()
+	workspace.Camera.FieldOfView = 70
+	fcRunning = false
+end
+
+function AnchorPlayer(player,value)
+	for k, v in pairs(player.Character:GetChildren()) do
+		if v:IsA("Part") or v:IsA("MeshPart") then
+			v.Anchored = value
+		end
+	end
+end
+
+local camera = sws:MakeTab({
+	Name = "Camera",
+	Icon = "rbxassetid://7733708692",
+	PremiumOnly = false
+})
+camera:AddToggle({
+	Name = "Freecam",
+	Default = false,
+	Callback = function(value)
+		if value then
+			StartFreecam()
+		else
+			StopFreecam()
+		end
+	end
+})
+camera:AddToggle({
+	Name = "Freeze/Anchor",
+	Default = false,
+	Callback = function(value)
+		AnchorPlayer(game.Players.LocalPlayer, value)
+	end
+})
+camera:AddDropdown({
+	Name = "Camera Type",
+	Default = workspace.CurrentCamera.CameraType.Name,
+	Options = {"Fixed","Attach","Watch","Track","Follow","Custom","Scriptable","Orbital"},
+	Callback = function(cam)
+		workspace.CurrentCamera.CameraType = Enum.CameraType[cam]
+	end
+})
+function UnlockParts(character)
+	for _, part in ipairs(character:GetDescendants()) do
+		if part:IsA("BasePart") then
+			part.Locked = false
+		end
+	end
+end
+function LockParts(character)
+	for _, part in ipairs(character:GetDescendants()) do
+		if part:IsA("BasePart") then
+			part.Locked = true
+		end
+	end
+end
+camera:AddToggle({
+	Name = "Locked Player",
+	Default = true,
+	Callback = function(value)
+		if value then
+			LockParts(game.Players.LocalPlayer.Character)
+		else
+			UnlockParts(game.Players.LocalPlayer.Character)
+		end
+	end
+})
+
+local currentPartsSelected = {}
+local PartManip2 = sws:MakeTab({
+	Name = "Multi-Parts",
+	Icon = "rbxassetid://8997388430",
+	PremiumOnly = false
+})
+local partSel2 = PartManip2:AddSection({Name = "Part Selection"})
+partSel2:AddToggle({
+	Name = "Part Selector",
+	Flag = "selParts",
+	Default = false
+})
+partSel2:AddButton({
+	Name = "Remove Selected Part ESP",
+	Callback = function()
+		for k, cps in pairs(currentPartsSelected) do
+			for k, v in pairs(cps:GetChildren()) do
+				if v:IsA("Highlight") then
+					v:Destroy()
+				end
+			end
+		end
+	end
+})
+local parts2 = PartManip2:AddSection({Name = "Part Manipulation"})
+parts2:AddButton({
+	Name = "Toggle Part X-Ray",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			if currentPartSelected:GetAttribute("xray") then
+				currentPartSelected.Transparency = currentPartSelected:GetAttribute("prexraytsp")
+				currentPartSelected:SetAttribute("xray", false)
+			else
+				currentPartSelected:SetAttribute("prexraytsp", currentPartSelected.Transparency)
+				currentPartSelected.Transparency = 0.25
+				currentPartSelected:SetAttribute("xray", true)
+			end
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Destroy Parts",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected:Destroy()
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Disable Part Collision",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanCollide = false
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Enable Part Collision",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+			if currentPartSelected ~= nil then
+				currentPartSelected.CanCollide = true
+			end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Disable Part Querying",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = false
+			currentPartSelected.CanTouch = false
+		end
+		end
+	end
+})
+parts2:AddButton({
+	Name = "Enable Part Querying",
+	Callback = function()
+		for k, currentPartSelected in pairs(currentPartsSelected) do
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = true
+			currentPartSelected.CanTouch = true
+		end
+		end
+	end
+})
+local PartManip = sws:MakeTab({
+	Name = "Parts",
+	Icon = "rbxassetid://8997388430",
+	PremiumOnly = false
+})
+local partSel = PartManip:AddSection({Name = "Part Selection"})
+function getMouseTarget()
+	local cursorPosition = game:GetService("UserInputService"):GetMouseLocation()
+	local oray = game.workspace.CurrentCamera:ViewportPointToRay(cursorPosition.x, cursorPosition.y, 0)
+	local ray = Ray.new(game.Workspace.CurrentCamera.CFrame.p,(oray.Direction * 1000))
+	return workspace:FindPartOnRay(ray)
+end
+local currentPartSelected = nil
+partSel:AddToggle({
+	Name = "Part Selector",
+	Flag = "selPart",
+	Default = false
+})
+partSel:AddButton({
+	Name = "Remove Selected Part ESP",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected:FindFirstChild("Highlight"):Destroy()
+		end
+	end
+})
+game:GetService("UserInputService").InputBegan:Connect(function(input, thing)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if OrionLib.Flags["selPart"].Value then
+			local part, pos = getMouseTarget()
+			if part == nil then return end
+			OrionLib.Flags["selPart"]:Set(false)
+			currentPartSelected = part
+			part:FindFirstChild("Highlight").FillColor = Color3.fromRGB(0, 255, 0)
+			part:FindFirstChild("Highlight").OutlineColor = Color3.fromRGB(0, 255, 0)
+		elseif OrionLib.Flags["selParts"].Value then
+			local part, pos = getMouseTarget()
+			if part == nil then return end
+			for k, v in pairs(currentPartsSelected) do
+				if v == part then
+					table.remove(currentPartsSelected, k)
+					break
+				end
+			end
+			table.insert(currentPartsSelected, part)
+			part:FindFirstChild("Highlight").FillColor = Color3.fromRGB(0, 255, 0)
+			part:FindFirstChild("Highlight").OutlineColor = Color3.fromRGB(0, 255, 0)
+		end
+	end
+end)
+local parts = PartManip:AddSection({Name = "Part Manipulation"})
+parts:AddButton({
+	Name = "Toggle Part X-Ray",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			if currentPartSelected:GetAttribute("xray") then
+				currentPartSelected.Transparency = currentPartSelected:GetAttribute("prexraytsp")
+				currentPartSelected:SetAttribute("xray", false)
+			else
+				currentPartSelected:SetAttribute("prexraytsp", currentPartSelected.Transparency)
+				currentPartSelected.Transparency = 0.25
+				currentPartSelected:SetAttribute("xray", true)
+			end
+		end
+	end
+})
+parts:AddButton({
+	Name = "Destroy Part",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected:Destroy()
+		end
+	end
+})
+parts:AddButton({
+	Name = "Disable Part Collision",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanCollide = false
+		end
+	end
+})
+parts:AddButton({
+	Name = "Enable Part Collision",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanCollide = true
+		end
+	end
+})
+parts:AddButton({
+	Name = "Disable Part Querying",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = false
+			currentPartSelected.CanTouch = false
+		end
+	end
+})
+parts:AddButton({
+	Name = "Enable Part Querying",
+	Callback = function()
+		if currentPartSelected ~= nil then
+			currentPartSelected.CanQuery = true
+			currentPartSelected.CanTouch = true
+		end
+	end
+})
+
+local tools = sws:MakeTab({
+	Name = "Tools",
+	Icon = "rbxassetid://7733955511",
+	PremiumOnly = false
+})
+local replToolsNames = {}
+local replTools = {}
+local workToolsNames = {}
+local workTools = {}
+function workToolsAdd(object)
+	for k, v in pairs(object:GetChildren()) do
+		if v:IsA("Tool") then
+			table.insert(workToolsNames, v.Name)
+			workTools[v.Name] = v
+		end
+		if #v:GetChildren() > 0 then
+			workToolsAdd(v)
+		end
+	end
+end
+function replToolsAdd(object)
+	for k, v in pairs(object:GetChildren()) do
+		if v:IsA("Tool") then
+			table.insert(replToolsNames, v.Name)
+			replTools[v.Name] = v
+		end
+		if #v:GetChildren() > 0 then
+			replToolsAdd(v)
+		end
+	end
+end
+replToolsAdd(game.ReplicatedStorage)
+replToolsAdd(game.ReplicatedFirst)
+replToolsAdd(game.Lighting)
+workToolsAdd(workspace)
+
+
+function randomString()
+	local length = math.random(10,20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
+
+local givers = tools:AddSection({Name = "Tool Givers"})
+givers:AddDropdown({
+	Name = "ReplFirst, ReplStorage, Lighting Tools",
+	Flag = "rpdd",
+	Options = replToolsNames,
+	Callback = function(option)
+		local tool = replTools[option]:Clone()
+		tool.Parent = game.Players.LocalPlayer.Backpack
+		OrionLib.Flags["rpdd"]:Set("None")
+	end
+})
+givers:AddDropdown({
+	Name = "Workspace Tools",
+	Flag = "wtdd",
+	Options = workToolsNames,
+	Callback = function(option)
+		local child = workTools[option]
+		if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(child)
+		end
+		OrionLib.Flags["wtdd"]:Set("None")
+	end
+})
+workspace.ChildAdded:Connect(function(child)
+	if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+		table.insert(workToolsNames, child.Name)
+		workTools[child.Name] = child
+		OrionLib.Flags["wtdd"]:Refresh(workToolsNames, true)
+	end
+end)
+game.ReplicatedStorage.ChildAdded:Connect(function(child)
+	if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+		table.insert(replToolsNames, child.Name)
+		replTools[child.Name] = child
+		OrionLib.Flags["rpdd"]:Refresh(replToolsNames, true)
+	end
+end)
+game.ReplicatedFirst.ChildAdded:Connect(function(child)
+	if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+		table.insert(replToolsNames, child.Name)
+		replTools[child.Name] = child
+		OrionLib.Flags["rpdd"]:Refresh(replToolsNames, true)
+	end
+end)
+game.Lighting.ChildAdded:Connect(function(child)
+	if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+		table.insert(replToolsNames, child.Name)
+		replTools[child.Name] = child
+		OrionLib.Flags["rpdd"]:Refresh(replToolsNames, true)
+	end
+end)
+givers:AddButton({
+	Name = "Client BTools (Classic)",
+	Callback = function()
+		for i = 1, 4 do
+			local Tool = Instance.new("HopperBin")
+			Tool.BinType = i
+			Tool.Name = randomString()
+			Tool.Parent = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
+		end
+	end
+})
+
+givers:AddButton({
+	Name = "Client BTools (F3X)",
+	Callback = function()
+		loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
+	end
+})
+local grabtoolsFunc = nil
+givers:AddToggle({
+	Name = "Auto Grab Tools",
+	Default = false,
+	Callback = function(value)
+		if value then
+			local humanoid = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+			for _, child in ipairs(workspace:GetChildren()) do
+				if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+					humanoid:EquipTool(child)
+				end
+			end
+
+			
+
+			grabtoolsFunc = workspace.ChildAdded:Connect(function(child)
+				if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+					humanoid:EquipTool(child)
+				end
+			end)
+		else
+			if grabtoolsFunc then 
+				grabtoolsFunc:Disconnect() 
+			end
+		end
+	end
+})
 
 local Cgui = sws:MakeTab({
 	Name = "Core UI",
@@ -923,8 +1569,36 @@ if game.PlaceId == CJRPGameId then
 end
 
 OrionLib:Init()
+local hls = {}
 
 while true do
+	if OrionLib.Flags["selPart"].Value or OrionLib.Flags["selParts"].Value then
+		local part, pos = getMouseTarget()
+		for k, v in pairs(hls) do
+			if v ~= part then
+				if OrionLib.Flags["selParts"].Value then
+					local containsHl = false
+					for z, x in pairs(currentPartsSelected) do
+						if x == v.Parent then
+							containsHl = true
+							v.FillColor = Color3.fromRGB(0, 255, 0)
+							v.OutlineColor = Color3.fromRGB(0, 255, 0)
+						end
+					end
+					if not containsHl then
+						table.remove(hls, k)
+						v:Destroy()
+					end
+				elseif OrionLib.Flags["selPart"].Value then
+					table.remove(hls, k)
+					v:Destroy()
+				end
+			end
+		end
+		local hl = Instance.new("Highlight")
+		hl.Parent = part
+		table.insert(hls, hl)
+	end
 	if loopWalkspeed then
 		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = setwalkspeed
 	end
