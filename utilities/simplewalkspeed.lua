@@ -254,6 +254,27 @@ if game.GameId == 3690404710 then
 		end
 	})
 	DaBackrooms:AddToggle({
+		Name = "Valve ESP",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace:GetChildren()) do
+				if v.Name == "Valve1" or v.Name == "Valve2" or v.Name == "Valve3" then
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "ValveESP"
+					hl.OutlineColor = Color3.fromRGB(255, 0, 255)
+					hl.FillColor = Color3.fromRGB(255, 0, 255)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("ValveESP") then
+						v:FindFirstChild("ValveESP"):Destroy()
+					end
+				end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
 		Name = "Loot ESP",
 		Default = false,
 		Callback = function(value)
