@@ -16,6 +16,12 @@ local PlayerTab = sws:MakeTab({
 	Icon = "rbxassetid://7733954760",
 	PremiumOnly = false
 })
+
+function tweenTp(part, cframe)
+	local ts = game:GetService("TweenService")
+	local tw = ts:Create(part,TweenInfo.new(1),{CFrame = cframe})
+	return tw
+end
 local Noclip = nil
 local Clip = nil
     
@@ -168,7 +174,177 @@ if game.PlaceId ~= CJRPGameId then
 PlayerSection2:AddToggle({ Name = "Infinite Jump", Default = false, Save = true, Flag = "movement_character_infinitejump" });
 PlayerSection2:AddToggle({ Name = "Click-Teleport", Default = false, Save = true, Flag = "movement_teleporting_clicktp" });
 end
+PlayerSection2:AddSlider({
+	Name = "Set Health Amount",
+	Min = 0,
+	Max = 100,
+	Increment = 1,
+	Flag = "sethealth",
+	Default = 100,
+	Color = Color3.fromRGB(255, 0, 255)
+})
+PlayerSection2:AddButton({
+	Name = "Set Health",
+	Callback = function()
+		game.Players.LocalPlayer.Character.Humanoid.Health = OrionLib.Flags["sethealth"].Value
+	end
+})
 
+if game.GameId == 3690404710 then
+	local DaBackrooms = sws:MakeTab({
+		Name = "Da Backrooms",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	local jsNames = {}
+	local jsEvents = {}
+	for k, v in pairs(game.ReplicatedStorage.Events:GetChildren()) do
+		if v:IsA("RemoteEvent") then
+			table.insert(jsNames, v.Name)
+			jsEvents[v.Name] = v
+		end
+	end
+	local rsNames = {}
+	local rsEvents = {}
+	for k, v in pairs(game.ReplicatedStorage:GetChildren()) do
+		if v:IsA("RemoteEvent") then
+			table.insert(rsNames, v.Name)
+			rsEvents[v.Name] = v
+		end
+	end
+	DaBackrooms:AddDropdown({
+		Name = "Run Jumpscare",
+		Default = "...",
+		Options = jsNames,
+		Flag = "runeventsel",
+		Callback = function(value)
+			jsEvents[value]:FireServer()
+			wait(0.5)
+			OrionLib.Flags["runeventsel"]:Set("...")
+		end
+	})
+	DaBackrooms:AddDropdown({
+		Name = "Run RemoteEvent",
+		Default = "...",
+		Options = rsNames,
+		Flag = "runevent2sel",
+		Callback = function(value)
+			rsEvents[value]:FireServer()
+			wait(0.5)
+			OrionLib.Flags["runevent2sel"]:Set("...")
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Monster ESP",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace.Monsters:GetChildren()) do
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "MonsterESP"
+					hl.OutlineColor = Color3.fromRGB(255, 0, 0)
+					hl.FillColor = Color3.fromRGB(255, 0, 0)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("MonsterESP") then
+						v:FindFirstChild("MonsterESP"):Destroy()
+					end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Loot ESP",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace.Loot:GetChildren()) do
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "LootESP"
+					hl.OutlineColor = Color3.fromRGB(0, 255, 0)
+					hl.FillColor = Color3.fromRGB(0, 255, 0)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("LootESP") then
+						v:FindFirstChild("LootESP"):Destroy()
+					end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Items ESP (BETA)",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace.Items:GetChildren()) do
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "ItemESP"
+					hl.OutlineColor = Color3.fromRGB(255, 255, 0)
+					hl.FillColor = Color3.fromRGB(255, 255, 0)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("ItemESP") then
+						v:FindFirstChild("ItemESP"):Destroy()
+					end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Vault ESP",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace.Vaults:GetChildren()) do
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "VaultESP"
+					hl.OutlineColor = Color3.fromRGB(0, 255, 255)
+					hl.FillColor = Color3.fromRGB(0, 255, 255)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("VaultESP") then
+						v:FindFirstChild("VaultESP"):Destroy()
+					end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Suitcase ESP",
+		Default = false,
+		Callback = function(value)
+			for k, v in pairs(workspace.Containers:GetChildren()) do
+				if value then
+					local hl = Instance.new("Highlight")
+					hl.Name = "SuitESP"
+					hl.OutlineColor = Color3.fromRGB(255, 0, 255)
+					hl.FillColor = Color3.fromRGB(255, 0, 255)
+					hl.Parent = v
+				else
+					if v:FindFirstChild("SuitESP") then
+						v:FindFirstChild("SuitESP"):Destroy()
+					end
+				end
+			end
+		end
+	})
+	DaBackrooms:AddToggle({
+		Name = "Infini-Light",
+		Default = false,
+		Callback = function(value)
+			if value then
+				local pl = Instance.new("PointLight")
+				pl.Name = "InfLight"
+				pl.Parent = game.Players.LocalPlayer.Character.Head
+			else
+				if game.Players.LocalPlayer.Character.Head:FindFirstChild("InfLight") then
+					game.Players.LocalPlayer.Character.Head:FindFirstChild("InfLight"):Destroy()
+				end
+			end
+		end
+	})
+end
 if game.GameId == 4889315193 or game.GameId == 1668992109 then
 	local TRD = sws:MakeTab({
 		Name = "TotalDrama",
@@ -781,6 +957,49 @@ local camera = sws:MakeTab({
 	Icon = "rbxassetid://7733708692",
 	PremiumOnly = false
 })
+camera:AddSlider({
+	Name = "Minimum ThirdPerson Zoom",
+	Min = 0,
+	Max = 120,
+	Default = game.Players.LocalPlayer.CameraMinZoomDistance,
+	Increment = 1,
+	ValueName = "studs",
+	Callback = function(value)
+		game.Players.LocalPlayer.CameraMinZoomDistance = value
+	end
+})
+camera:AddSlider({
+	Name = "Maximum ThirdPerson Zoom",
+	Min = 0,
+	Max = 120,
+	Default = game.Players.LocalPlayer.CameraMaxZoomDistance,
+	Increment = 1,
+	ValueName = "studs",
+	Callback = function(value)
+		game.Players.LocalPlayer.CameraMaxZoomDistance = value
+	end
+})
+camera:AddSlider({
+	Name = "Zoom Level",
+	Min = 0,
+	Max = 120,
+	Default = game.Players.LocalPlayer.CameraMinZoomDistance,
+	Increment = 1,
+	ValueName = "studs",
+	Callback = function(value)
+		local speaker = game.Players.LocalPlayer
+		local camMax = speaker.CameraMaxZoomDistance
+		local camMin = speaker.CameraMinZoomDistance
+		if camMax < tonumber(value) then
+			camMax = value
+		end
+		speaker.CameraMaxZoomDistance = value
+		speaker.CameraMinZoomDistance = value
+		wait()
+		speaker.CameraMaxZoomDistance = camMax
+		speaker.CameraMinZoomDistance = camMin
+	end
+})
 camera:AddToggle({
 	Name = "Freecam",
 	Default = false,
@@ -805,6 +1024,21 @@ camera:AddDropdown({
 	Options = {"Fixed","Attach","Watch","Track","Follow","Custom","Scriptable","Orbital"},
 	Callback = function(cam)
 		workspace.CurrentCamera.CameraType = Enum.CameraType[cam]
+	end
+})
+camera:AddDropdown({
+	Name = "Camera Type",
+	Default = game.Players.LocalPlayer.CameraMode,
+	Options = {"Classic", "LockFirstPerson"},
+	Callback = function(cam)
+		game.Players.LocalPlayer.CameraMode = cam
+	end
+})
+camera:AddToggle({
+	Name = "Shift Lock Enabled",
+	Default = game.Players.LocalPlayer.DevEnableMouseLock,
+	Callback = function(value)
+		game.Players.LocalPlayer.DevEnableMouseLock = value
 	end
 })
 function UnlockParts(character)
@@ -1239,6 +1473,18 @@ GenUI:AddToggle({
                 end
             end
         end
+	end
+})
+GenUI:AddButton({
+	Name = "Enable Reset Character",
+	Callback = function()
+		game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
+	end
+})
+GenUI:AddButton({
+	Name = "Disable Reset Character",
+	Callback = function()
+		game:GetService("StarterGui"):SetCore("ResetButtonCallback", false)
 	end
 })
 
