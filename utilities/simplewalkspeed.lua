@@ -191,6 +191,51 @@ PlayerSection2:AddButton({
 })
 
 if game.GameId == 3690404710 then
+local DaToggle = sws:MakeTab({
+		Name = "Da Toggles",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	local QSEL = DaToggle:AddSection({Name = "Toggle"})
+	local gdNames = {}
+	local gdTogs = {}
+	for k, v in pairs(game.Players.LocalPlayer.GameData:GetChildren()) do
+		table.insert(gdNames, v.Name)
+		gdTogs[v.Name] = v
+	end
+	local gd = nil
+	local val = false
+	QSEL:AddDropdown({
+		Name = "GameData Setter",
+		Options = gdNames,
+		Default = "...",
+		Callback = function(value)
+			gd = value
+		end
+	})
+	QSEL:AddToggle({
+		Name = "Value To Set",
+		Default = false,
+		Callback = function(value)
+			val = value
+		end
+	})
+	QSEL:AddButton({
+		Name = "Execute Action",
+		Callback = function()
+			gd.Value = val
+		end
+	})
+	local GPS = DaToggle:AddSection({Name = "Gamepasses"})
+	for k, v in pairs(game.Players.LocalPlayer.Gamepasses:GetChildren()) do
+		GPS:AddToggle({
+			Name = v.Name,
+			default = v.Value,
+			Callback = function(value)
+				v.Value = value
+			end
+		})
+	end
 	local DaBackrooms = sws:MakeTab({
 		Name = "Da Backrooms",
 		Icon = "rbxassetid://4483345998",
@@ -810,7 +855,8 @@ PlayerManTPS:AddButton({
 		for k, v in pairs(workspace:GetChildren()) do
 			if v.Name == "MikaDummy" then
 				print("found")
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[0].HumanoidRootPart.CFrame
+				wait(0.1)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[1].HumanoidRootPart.CFrame
 			end
 		end
 	end
