@@ -1,13 +1,15 @@
 -- [ [ [ [ -- ] ] ] ] --
 -- [ [ [ MikaUI ] ] ] --
--- [ [All credits go] ] --
--- [ [to KlashDevelopment] ] --
+-- [ [All credits go to] ] --
+-- [ [KlashDevelopment ] ] --
+-- [ [ [ MikaUI ] ] ] --
 -- [ [ [ [ -- ] ] ] ] --
 local mikate = Instance.new("ScreenGui")
 mikate.Name = "MikaUIScript"
 mikate.Enabled = false
 mikate.ResetOnSpawn = false
 mikate.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+mikate.Parent = game.Players.LocalPlayer.PlayerGui
 
 local frame = Instance.new("Frame")
 frame.Name = "Frame"
