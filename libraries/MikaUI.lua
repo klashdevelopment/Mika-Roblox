@@ -9,7 +9,6 @@ mikate.Name = "MikaUIScript"
 mikate.Enabled = false
 mikate.ResetOnSpawn = false
 mikate.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-mikate.Parent = game.Players.LocalPlayer.PlayerGui
 
 local frame = Instance.new("Frame")
 frame.Name = "Frame"
@@ -330,10 +329,6 @@ bgframe.Parent = frame
 
 frame.Parent = mikate
 
-local localScript = Instance.new("LocalScript")
-localScript.Name = "LocalScript"
-localScript.Parent = mikate
-
 local loadingFrame = Instance.new("Frame")
 loadingFrame.Name = "LoadingFrame"
 loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -362,6 +357,7 @@ uICorner11.Name = "UICorner"
 uICorner11.Parent = loadingFrame
 
 loadingFrame.Parent = mikate
+mikate.Parent = game.Players.LocalPlayer.PlayerGui
 
 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 	game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript"):Destroy()
