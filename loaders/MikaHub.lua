@@ -90,7 +90,7 @@ Utils:AddButton({
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/emojis.lua"))() 
 	end
 })
-PlayerSection:AddButton({
+Utils:AddButton({
 	Name = "SecureDex X3",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
