@@ -9,6 +9,15 @@ wait()
 task.spawn(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/InfiniteYield.lua"))()
 end)
+
+task.spawn(function()
+	local CFC = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CFreecam.lua"
+	loadstring(game:HttpGet(CFC))()
+end)
+task.spawn(function()
+	local ECHAT = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/emojis.lua"
+	loadstring(game:HttpGet(ECHAT))()
+end)
 wait()
 task.spawn(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/DarkDexV5.lua"))()
