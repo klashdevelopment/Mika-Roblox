@@ -357,7 +357,6 @@ uICorner11.Name = "UICorner"
 uICorner11.Parent = loadingFrame
 
 loadingFrame.Parent = mikate
-mikate.Parent = game.Players.LocalPlayer.PlayerGui
 
 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 	game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript"):Destroy()
@@ -366,6 +365,7 @@ if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 		Text = "We have deleted your previously loaded MikaUI script."
 	})
 end
+mikate.Parent = game.Players.LocalPlayer.PlayerGui
 
 local UDim2_new = UDim2.new
 
