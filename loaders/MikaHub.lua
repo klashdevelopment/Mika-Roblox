@@ -45,12 +45,6 @@ local PlayerSection = PlayerTab:AddSection({
 })
 
 PlayerSection:AddButton({
-	Name = "Secure Dex (more uses)",
-	Callback = function()
-		loadstring(game:HttpGet(DarkDexV5))()
-	end
-})
-PlayerSection:AddButton({
 	Name = "Dex V5 (cleaner)",
 	Callback = function()
 		loadstring(game:HttpGet(OldDarkDexV5))()
@@ -62,15 +56,15 @@ PlayerSection:AddButton({
 		loadstring(game:HttpGet(InfiniteYield))()
 	end
 })
-
-local Utils = PlayerTab:AddSection({
-	Name = "Miscellaneous"
-})
-Utils:AddButton({
+PlayerSection:AddButton({
 	Name = "Mikate",
 	Callback = function()
 		loadstring(game:HttpGet(SWS))()
 	end
+})
+
+local Utils = PlayerTab:AddSection({
+	Name = "Miscellaneous"
 })
 Utils:AddButton({
 	Name = "Stream Sniper",
@@ -88,6 +82,18 @@ Utils:AddButton({
 	Name = "Cinema Freecam (Shift+P)",
 	Callback = function()
 		loadstring(game:HttpGet(CFC))() 
+	end
+})
+Utils:AddButton({
+	Name = ":emoji: chat",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/emojis.lua"))() 
+	end
+})
+PlayerSection:AddButton({
+	Name = "SecureDex X3",
+	Callback = function()
+		loadstring(game:HttpGet(DarkDexV5))()
 	end
 })
 
