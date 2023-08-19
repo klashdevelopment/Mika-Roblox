@@ -1,362 +1,1083 @@
--- [ [ [ [ -- ] ] ] ] --
--- [ [ [ MikaUI ] ] ] --
--- [ [All credits go to] ] --
--- [ [KlashDevelopment ] ] --
--- [ [ [ MikaUI ] ] ] --
--- [ [ [ [ -- ] ] ] ] --
-local mikate = Instance.new("ScreenGui")
-mikate.Name = "MikaUIScript"
-mikate.Enabled = false
-mikate.ResetOnSpawn = false
-mikate.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+-- Spin up a base Mika UI
+-- If we are in studio we just use script.parent, if we are in a solo localscript we use Codify 
+local mikate = nil
+function SetupDarken()
+	local darken = Instance.new("ScreenGui")
+	darken.Name = "Darken"
+	darken.Enabled = true
+	darken.ResetOnSpawn = false
+	darken.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local frame = Instance.new("Frame")
-frame.Name = "Frame"
-frame.AnchorPoint = Vector2.new(0.5, 0.5)
-frame.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
-frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-frame.BorderSizePixel = 0
-frame.Position = UDim2.fromScale(0.5, 0.5)
-frame.Size = UDim2.fromOffset(573, 304)
+	local frame = Instance.new("Frame")
+	frame.Name = "Frame"
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+	frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	frame.BorderSizePixel = 0
+	frame.Position = UDim2.fromScale(0.5, 0.5)
+	frame.Size = UDim2.fromOffset(573, 304)
 
-local uICorner = Instance.new("UICorner")
-uICorner.Name = "UICorner"
-uICorner.CornerRadius = UDim.new(0, 12)
-uICorner.Parent = frame
+	local uICorner = Instance.new("UICorner")
+	uICorner.Name = "UICorner"
+	uICorner.CornerRadius = UDim.new(0, 12)
+	uICorner.Parent = frame
 
-local tabs = Instance.new("Frame")
-tabs.Name = "Tabs"
-tabs.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabs.BorderSizePixel = 0
-tabs.Position = UDim2.fromScale(-0.000338, -0.000411)
-tabs.Size = UDim2.fromOffset(172, 304)
+	local tabs = Instance.new("Frame")
+	tabs.Name = "Tabs"
+	tabs.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabs.BorderSizePixel = 0
+	tabs.Position = UDim2.fromScale(-0.000338, -0.000411)
+	tabs.Size = UDim2.fromOffset(172, 304)
 
-local scrollingFrame = Instance.new("ScrollingFrame")
-scrollingFrame.Name = "ScrollingFrame"
-scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY
-scrollingFrame.BottomImage = ""
-scrollingFrame.MidImage = ""
-scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
-scrollingFrame.ScrollBarImageTransparency = 1
-scrollingFrame.ScrollBarThickness = 4
-scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
-scrollingFrame.TopImage = ""
-scrollingFrame.Active = true
-scrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-scrollingFrame.BackgroundTransparency = 1
-scrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-scrollingFrame.BorderSizePixel = 0
-scrollingFrame.Position = UDim2.fromScale(0.00112, 0)
-scrollingFrame.Size = UDim2.fromOffset(171, 304)
+	local scrollingFrame = Instance.new("ScrollingFrame")
+	scrollingFrame.Name = "ScrollingFrame"
+	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY
+	scrollingFrame.BottomImage = ""
+	scrollingFrame.MidImage = ""
+	scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.ScrollBarImageTransparency = 1
+	scrollingFrame.ScrollBarThickness = 4
+	scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+	scrollingFrame.TopImage = ""
+	scrollingFrame.Active = true
+	scrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	scrollingFrame.BackgroundTransparency = 1
+	scrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.BorderSizePixel = 0
+	scrollingFrame.Position = UDim2.fromScale(0.00112, 0)
+	scrollingFrame.Size = UDim2.fromOffset(171, 304)
 
-local textLabel = Instance.new("TextLabel")
-textLabel.Name = "TextLabel"
-textLabel.FontFace = Font.new(
-	"rbxasset://fonts/families/GothamSSm.json",
-	Enum.FontWeight.Light,
-	Enum.FontStyle.Normal
-)
-textLabel.RichText = true
-textLabel.Text = "Dummy Script"
-textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-textLabel.TextScaled = true
-textLabel.TextSize = 14
-textLabel.TextWrapped = true
-textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-textLabel.BackgroundTransparency = 1
-textLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-textLabel.BorderSizePixel = 0
-textLabel.Position = UDim2.fromScale(0.112, 0.023)
-textLabel.Size = UDim2.fromOffset(133, 26)
-textLabel.Parent = scrollingFrame
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Name = "TextLabel"
+	textLabel.FontFace = Font.new(
+		"rbxasset://fonts/families/GothamSSm.json",
+		Enum.FontWeight.Light,
+		Enum.FontStyle.Normal
+	)
+	textLabel.RichText = true
+	textLabel.Text = "Dummy Script"
+	textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.TextScaled = true
+	textLabel.TextSize = 14
+	textLabel.TextWrapped = true
+	textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.BackgroundTransparency = 1
+	textLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel.BorderSizePixel = 0
+	textLabel.Position = UDim2.fromScale(0.112, 0.023)
+	textLabel.Size = UDim2.fromOffset(133, 26)
+	textLabel.Parent = scrollingFrame
 
-local tabButton = Instance.new("TextButton")
-tabButton.Name = "TabButton"
-tabButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabButton.TextSize = 14
-tabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-tabButton.BackgroundTransparency = 1
-tabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabButton.BorderSizePixel = 0
-tabButton.Position = UDim2.fromScale(0.065, 0.138)
-tabButton.Size = UDim2.fromOffset(148, 26)
-tabButton.Visible = false
-tabButton.Parent = scrollingFrame
+	local tabButton = Instance.new("TextButton")
+	tabButton.Name = "TabButton"
+	tabButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.TextSize = 14
+	tabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.BackgroundTransparency = 1
+	tabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabButton.BorderSizePixel = 0
+	tabButton.Position = UDim2.fromScale(0.065, 0.138)
+	tabButton.Size = UDim2.fromOffset(148, 26)
+	tabButton.Visible = false
+	tabButton.Parent = scrollingFrame
 
-scrollingFrame.Parent = tabs
+	scrollingFrame.Parent = tabs
 
-local uICorner1 = Instance.new("UICorner")
-uICorner1.Name = "UICorner"
-uICorner1.CornerRadius = UDim.new(0, 12)
-uICorner1.Parent = tabs
+	local uICorner1 = Instance.new("UICorner")
+	uICorner1.Name = "UICorner"
+	uICorner1.CornerRadius = UDim.new(0, 12)
+	uICorner1.Parent = tabs
 
-tabs.Parent = frame
+	tabs.Parent = frame
 
-local exitBtn = Instance.new("TextButton")
-exitBtn.Name = "ExitBtn"
-exitBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-exitBtn.Text = "X"
-exitBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-exitBtn.TextSize = 30
-exitBtn.TextWrapped = true
-exitBtn.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
-exitBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
-exitBtn.BorderSizePixel = 0
-exitBtn.Position = UDim2.fromScale(0.97, -0.0526)
-exitBtn.Size = UDim2.fromOffset(33, 33)
-exitBtn.ZIndex = 4
+	local exitBtn = Instance.new("TextButton")
+	exitBtn.Name = "ExitBtn"
+	exitBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	exitBtn.Text = "X"
+	exitBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	exitBtn.TextSize = 30
+	exitBtn.TextWrapped = true
+	exitBtn.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
+	exitBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	exitBtn.BorderSizePixel = 0
+	exitBtn.Position = UDim2.fromScale(0.97, -0.0526)
+	exitBtn.Size = UDim2.fromOffset(33, 33)
+	exitBtn.ZIndex = 4
 
-local uICorner2 = Instance.new("UICorner")
-uICorner2.Name = "UICorner"
-uICorner2.CornerRadius = UDim.new(0, 12)
-uICorner2.Parent = exitBtn
+	local uICorner2 = Instance.new("UICorner")
+	uICorner2.Name = "UICorner"
+	uICorner2.CornerRadius = UDim.new(0, 12)
+	uICorner2.Parent = exitBtn
 
-exitBtn.Parent = frame
+	exitBtn.Parent = frame
 
-local tabContent = Instance.new("Frame")
-tabContent.Name = "TabContent"
-tabContent.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
-tabContent.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabContent.BorderSizePixel = 0
-tabContent.Position = UDim2.fromScale(0.3, 0)
-tabContent.Size = UDim2.fromOffset(401, 302)
+	local tabContent = Instance.new("Frame")
+	tabContent.Name = "TabContent"
+	tabContent.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+	tabContent.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabContent.BorderSizePixel = 0
+	tabContent.Position = UDim2.fromScale(0.3, 0)
+	tabContent.Size = UDim2.fromOffset(401, 302)
 
-local uICorner3 = Instance.new("UICorner")
-uICorner3.Name = "UICorner"
-uICorner3.CornerRadius = UDim.new(0, 12)
-uICorner3.Parent = tabContent
+	local uICorner3 = Instance.new("UICorner")
+	uICorner3.Name = "UICorner"
+	uICorner3.CornerRadius = UDim.new(0, 12)
+	uICorner3.Parent = tabContent
 
-local tabBtnExample = Instance.new("TextButton")
-tabBtnExample.Name = "TabBtnExample"
-tabBtnExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-tabBtnExample.Text = "Button Name"
-tabBtnExample.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabBtnExample.TextSize = 14
-tabBtnExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-tabBtnExample.BackgroundTransparency = 0.95
-tabBtnExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabBtnExample.BorderSizePixel = 0
-tabBtnExample.Position = UDim2.fromScale(0.0574, 0.142)
-tabBtnExample.Size = UDim2.fromOffset(354, 33)
-tabBtnExample.Visible = false
+	local tabBtnExample = Instance.new("TextButton")
+	tabBtnExample.Name = "TabBtnExample"
+	tabBtnExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabBtnExample.Text = "Button Name"
+	tabBtnExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabBtnExample.TextSize = 14
+	tabBtnExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabBtnExample.BackgroundTransparency = 0.95
+	tabBtnExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabBtnExample.BorderSizePixel = 0
+	tabBtnExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabBtnExample.Size = UDim2.fromOffset(354, 33)
+	tabBtnExample.Visible = false
 
-local uICorner4 = Instance.new("UICorner")
-uICorner4.Name = "UICorner"
-uICorner4.Parent = tabBtnExample
+	local uICorner4 = Instance.new("UICorner")
+	uICorner4.Name = "UICorner"
+	uICorner4.Parent = tabBtnExample
 
-local imageLabel = Instance.new("ImageLabel")
-imageLabel.Name = "ImageLabel"
-imageLabel.Image = "rbxassetid://12333784627"
-imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-imageLabel.BackgroundTransparency = 1
-imageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-imageLabel.BorderSizePixel = 0
-imageLabel.Position = UDim2.fromScale(0.911, 0.04)
-imageLabel.Size = UDim2.fromOffset(29, 29)
-imageLabel.Parent = tabBtnExample
+	local imageLabel = Instance.new("ImageLabel")
+	imageLabel.Name = "ImageLabel"
+	imageLabel.Image = "rbxassetid://12333784627"
+	imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel.BackgroundTransparency = 1
+	imageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel.BorderSizePixel = 0
+	imageLabel.Position = UDim2.fromScale(0.911, 0.04)
+	imageLabel.Size = UDim2.fromOffset(29, 29)
+	imageLabel.Parent = tabBtnExample
 
-tabBtnExample.Parent = tabContent
+	tabBtnExample.Parent = tabContent
 
-local tabToggleExample = Instance.new("TextButton")
-tabToggleExample.Name = "TabToggleExample"
-tabToggleExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-tabToggleExample.Text = "Button Name"
-tabToggleExample.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabToggleExample.TextSize = 14
-tabToggleExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-tabToggleExample.BackgroundTransparency = 0.95
-tabToggleExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabToggleExample.BorderSizePixel = 0
-tabToggleExample.Position = UDim2.fromScale(0.0574, 0.142)
-tabToggleExample.Size = UDim2.fromOffset(354, 33)
-tabToggleExample.Visible = false
+	local tabToggleExample = Instance.new("TextButton")
+	tabToggleExample.Name = "TabToggleExample"
+	tabToggleExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabToggleExample.Text = "Button Name"
+	tabToggleExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabToggleExample.TextSize = 14
+	tabToggleExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabToggleExample.BackgroundTransparency = 0.95
+	tabToggleExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabToggleExample.BorderSizePixel = 0
+	tabToggleExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabToggleExample.Size = UDim2.fromOffset(354, 33)
+	tabToggleExample.Visible = false
 
-local uICorner5 = Instance.new("UICorner")
-uICorner5.Name = "UICorner"
-uICorner5.Parent = tabToggleExample
+	local uICorner5 = Instance.new("UICorner")
+	uICorner5.Name = "UICorner"
+	uICorner5.Parent = tabToggleExample
 
-local imageLabel1 = Instance.new("ImageLabel")
-imageLabel1.Name = "ImageLabel"
-imageLabel1.Image = "rbxassetid://7310154850"
-imageLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-imageLabel1.BackgroundTransparency = 1
-imageLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-imageLabel1.BorderSizePixel = 0
-imageLabel1.Position = UDim2.fromScale(0.907, 0)
-imageLabel1.Size = UDim2.fromOffset(33, 33)
+	local imageLabel1 = Instance.new("ImageLabel")
+	imageLabel1.Name = "ImageLabel"
+	imageLabel1.Image = "rbxassetid://7310154850"
+	imageLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel1.BackgroundTransparency = 1
+	imageLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel1.BorderSizePixel = 0
+	imageLabel1.Position = UDim2.fromScale(0.907, 0)
+	imageLabel1.Size = UDim2.fromOffset(33, 33)
 
-local toggle = Instance.new("ImageLabel")
-toggle.Name = "Toggle"
-toggle.Image = "rbxassetid://5825681337"
-toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-toggle.BackgroundTransparency = 1
-toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-toggle.BorderSizePixel = 0
-toggle.Position = UDim2.fromScale(0.182, 0.182)
-toggle.Size = UDim2.fromOffset(21, 21)
-toggle.Visible = false
-toggle.Parent = imageLabel1
+	local toggle = Instance.new("ImageLabel")
+	toggle.Name = "Toggle"
+	toggle.Image = "rbxassetid://5825681337"
+	toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	toggle.BackgroundTransparency = 1
+	toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	toggle.BorderSizePixel = 0
+	toggle.Position = UDim2.fromScale(0.182, 0.182)
+	toggle.Size = UDim2.fromOffset(21, 21)
+	toggle.Visible = false
+	toggle.Parent = imageLabel1
 
-imageLabel1.Parent = tabToggleExample
+	imageLabel1.Parent = tabToggleExample
 
-tabToggleExample.Parent = tabContent
+	tabToggleExample.Parent = tabContent
 
-local tabSliderExample = Instance.new("Frame")
-tabSliderExample.Name = "TabSliderExample"
-tabSliderExample.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
-tabSliderExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabSliderExample.BorderSizePixel = 0
-tabSliderExample.Position = UDim2.fromScale(0.057, 0.142)
-tabSliderExample.Size = UDim2.fromOffset(354, 33)
-tabSliderExample.Visible = false
+	local tabSliderExample = Instance.new("Frame")
+	tabSliderExample.Name = "TabSliderExample"
+	tabSliderExample.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+	tabSliderExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabSliderExample.BorderSizePixel = 0
+	tabSliderExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabSliderExample.Size = UDim2.fromOffset(354, 33)
+	tabSliderExample.Visible = false
 
-local uICorner6 = Instance.new("UICorner")
-uICorner6.Name = "UICorner"
-uICorner6.Parent = tabSliderExample
+	local uICorner6 = Instance.new("UICorner")
+	uICorner6.Name = "UICorner"
+	uICorner6.Parent = tabSliderExample
 
-local uIStroke = Instance.new("UIStroke")
-uIStroke.Name = "UIStroke"
-uIStroke.Color = Color3.fromRGB(255, 255, 255)
-uIStroke.Parent = tabSliderExample
+	local uIStroke = Instance.new("UIStroke")
+	uIStroke.Name = "UIStroke"
+	uIStroke.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke.Parent = tabSliderExample
 
-local value = Instance.new("Frame")
-value.Name = "Value"
-value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-value.BorderColor3 = Color3.fromRGB(0, 0, 0)
-value.BorderSizePixel = 0
-value.Position = UDim2.fromScale(-0.00232, -0.00952)
-value.Size = UDim2.fromOffset(0, 33)
+	local value = Instance.new("Frame")
+	value.Name = "Value"
+	value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	value.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	value.BorderSizePixel = 0
+	value.Position = UDim2.fromScale(-0.00232, -0.00952)
+	value.Size = UDim2.fromOffset(0, 33)
 
-local uICorner7 = Instance.new("UICorner")
-uICorner7.Name = "UICorner"
-uICorner7.Parent = value
+	local uICorner7 = Instance.new("UICorner")
+	uICorner7.Name = "UICorner"
+	uICorner7.Parent = value
 
-value.Parent = tabSliderExample
+	value.Parent = tabSliderExample
 
-local valueText = Instance.new("TextLabel")
-valueText.Name = "ValueText"
-valueText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-valueText.TextColor3 = Color3.fromRGB(0, 0, 0)
-valueText.TextSize = 19
-valueText.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-valueText.TextStrokeTransparency = 0
-valueText.TextTransparency = 0.3
-valueText.TextXAlignment = Enum.TextXAlignment.Right
-valueText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-valueText.BackgroundTransparency = 1
-valueText.BorderColor3 = Color3.fromRGB(0, 0, 0)
-valueText.BorderSizePixel = 0
-valueText.Position = UDim2.fromScale(0.41, 0)
-valueText.Size = UDim2.fromOffset(200, 33)
+	local valueText = Instance.new("TextLabel")
+	valueText.Name = "ValueText"
+	valueText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText.TextColor3 = Color3.fromRGB(0, 0, 0)
+	valueText.TextSize = 19
+	valueText.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.TextStrokeTransparency = 0
+	valueText.TextTransparency = 0.3
+	valueText.TextXAlignment = Enum.TextXAlignment.Right
+	valueText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.BackgroundTransparency = 1
+	valueText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText.BorderSizePixel = 0
+	valueText.Position = UDim2.fromScale(0.41, 0)
+	valueText.Size = UDim2.fromOffset(200, 33)
 
-local uIStroke1 = Instance.new("UIStroke")
-uIStroke1.Name = "UIStroke"
-uIStroke1.Color = Color3.fromRGB(255, 255, 255)
-uIStroke1.Thickness = 1.5
-uIStroke1.Parent = valueText
+	local uIStroke1 = Instance.new("UIStroke")
+	uIStroke1.Name = "UIStroke"
+	uIStroke1.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke1.Thickness = 1.5
+	uIStroke1.Parent = valueText
 
-valueText.Parent = tabSliderExample
+	valueText.Parent = tabSliderExample
 
-tabSliderExample.Parent = tabContent
+	tabSliderExample.Parent = tabContent
 
-local tabLabelExample = Instance.new("TextLabel")
-tabLabelExample.Name = "TabLabelExample"
-tabLabelExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-tabLabelExample.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabLabelExample.TextSize = 22
-tabLabelExample.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-tabLabelExample.TextWrapped = true
-tabLabelExample.TextXAlignment = Enum.TextXAlignment.Left
-tabLabelExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-tabLabelExample.BackgroundTransparency = 0.95
-tabLabelExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
-tabLabelExample.BorderSizePixel = 0
-tabLabelExample.Position = UDim2.fromScale(0.057, 0.142)
-tabLabelExample.Size = UDim2.fromOffset(354, 33)
-tabLabelExample.Visible = false
+	local tabLabelExample = Instance.new("TextLabel")
+	tabLabelExample.Name = "TabLabelExample"
+	tabLabelExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabLabelExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.TextSize = 22
+	tabLabelExample.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.TextWrapped = true
+	tabLabelExample.TextXAlignment = Enum.TextXAlignment.Left
+	tabLabelExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.BackgroundTransparency = 0.95
+	tabLabelExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabLabelExample.BorderSizePixel = 0
+	tabLabelExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabLabelExample.Size = UDim2.fromOffset(354, 33)
+	tabLabelExample.Visible = false
 
-local uICorner8 = Instance.new("UICorner")
-uICorner8.Name = "UICorner"
-uICorner8.Parent = tabLabelExample
+	local uICorner8 = Instance.new("UICorner")
+	uICorner8.Name = "UICorner"
+	uICorner8.Parent = tabLabelExample
 
-local uIPadding = Instance.new("UIPadding")
-uIPadding.Name = "UIPadding"
-uIPadding.PaddingLeft = UDim.new(0, 10)
-uIPadding.Parent = tabLabelExample
+	local uIPadding = Instance.new("UIPadding")
+	uIPadding.Name = "UIPadding"
+	uIPadding.PaddingLeft = UDim.new(0, 10)
+	uIPadding.Parent = tabLabelExample
 
-tabLabelExample.Parent = tabContent
+	tabLabelExample.Parent = tabContent
 
-tabContent.Parent = frame
+	tabContent.Parent = frame
 
-local minBtn = Instance.new("TextButton")
-minBtn.Name = "MinBtn"
-minBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
-minBtn.Text = "-"
-minBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-minBtn.TextSize = 43
-minBtn.TextWrapped = true
-minBtn.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
-minBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
-minBtn.BorderSizePixel = 0
-minBtn.Position = UDim2.fromScale(0.902, -0.0526)
-minBtn.Size = UDim2.fromOffset(33, 33)
-minBtn.ZIndex = 4
+	local minBtn = Instance.new("TextButton")
+	minBtn.Name = "MinBtn"
+	minBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	minBtn.Text = "-"
+	minBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	minBtn.TextSize = 43
+	minBtn.TextWrapped = true
+	minBtn.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
+	minBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	minBtn.BorderSizePixel = 0
+	minBtn.Position = UDim2.fromScale(0.902, -0.0526)
+	minBtn.Size = UDim2.fromOffset(33, 33)
+	minBtn.ZIndex = 4
 
-local uICorner9 = Instance.new("UICorner")
-uICorner9.Name = "UICorner"
-uICorner9.CornerRadius = UDim.new(0, 12)
-uICorner9.Parent = minBtn
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.CornerRadius = UDim.new(0, 12)
+	uICorner9.Parent = minBtn
 
-minBtn.Parent = frame
+	minBtn.Parent = frame
 
-local bgframe = Instance.new("Frame")
-bgframe.Name = "Bgframe"
-bgframe.BackgroundColor3 = Color3.fromRGB(121, 121, 121)
-bgframe.BorderColor3 = Color3.fromRGB(0, 0, 0)
-bgframe.BorderSizePixel = 0
-bgframe.Position = UDim2.fromScale(0.89, -0.0757)
-bgframe.Size = UDim2.fromOffset(87, 49)
-bgframe.ZIndex = 3
+	local bgframe = Instance.new("Frame")
+	bgframe.Name = "Bgframe"
+	bgframe.BackgroundColor3 = Color3.fromRGB(121, 121, 121)
+	bgframe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	bgframe.BorderSizePixel = 0
+	bgframe.Position = UDim2.fromScale(0.89, -0.0757)
+	bgframe.Size = UDim2.fromOffset(87, 49)
+	bgframe.ZIndex = 3
 
-local uICorner10 = Instance.new("UICorner")
-uICorner10.Name = "UICorner"
-uICorner10.CornerRadius = UDim.new(0, 15)
-uICorner10.Parent = bgframe
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 15)
+	uICorner10.Parent = bgframe
 
-bgframe.Parent = frame
+	bgframe.Parent = frame
 
-frame.Parent = mikate
+	frame.Parent = darken
 
-local loadingFrame = Instance.new("Frame")
-loadingFrame.Name = "LoadingFrame"
-loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-loadingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-loadingFrame.BorderSizePixel = 0
-loadingFrame.Position = UDim2.fromScale(0.454, 0.506)
-loadingFrame.Size = UDim2.fromOffset(127, 50)
-loadingFrame.Visible = false
+	local loadingFrame = Instance.new("Frame")
+	loadingFrame.Name = "LoadingFrame"
+	loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	loadingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	loadingFrame.BorderSizePixel = 0
+	loadingFrame.Position = UDim2.fromScale(0.454, 0.506)
+	loadingFrame.Size = UDim2.fromOffset(127, 50)
+	loadingFrame.Visible = false
 
-local textLabel1 = Instance.new("TextLabel")
-textLabel1.Name = "TextLabel"
-textLabel1.FontFace = Font.new("rbxasset://fonts/families/Nunito.json")
-textLabel1.Text = "Mika UI"
-textLabel1.TextColor3 = Color3.fromRGB(0, 0, 0)
-textLabel1.TextSize = 27
-textLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-textLabel1.BackgroundTransparency = 1
-textLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-textLabel1.BorderSizePixel = 0
-textLabel1.Position = UDim2.fromScale(-0.00439, 0)
-textLabel1.Size = UDim2.fromOffset(124, 50)
-textLabel1.Parent = loadingFrame
+	local textLabel1 = Instance.new("TextLabel")
+	textLabel1.Name = "TextLabel"
+	textLabel1.FontFace = Font.new("rbxasset://fonts/families/Nunito.json")
+	textLabel1.Text = "Mika UI"
+	textLabel1.TextColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel1.TextSize = 27
+	textLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel1.BackgroundTransparency = 1
+	textLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel1.BorderSizePixel = 0
+	textLabel1.Position = UDim2.fromScale(-0.00439, 0)
+	textLabel1.Size = UDim2.fromOffset(124, 50)
+	textLabel1.Parent = loadingFrame
 
-local uICorner11 = Instance.new("UICorner")
-uICorner11.Name = "UICorner"
-uICorner11.Parent = loadingFrame
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.Parent = loadingFrame
 
-loadingFrame.Parent = mikate
+	loadingFrame.Parent = darken
+	darken.Parent = game.Players.LocalPlayer.PlayerGui
+	mikate = darken
+end
+function SetupBlackout()
+	local blackout = Instance.new("ScreenGui")
+	blackout.Name = "Blackout"
+	blackout.ResetOnSpawn = false
+	blackout.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	local frame = Instance.new("Frame")
+	frame.Name = "Frame"
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	frame.BorderSizePixel = 0
+	frame.Position = UDim2.fromScale(0.5, 0.5)
+	frame.Size = UDim2.fromOffset(573, 304)
+
+	local uICorner = Instance.new("UICorner")
+	uICorner.Name = "UICorner"
+	uICorner.CornerRadius = UDim.new(0, 12)
+	uICorner.Parent = frame
+
+	local tabs = Instance.new("Frame")
+	tabs.Name = "Tabs"
+	tabs.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+	tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabs.BorderSizePixel = 0
+	tabs.Position = UDim2.fromScale(-0.000338, -0.000411)
+	tabs.Size = UDim2.fromOffset(172, 304)
+
+	local scrollingFrame = Instance.new("ScrollingFrame")
+	scrollingFrame.Name = "ScrollingFrame"
+	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY
+	scrollingFrame.BottomImage = ""
+	scrollingFrame.MidImage = ""
+	scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.ScrollBarImageTransparency = 1
+	scrollingFrame.ScrollBarThickness = 4
+	scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+	scrollingFrame.TopImage = ""
+	scrollingFrame.Active = true
+	scrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	scrollingFrame.BackgroundTransparency = 1
+	scrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.BorderSizePixel = 0
+	scrollingFrame.Position = UDim2.fromScale(0.00112, 0)
+	scrollingFrame.Size = UDim2.fromOffset(171, 304)
+
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Name = "TextLabel"
+	textLabel.FontFace = Font.new(
+		"rbxasset://fonts/families/GothamSSm.json",
+		Enum.FontWeight.Light,
+		Enum.FontStyle.Normal
+	)
+	textLabel.RichText = true
+	textLabel.Text = "Dummy Script"
+	textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.TextScaled = true
+	textLabel.TextSize = 14
+	textLabel.TextWrapped = true
+	textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.BackgroundTransparency = 1
+	textLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel.BorderSizePixel = 0
+	textLabel.Position = UDim2.fromScale(0.112, 0.023)
+	textLabel.Size = UDim2.fromOffset(133, 26)
+	textLabel.Parent = scrollingFrame
+
+	local tabButton = Instance.new("TextButton")
+	tabButton.Name = "TabButton"
+	tabButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.TextSize = 14
+	tabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.BackgroundTransparency = 1
+	tabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabButton.BorderSizePixel = 0
+	tabButton.Position = UDim2.fromScale(0.065, 0.138)
+	tabButton.Size = UDim2.fromOffset(148, 26)
+	tabButton.Visible = false
+	tabButton.Parent = scrollingFrame
+
+	scrollingFrame.Parent = tabs
+
+	local uICorner1 = Instance.new("UICorner")
+	uICorner1.Name = "UICorner"
+	uICorner1.CornerRadius = UDim.new(0, 12)
+	uICorner1.Parent = tabs
+
+	tabs.Parent = frame
+
+	local exitBtn = Instance.new("TextButton")
+	exitBtn.Name = "ExitBtn"
+	exitBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	exitBtn.Text = "X"
+	exitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	exitBtn.TextSize = 30
+	exitBtn.TextWrapped = true
+	exitBtn.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
+	exitBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	exitBtn.BorderSizePixel = 0
+	exitBtn.Position = UDim2.fromScale(0.97, -0.0526)
+	exitBtn.Size = UDim2.fromOffset(33, 33)
+	exitBtn.ZIndex = 4
+
+	local uICorner2 = Instance.new("UICorner")
+	uICorner2.Name = "UICorner"
+	uICorner2.CornerRadius = UDim.new(0, 12)
+	uICorner2.Parent = exitBtn
+
+	exitBtn.Parent = frame
+
+	local tabContent = Instance.new("Frame")
+	tabContent.Name = "TabContent"
+	tabContent.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	tabContent.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabContent.BorderSizePixel = 0
+	tabContent.Position = UDim2.fromScale(0.3, 0)
+	tabContent.Size = UDim2.fromOffset(401, 302)
+
+	local uICorner3 = Instance.new("UICorner")
+	uICorner3.Name = "UICorner"
+	uICorner3.CornerRadius = UDim.new(0, 12)
+	uICorner3.Parent = tabContent
+
+	local tabBtnExample = Instance.new("TextButton")
+	tabBtnExample.Name = "TabBtnExample"
+	tabBtnExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabBtnExample.Text = "Button Name"
+	tabBtnExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabBtnExample.TextSize = 14
+	tabBtnExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabBtnExample.BackgroundTransparency = 0.98
+	tabBtnExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabBtnExample.BorderSizePixel = 0
+	tabBtnExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabBtnExample.Size = UDim2.fromOffset(354, 33)
+	tabBtnExample.Visible = false
+
+	local uICorner4 = Instance.new("UICorner")
+	uICorner4.Name = "UICorner"
+	uICorner4.Parent = tabBtnExample
+
+	local imageLabel = Instance.new("ImageLabel")
+	imageLabel.Name = "ImageLabel"
+	imageLabel.Image = "rbxassetid://12333784627"
+	imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel.BackgroundTransparency = 1
+	imageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel.BorderSizePixel = 0
+	imageLabel.Position = UDim2.fromScale(0.911, 0.04)
+	imageLabel.Size = UDim2.fromOffset(29, 29)
+	imageLabel.Parent = tabBtnExample
+
+	tabBtnExample.Parent = tabContent
+
+	local tabToggleExample = Instance.new("TextButton")
+	tabToggleExample.Name = "TabToggleExample"
+	tabToggleExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabToggleExample.Text = "Button Name"
+	tabToggleExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabToggleExample.TextSize = 14
+	tabToggleExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabToggleExample.BackgroundTransparency = 0.98
+	tabToggleExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabToggleExample.BorderSizePixel = 0
+	tabToggleExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabToggleExample.Size = UDim2.fromOffset(354, 33)
+	tabToggleExample.Visible = false
+
+	local uICorner5 = Instance.new("UICorner")
+	uICorner5.Name = "UICorner"
+	uICorner5.Parent = tabToggleExample
+
+	local imageLabel1 = Instance.new("ImageLabel")
+	imageLabel1.Name = "ImageLabel"
+	imageLabel1.Image = "rbxassetid://7310154850"
+	imageLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel1.BackgroundTransparency = 1
+	imageLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel1.BorderSizePixel = 0
+	imageLabel1.Position = UDim2.fromScale(0.907, 0)
+	imageLabel1.Size = UDim2.fromOffset(33, 33)
+
+	local toggle = Instance.new("ImageLabel")
+	toggle.Name = "Toggle"
+	toggle.Image = "rbxassetid://5825681337"
+	toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	toggle.BackgroundTransparency = 1
+	toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	toggle.BorderSizePixel = 0
+	toggle.Position = UDim2.fromScale(0.182, 0.182)
+	toggle.Size = UDim2.fromOffset(21, 21)
+	toggle.Visible = false
+	toggle.Parent = imageLabel1
+
+	imageLabel1.Parent = tabToggleExample
+
+	tabToggleExample.Parent = tabContent
+
+	local tabSliderExample = Instance.new("Frame")
+	tabSliderExample.Name = "TabSliderExample"
+	tabSliderExample.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+	tabSliderExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabSliderExample.BorderSizePixel = 0
+	tabSliderExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabSliderExample.Size = UDim2.fromOffset(354, 33)
+	tabSliderExample.Visible = false
+
+	local uICorner6 = Instance.new("UICorner")
+	uICorner6.Name = "UICorner"
+	uICorner6.Parent = tabSliderExample
+
+	local uIStroke = Instance.new("UIStroke")
+	uIStroke.Name = "UIStroke"
+	uIStroke.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke.Thickness = 0.6
+	uIStroke.Parent = tabSliderExample
+
+	local value = Instance.new("Frame")
+	value.Name = "Value"
+	value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	value.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	value.BorderSizePixel = 0
+	value.Position = UDim2.fromScale(-0.00232, -0.00952)
+	value.Size = UDim2.fromOffset(0, 33)
+
+	local uICorner7 = Instance.new("UICorner")
+	uICorner7.Name = "UICorner"
+	uICorner7.Parent = value
+
+	value.Parent = tabSliderExample
+
+	local valueText = Instance.new("TextLabel")
+	valueText.Name = "ValueText"
+	valueText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText.TextColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.TextSize = 19
+	valueText.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.TextStrokeTransparency = 0
+	valueText.TextTransparency = 0.3
+	valueText.TextXAlignment = Enum.TextXAlignment.Right
+	valueText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.BackgroundTransparency = 1
+	valueText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText.BorderSizePixel = 0
+	valueText.Position = UDim2.fromScale(0.41, 0)
+	valueText.Size = UDim2.fromOffset(200, 33)
+
+	local uIStroke1 = Instance.new("UIStroke")
+	uIStroke1.Name = "UIStroke"
+	uIStroke1.Transparency = 0.5
+	uIStroke1.Parent = valueText
+
+	valueText.Parent = tabSliderExample
+
+	tabSliderExample.Parent = tabContent
+
+	local tabLabelExample = Instance.new("TextLabel")
+	tabLabelExample.Name = "TabLabelExample"
+	tabLabelExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabLabelExample.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.TextSize = 22
+	tabLabelExample.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.TextWrapped = true
+	tabLabelExample.TextXAlignment = Enum.TextXAlignment.Left
+	tabLabelExample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.BackgroundTransparency = 0.98
+	tabLabelExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabLabelExample.BorderSizePixel = 0
+	tabLabelExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabLabelExample.Size = UDim2.fromOffset(354, 33)
+	tabLabelExample.Visible = false
+
+	local uICorner8 = Instance.new("UICorner")
+	uICorner8.Name = "UICorner"
+	uICorner8.Parent = tabLabelExample
+
+	local uIPadding = Instance.new("UIPadding")
+	uIPadding.Name = "UIPadding"
+	uIPadding.PaddingLeft = UDim.new(0, 10)
+	uIPadding.Parent = tabLabelExample
+
+	tabLabelExample.Parent = tabContent
+
+	tabContent.Parent = frame
+
+	local minBtn = Instance.new("TextButton")
+	minBtn.Name = "MinBtn"
+	minBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	minBtn.Text = "-"
+	minBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	minBtn.TextSize = 43
+	minBtn.TextWrapped = true
+	minBtn.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
+	minBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	minBtn.BorderSizePixel = 0
+	minBtn.Position = UDim2.fromScale(0.902, -0.0526)
+	minBtn.Size = UDim2.fromOffset(33, 33)
+	minBtn.ZIndex = 4
+
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.CornerRadius = UDim.new(0, 12)
+	uICorner9.Parent = minBtn
+
+	minBtn.Parent = frame
+
+	local bgframe = Instance.new("Frame")
+	bgframe.Name = "Bgframe"
+	bgframe.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+	bgframe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	bgframe.BorderSizePixel = 0
+	bgframe.Position = UDim2.fromScale(0.89, -0.0757)
+	bgframe.Size = UDim2.fromOffset(87, 49)
+	bgframe.ZIndex = 3
+
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 15)
+	uICorner10.Parent = bgframe
+
+	bgframe.Parent = frame
+
+	local seperator = Instance.new("Frame")
+	seperator.Name = "Seperator"
+	seperator.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	seperator.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	seperator.BorderSizePixel = 0
+	seperator.Position = UDim2.fromOffset(172, 0)
+	seperator.Size = UDim2.new(0, 2, 1, 0)
+	seperator.ZIndex = 6.97e+05
+	seperator.Parent = frame
+
+	frame.Parent = blackout
+
+	local loadingFrame = Instance.new("Frame")
+	loadingFrame.Name = "LoadingFrame"
+	loadingFrame.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+	loadingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	loadingFrame.BorderSizePixel = 0
+	loadingFrame.Position = UDim2.fromScale(0.454, 0.506)
+	loadingFrame.Size = UDim2.fromOffset(127, 50)
+	loadingFrame.Visible = false
+
+	local textLabel1 = Instance.new("TextLabel")
+	textLabel1.Name = "TextLabel"
+	textLabel1.FontFace = Font.new("rbxasset://fonts/families/Nunito.json")
+	textLabel1.Text = "Mika UI"
+	textLabel1.TextColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel1.TextSize = 27
+	textLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel1.BackgroundTransparency = 1
+	textLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel1.BorderSizePixel = 0
+	textLabel1.Position = UDim2.fromScale(-0.00439, 0)
+	textLabel1.Size = UDim2.fromOffset(128, 50)
+	textLabel1.Parent = loadingFrame
+
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.CornerRadius = UDim.new(0, 15)
+	uICorner11.Parent = loadingFrame
+
+	loadingFrame.Parent = blackout
+	blackout.Parent = game.Players.LocalPlayer.PlayerGui
+	mikate = blackout
+end
+function SetupSunshine()
+	local sunshine = Instance.new("ScreenGui")
+	sunshine.Name = "Sunshine"
+	sunshine.Enabled = true
+	sunshine.ResetOnSpawn = false
+	sunshine.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	local frame = Instance.new("Frame")
+	frame.Name = "Frame"
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.BackgroundColor3 = Color3.fromRGB(222, 197, 153)
+	frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	frame.BorderSizePixel = 0
+	frame.Position = UDim2.fromScale(0.5, 0.5)
+	frame.Size = UDim2.fromOffset(573, 304)
+
+	local uICorner = Instance.new("UICorner")
+	uICorner.Name = "UICorner"
+	uICorner.CornerRadius = UDim.new(0, 12)
+	uICorner.Parent = frame
+
+	local tabs = Instance.new("Frame")
+	tabs.Name = "Tabs"
+	tabs.BackgroundColor3 = Color3.fromRGB(153, 136, 106)
+	tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabs.BorderSizePixel = 0
+	tabs.Position = UDim2.fromScale(-0.000338, -0.000411)
+	tabs.Size = UDim2.fromOffset(172, 304)
+
+	local scrollingFrame = Instance.new("ScrollingFrame")
+	scrollingFrame.Name = "ScrollingFrame"
+	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY
+	scrollingFrame.BottomImage = ""
+	scrollingFrame.MidImage = ""
+	scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.ScrollBarImageTransparency = 1
+	scrollingFrame.ScrollBarThickness = 4
+	scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+	scrollingFrame.TopImage = ""
+	scrollingFrame.Active = true
+	scrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	scrollingFrame.BackgroundTransparency = 1
+	scrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	scrollingFrame.BorderSizePixel = 0
+	scrollingFrame.Position = UDim2.fromScale(0.00112, 0)
+	scrollingFrame.Size = UDim2.fromOffset(171, 304)
+
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Name = "TextLabel"
+	textLabel.FontFace = Font.new(
+		"rbxasset://fonts/families/GothamSSm.json",
+		Enum.FontWeight.Light,
+		Enum.FontStyle.Normal
+	)
+	textLabel.RichText = true
+	textLabel.Text = "Dummy Script"
+	textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.TextScaled = true
+	textLabel.TextSize = 14
+	textLabel.TextWrapped = true
+	textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.BackgroundTransparency = 1
+	textLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel.BorderSizePixel = 0
+	textLabel.Position = UDim2.fromScale(0.112, 0.023)
+	textLabel.Size = UDim2.fromOffset(133, 26)
+	textLabel.Parent = scrollingFrame
+
+	local tabButton = Instance.new("TextButton")
+	tabButton.Name = "TabButton"
+	tabButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.TextSize = 14
+	tabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabButton.BackgroundTransparency = 1
+	tabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabButton.BorderSizePixel = 0
+	tabButton.Position = UDim2.fromScale(0.065, 0.138)
+	tabButton.Size = UDim2.fromOffset(148, 26)
+	tabButton.Visible = false
+	tabButton.Parent = scrollingFrame
+
+	scrollingFrame.Parent = tabs
+
+	local uICorner1 = Instance.new("UICorner")
+	uICorner1.Name = "UICorner"
+	uICorner1.CornerRadius = UDim.new(0, 12)
+	uICorner1.Parent = tabs
+
+	tabs.Parent = frame
+
+	local exitBtn = Instance.new("TextButton")
+	exitBtn.Name = "ExitBtn"
+	exitBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	exitBtn.Text = "X"
+	exitBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	exitBtn.TextSize = 30
+	exitBtn.TextWrapped = true
+	exitBtn.BackgroundColor3 = Color3.fromRGB(253, 248, 220)
+	exitBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	exitBtn.BorderSizePixel = 0
+	exitBtn.Position = UDim2.fromScale(0.97, -0.0526)
+	exitBtn.Size = UDim2.fromOffset(33, 33)
+	exitBtn.ZIndex = 4
+
+	local uICorner2 = Instance.new("UICorner")
+	uICorner2.Name = "UICorner"
+	uICorner2.CornerRadius = UDim.new(0, 12)
+	uICorner2.Parent = exitBtn
+
+	exitBtn.Parent = frame
+
+	local tabContent = Instance.new("Frame")
+	tabContent.Name = "TabContent"
+	tabContent.BackgroundColor3 = Color3.fromRGB(222, 197, 153)
+	tabContent.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabContent.BorderSizePixel = 0
+	tabContent.Position = UDim2.fromScale(0.3, 0)
+	tabContent.Size = UDim2.fromOffset(401, 302)
+
+	local uICorner3 = Instance.new("UICorner")
+	uICorner3.Name = "UICorner"
+	uICorner3.CornerRadius = UDim.new(0, 12)
+	uICorner3.Parent = tabContent
+
+	local tabBtnExample = Instance.new("TextButton")
+	tabBtnExample.Name = "TabBtnExample"
+	tabBtnExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabBtnExample.Text = "Button Name"
+	tabBtnExample.TextColor3 = Color3.fromRGB(0, 0, 0)
+	tabBtnExample.TextSize = 14
+	tabBtnExample.BackgroundColor3 = Color3.fromRGB(247, 238, 191)
+	tabBtnExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabBtnExample.BorderSizePixel = 0
+	tabBtnExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabBtnExample.Size = UDim2.fromOffset(354, 33)
+	tabBtnExample.Visible = false
+
+	local uICorner4 = Instance.new("UICorner")
+	uICorner4.Name = "UICorner"
+	uICorner4.Parent = tabBtnExample
+
+	local imageLabel = Instance.new("ImageLabel")
+	imageLabel.Name = "ImageLabel"
+	imageLabel.Image = "rbxassetid://12333784627"
+	imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel.BackgroundTransparency = 1
+	imageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel.BorderSizePixel = 0
+	imageLabel.Position = UDim2.fromScale(0.911, 0.04)
+	imageLabel.Size = UDim2.fromOffset(29, 29)
+	imageLabel.Parent = tabBtnExample
+
+	tabBtnExample.Parent = tabContent
+
+	local tabToggleExample = Instance.new("TextButton")
+	tabToggleExample.Name = "TabToggleExample"
+	tabToggleExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabToggleExample.Text = "Button Name"
+	tabToggleExample.TextColor3 = Color3.fromRGB(0, 0, 0)
+	tabToggleExample.TextSize = 14
+	tabToggleExample.BackgroundColor3 = Color3.fromRGB(247, 238, 191)
+	tabToggleExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabToggleExample.BorderSizePixel = 0
+	tabToggleExample.Position = UDim2.fromScale(0.0574, 0.142)
+	tabToggleExample.Size = UDim2.fromOffset(354, 33)
+	tabToggleExample.Visible = false
+
+	local uICorner5 = Instance.new("UICorner")
+	uICorner5.Name = "UICorner"
+	uICorner5.Parent = tabToggleExample
+
+	local imageLabel1 = Instance.new("ImageLabel")
+	imageLabel1.Name = "ImageLabel"
+	imageLabel1.Image = "rbxassetid://7310154850"
+	imageLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	imageLabel1.BackgroundTransparency = 1
+	imageLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	imageLabel1.BorderSizePixel = 0
+	imageLabel1.Position = UDim2.fromScale(0.907, 0)
+	imageLabel1.Size = UDim2.fromOffset(33, 33)
+
+	local toggle = Instance.new("ImageLabel")
+	toggle.Name = "Toggle"
+	toggle.Image = "rbxassetid://5825681337"
+	toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	toggle.BackgroundTransparency = 1
+	toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	toggle.BorderSizePixel = 0
+	toggle.Position = UDim2.fromScale(0.182, 0.182)
+	toggle.Size = UDim2.fromOffset(21, 21)
+	toggle.Visible = false
+	toggle.Parent = imageLabel1
+
+	imageLabel1.Parent = tabToggleExample
+
+	tabToggleExample.Parent = tabContent
+
+	local tabSliderExample = Instance.new("Frame")
+	tabSliderExample.Name = "TabSliderExample"
+	tabSliderExample.BackgroundColor3 = Color3.fromRGB(247, 238, 191)
+	tabSliderExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabSliderExample.BorderSizePixel = 0
+	tabSliderExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabSliderExample.Size = UDim2.fromOffset(354, 33)
+	tabSliderExample.Visible = false
+
+	local uICorner6 = Instance.new("UICorner")
+	uICorner6.Name = "UICorner"
+	uICorner6.Parent = tabSliderExample
+
+	local uIStroke = Instance.new("UIStroke")
+	uIStroke.Name = "UIStroke"
+	uIStroke.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke.Parent = tabSliderExample
+
+	local value = Instance.new("Frame")
+	value.Name = "Value"
+	value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	value.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	value.BorderSizePixel = 0
+	value.Position = UDim2.fromScale(-0.00232, -0.00952)
+	value.Size = UDim2.fromOffset(0, 33)
+
+	local uICorner7 = Instance.new("UICorner")
+	uICorner7.Name = "UICorner"
+	uICorner7.Parent = value
+
+	value.Parent = tabSliderExample
+
+	local valueText = Instance.new("TextLabel")
+	valueText.Name = "ValueText"
+	valueText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText.TextColor3 = Color3.fromRGB(0, 0, 0)
+	valueText.TextSize = 19
+	valueText.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.TextStrokeTransparency = 0
+	valueText.TextTransparency = 0.3
+	valueText.TextXAlignment = Enum.TextXAlignment.Right
+	valueText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText.BackgroundTransparency = 1
+	valueText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText.BorderSizePixel = 0
+	valueText.Position = UDim2.fromScale(0.41, 0)
+	valueText.Size = UDim2.fromOffset(200, 33)
+
+	local uIStroke1 = Instance.new("UIStroke")
+	uIStroke1.Name = "UIStroke"
+	uIStroke1.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke1.Parent = valueText
+
+	valueText.Parent = tabSliderExample
+
+	tabSliderExample.Parent = tabContent
+
+	local tabLabelExample = Instance.new("TextLabel")
+	tabLabelExample.Name = "TabLabelExample"
+	tabLabelExample.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	tabLabelExample.TextColor3 = Color3.fromRGB(0, 0, 0)
+	tabLabelExample.TextSize = 22
+	tabLabelExample.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	tabLabelExample.TextWrapped = true
+	tabLabelExample.TextXAlignment = Enum.TextXAlignment.Left
+	tabLabelExample.BackgroundColor3 = Color3.fromRGB(247, 238, 191)
+	tabLabelExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabLabelExample.BorderSizePixel = 0
+	tabLabelExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabLabelExample.Size = UDim2.fromOffset(354, 33)
+	tabLabelExample.Visible = false
+
+	local uICorner8 = Instance.new("UICorner")
+	uICorner8.Name = "UICorner"
+	uICorner8.Parent = tabLabelExample
+
+	local uIPadding = Instance.new("UIPadding")
+	uIPadding.Name = "UIPadding"
+	uIPadding.PaddingLeft = UDim.new(0, 10)
+	uIPadding.Parent = tabLabelExample
+
+	tabLabelExample.Parent = tabContent
+
+	tabContent.Parent = frame
+
+	local minBtn = Instance.new("TextButton")
+	minBtn.Name = "MinBtn"
+	minBtn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	minBtn.Text = "-"
+	minBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	minBtn.TextSize = 43
+	minBtn.TextWrapped = true
+	minBtn.BackgroundColor3 = Color3.fromRGB(253, 248, 220)
+	minBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	minBtn.BorderSizePixel = 0
+	minBtn.Position = UDim2.fromScale(0.902, -0.0526)
+	minBtn.Size = UDim2.fromOffset(33, 33)
+	minBtn.ZIndex = 4
+
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.CornerRadius = UDim.new(0, 12)
+	uICorner9.Parent = minBtn
+
+	minBtn.Parent = frame
+
+	local bgframe = Instance.new("Frame")
+	bgframe.Name = "Bgframe"
+	bgframe.BackgroundColor3 = Color3.fromRGB(179, 151, 122)
+	bgframe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	bgframe.BorderSizePixel = 0
+	bgframe.Position = UDim2.fromScale(0.89, -0.0757)
+	bgframe.Size = UDim2.fromOffset(87, 49)
+	bgframe.ZIndex = 3
+
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 15)
+	uICorner10.Parent = bgframe
+
+	bgframe.Parent = frame
+
+	frame.Parent = sunshine
+
+	local loadingFrame = Instance.new("Frame")
+	loadingFrame.Name = "LoadingFrame"
+	loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	loadingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	loadingFrame.BorderSizePixel = 0
+	loadingFrame.Position = UDim2.fromScale(0.454, 0.506)
+	loadingFrame.Size = UDim2.fromOffset(127, 50)
+	loadingFrame.Visible = false
+
+	local textLabel1 = Instance.new("TextLabel")
+	textLabel1.Name = "TextLabel"
+	textLabel1.FontFace = Font.new("rbxasset://fonts/families/Nunito.json")
+	textLabel1.Text = "Mika UI"
+	textLabel1.TextColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel1.TextSize = 27
+	textLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel1.BackgroundTransparency = 1
+	textLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel1.BorderSizePixel = 0
+	textLabel1.Position = UDim2.fromScale(-0.00439, 0)
+	textLabel1.Size = UDim2.fromOffset(124, 50)
+	textLabel1.Parent = loadingFrame
+
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.Parent = loadingFrame
+
+	loadingFrame.Parent = sunshine
+	sunshine.Parent = game.Players.LocalPlayer.PlayerGui
+	mikate = sunshine
+end
 
 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 	game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript"):Destroy()
@@ -365,7 +1086,15 @@ if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 		Text = "We have deleted your previously loaded MikaUI script."
 	})
 end
-mikate.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- SETUP MIKAUI OF CHOICE
+if game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Darken" or game.Players.LocalPLayer:GetAttribute("themeOfMika") == nil then
+	SetupDarken()
+elseif game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Sunshine" then
+	SetupSunshine()
+elseif game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Blackout" then
+	SetupBlackout()
+end
 
 local UDim2_new = UDim2.new
 
@@ -655,7 +1384,6 @@ function MikaUI:AddTab(tabName)
 	}
 end
 function MikaUI:Init(title)
-	mikate.Enabled = true
 	Setup()
 	mikate.Frame.Visible = false
 	mikate.Frame.Tabs.ScrollingFrame.TextLabel.Text = title
@@ -683,5 +1411,5 @@ function MikaUI:Init(title)
 	mikate.Frame.Visible = true
 	mikate.LoadingFrame.Visible = false
 end
-
+-- END MIKAUI
 return MikaUI
