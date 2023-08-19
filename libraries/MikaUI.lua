@@ -1088,11 +1088,11 @@ if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 end
 
 -- SETUP MIKAUI OF CHOICE
-if game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Darken" or game.Players.LocalPLayer:GetAttribute("themeOfMika") == nil then
+if game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Darken" or game.Players.LocalPlayer:GetAttribute("themeOfMika") == nil then
 	SetupDarken()
-elseif game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Sunshine" then
+elseif game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Sunshine" then
 	SetupSunshine()
-elseif game.Players.LocalPLayer:GetAttribute("themeOfMika") == "Blackout" then
+elseif game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Blackout" then
 	SetupBlackout()
 end
 
