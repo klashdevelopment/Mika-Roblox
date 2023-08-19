@@ -1,3 +1,12 @@
+-- Change this theme to one of the ones below
+-- Sunshine (light)
+-- Darken (default, dark)
+-- Blackout (ultra dark)
+MikaUITheme = "Darken"
+
+
+
+game.Players.LocalPlayer:SetAttribute("themeOfMika", MikaUITheme)
 local MikaUI = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaUI.lua"))()
 
 local MainTab = MikaUI:AddTab("Labels")
