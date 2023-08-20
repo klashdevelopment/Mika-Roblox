@@ -191,6 +191,13 @@ PlayerSection2:AddButton({
 })
 
 if game.GameId == 3690404710 then
+if workspace:FindFirstChild("Recruitment Booth") then
+	game.Lighting.Brightness = 5
+	game.Lighting.ClockTime = 16
+	game.Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+	game.Lighting.Bloom.Enabled = false
+	game.Lighting.ColorCorrection2.Enabled = false
+end
 local DaToggle = sws:MakeTab({
 		Name = "Da Toggles",
 		Icon = "rbxassetid://4483345998",
