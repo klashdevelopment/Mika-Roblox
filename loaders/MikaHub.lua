@@ -67,6 +67,12 @@ local Utils = PlayerTab:AddSection({
 	Name = "Miscellaneous"
 })
 Utils:AddButton({
+	Name = "Simple Spy",
+	Callback = function()
+		loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+	end
+})
+Utils:AddButton({
 	Name = "Stream Sniper",
 	Callback = function()
 		OrionLib:MakeNotification({
