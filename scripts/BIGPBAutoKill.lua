@@ -38,17 +38,36 @@ if cooldown then return end
 	t:Destroy()
 
 		for _,p in pairs(game.Players:GetPlayers()) do
+		local function set()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+				p.Character.HumanoidRootPart.CFrame.X,
+				p.Character.HumanoidRootPart.CFrame.Y + 3,
+				p.Character.HumanoidRootPart.CFrame.Z
+			)
+		end
 			if game.Players.LocalPlayer.Team == nil then
 				if p ~= game.Players.LocalPlayer then
 					if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then break end
-					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+					set()
 					wait(0.2)
 				end
 			else
 				if p ~= game.Players.LocalPlayer and p.Team ~= game.Players.LocalPlayer.Team then
 					if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then break end
-					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
-					wait(0.2)
+					set()
+					wait(0.02)
+					set()
+					wait(0.02)
+					set()
+					wait(0.02)
+					set()
+					wait(0.02)
+					set()
+					wait(0.02)
+					set()
+					wait(0.02)
+					set()
+					wait(0.1)
 				end
 			end
 		end
