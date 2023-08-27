@@ -5,16 +5,27 @@ With documentation for [Roblox](https://pages.klash.dev/Mika-Roblox).
 ## Loading
 All of Mika's scripts are in a bundle, MikaHub.
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/MikaHub.lua"))()
+loadstring(game:HttpGet("https://x.klash.dev"))()
 ```
+Or - to quick access Mikate do:
+```lua
+loadstring(game:HttpGet("https://x.klash.dev/mikate"))()
+```
+Or - look at the path to a script's file in github (ex. /scripts/ScriptName.lua) and put that on the end of either `https://x.klash.dev` or `https://script.klash.dev` in your loadstring.
+Example:
+`loadstring(game:HttpGet("https://x.klash.dev/scripts/TheScriptName"))()`
 
 ## Script List
 - MikaHub (Script Hub)
 - Mikate (Universal Script)
-- DarkDex (Universal Explorer)
+- DarkDex New (Universal Explorer)
+- SecureDex Old (Universal Explorer)
 - Infinite Yield (Universal Script)
+- Client Scripts
+    - Headless (https://x.klash.dev/client/headless)
 - Synapse Sniper
 - Doors
+    - Morphs
     - DoorsHub
     - Doors Mikamod
     - Vynixius Doors/Rooms
@@ -26,6 +37,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika
 - County Jail RP
     - CJRP Anticheat Bypasser
     - Mikate (CJRP Edition)
+- Da Backrooms
+    - Mikate (Da Backrooms Edition)
+- BIG Paintball
+    - Mika Manual Autokill
+    - Novice Gun Mods
 
 
 ## I need an executor/scripting software/injector!
@@ -48,12 +64,10 @@ If you need to rollback roblox to use one, follow these instructions [in this vi
 
 ## Game list 
 We support many games.
-
-| Name | Script List | Script Roadmap |
-| ---- | ----------- | -------------- |
-| [Roblox Doors](https://web.roblox.com/games/6516141723) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | DarkraiX, Vynixius, PlamenUtil, Doors's Mikamod, Rooms Autofarm | Doors Autofarm, Better Mikamod |
-| [Roblox Notoriety](https://web.roblox.com/games/21532277) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | ValoddNotyGui | Noto's Mikamod |
-| [Roblox CountyJailRP](https://web.roblox.com/games/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | Mikate (CJRP Edition), CJRPAnticheatBypass |  |
-| [Roblox Universal](https://web.roblox.com/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) | Mikate, InfiniteYield, Dex, Sniper, Mika Hub |  |
-| [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) | MikaMuck |  |
-| [Unity/Itch.io games](https://github.com/klashdevelopment/Mika-Others) | Karlson (Dani), MinecraftClone (SamHogan), Jelly Drift (Dani), Balls? (Dani) | Slime Rancher, Subnautica |
+Script list removed and moved to above
+| Name |
+| ---- |
+| [Roblox Games](https://web.roblox.com/games/) ([Mika Link](https://github.com/klashdevelopment/Mika-Roblox)) |
+| [Roblox Universal](https://web.roblox.com/)|
+| [Muck](https://store.steampowered.com/app/1625450/Muck/) ([Mika Link](https://github.com/klashdevelopment/Mika)) |
+| [Unity/Itch.io games](https://github.com/klashdevelopment/Mika-Others) |
