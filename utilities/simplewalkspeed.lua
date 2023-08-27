@@ -17,9 +17,9 @@ local PlayerTab = sws:MakeTab({
 	PremiumOnly = false
 })
 
-function tweenTp(part, cframe)
+function tweenTp(part, cframe, duration)
 	local ts = game:GetService("TweenService")
-	local tw = ts:Create(part,TweenInfo.new(1),{CFrame = cframe})
+	local tw = ts:Create(part,TweenInfo.new(duration),{CFrame = cframe})
 	return tw
 end
 local Noclip = nil
@@ -1736,6 +1736,123 @@ playerlps:AddToggle({
 	end
 })
 end
+local MikaTAS = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaTAS"))()
+local TAS = sws:MakeTab({
+	Name = "TAS/Teleports",
+	Icon = "rbxassetid://7743870505",
+	PremiumOnly = false
+})
+local useTween = false
+local tweenDuration = 1
+local Config = TAS:AddSection({Name = "Configuration"})
+Config:AddToggle({
+	Name = "Use TweenTP",
+	Default = useTween,
+	Save = true,
+	Callback = function(value)
+		useTween = value
+	end
+})
+Config:AddSlider({
+	Name = "Tween Duration",
+	ValueName = "secconds",
+	Min = 1,
+	Max = 60,
+	Default = 1,
+	Callback = function(ntdir)
+		tweenDuration = ntdir
+	end
+})
+local Teleport = TAS:AddSection({Name = "Teleport"})
+local startedSetting = false
+local cfXvalue = 1
+local cfYvalue = 1
+local cfZvalue = 1
+local cfX = Teleport:AddSlider({
+	Name = "CFrame X",
+	Default = 0,
+	Min = -10000,
+	Max = 10000,
+	Increment = 1,
+	Flag = "cfX",
+	Callback = function(value)
+		cfXValue = value
+		startedSetting = true
+	end
+})
+local cfY = Teleport:AddSlider({
+	Name = "CFrame Y",
+	Default = 0,
+	Min = -10000,
+	Max = 10000,
+	Increment = 1,
+	Flag = "cfY",
+	Callback = function(value)
+		cfYValue = value
+		startedSetting = true
+	end
+})
+local cfZ = Teleport:AddSlider({
+	Name = "CFrame Z",
+	Default = 0,
+	Min = -10000,
+	Max = 10000,
+	Increment = 1,
+	Flag = "cfZ",
+	Callback = function(value)
+		cfZValue = value
+		startedSetting = true
+	end
+})
+Teleport:AddButton({
+	Name = "Set to Current Position",
+	Callback = function()
+		cfX:Set(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X)
+		cfY:Set(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y)
+		cfZ:Set(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+	end
+})
+Teleport:AddButton({
+	Name = "Teleport",
+	Callback = function()
+		if not startedSetting then return end
+		if useTween then
+			tweenTp(game.Players.LocalPlayer.Character.HumanoidRootPart, CFrame.new(cfXValue, cfYValue, cfZValue), tweenDuration):Play()
+		else
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(cfXValue, cfYValue, cfZValue)
+		end
+	end
+})
+local TASTP = TAS:AddSection({Name = "TAS Recording"})
+local recReady = false
+local recording = false
+TASTP:AddButton({
+	Name = "Start Recording",
+	Callback = function()
+		if not recording then
+			recording = true
+			MikaTAS:StartRecord()
+		end
+	end
+})
+TASTP:AddButton({
+	Name = "Stop Recording",
+	Callback = function()
+		if recording then
+			MikaTAS:StopRecord()
+			recReady = true
+			recording = false
+		end
+	end
+})
+TASTP:AddButton({
+	Name = "Playback Recording",
+	Callback = function()
+		if recReady and not recording then
+			MikaTAS:Play()
+		end
+	end
+})
 
 local Visuals = sws:MakeTab({
 	Name = "Visual",
