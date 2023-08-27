@@ -11,6 +11,8 @@ local SynapseXSniper = "https://raw.githubusercontent.com/klashdevelopment/Mika-
 local Quillo = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/quillo.lua"
 local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"
 local dingus = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua"
+local bpb1 = loadstring(game:HttpGet("https://scriptblox.com/raw/BIG-Paintball!-Novice-Hub-4906"))
+local bpb2 = loadstring(game:HttpGet("https://x.klash.dev/scripts/BIGPBAutoKill"))
 
 local uix = game.Players.LocalPlayer.PlayerGui
 local screen = Instance.new("ScreenGui")
@@ -97,12 +99,6 @@ Utils:AddButton({
 	end
 })
 Utils:AddButton({
-	Name = ":emoji: chat",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/emojis.lua"))() 
-	end
-})
-Utils:AddButton({
 	Name = "SecureDex X3",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
@@ -121,6 +117,13 @@ Game:AddButton({
 	Name = "Doors",
 	Callback = function()
 		loadstring(game:HttpGet(DoorsHub))()
+	end
+})
+Game:AddButton({
+	Name = "BIG Painball",
+	Callback = function()
+		bpb1()
+		bpb2()
 	end
 })
 Game:AddButton({
