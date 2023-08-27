@@ -67,6 +67,12 @@ local Utils = PlayerTab:AddSection({
 	Name = "Miscellaneous"
 })
 Utils:AddButton({
+	Name = "orca",
+	Callback = function()
+		loadstring(game:HttpGet("https://x.klash.dev/utilities/orca"))()
+	end
+})
+Utils:AddButton({
 	Name = "Simple Spy",
 	Callback = function()
 		loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
