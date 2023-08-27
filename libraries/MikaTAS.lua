@@ -15,7 +15,7 @@ local getChar = function()
 end
 
 
-local MikaTAS:StartRecord = function()
+function MikaTAS:StartRecord()
     Frames = {}
     Running = true
     TimeStart = tick()
@@ -30,11 +30,11 @@ local MikaTAS:StartRecord = function()
     end
 end
 
-local MikaTAS:StopRecord = function()
+function MikaTAS:StopRecord()
     Running = false
 end
 
-local MikaTAS:Play = function()
+function MikaTAS:Play()
     local Character = getChar()
     local TimePlay = tick()
     local FrameCount = #Frames
