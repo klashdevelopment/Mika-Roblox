@@ -1137,7 +1137,7 @@ camera:AddButton({
 	Callback = function()
 		game.Players.LocalPlayer.CameraMinZoomDistance = 0
 		game.Players.LocalPlayer.CameraMaxZoomDistance = 90
-		workspace.CurrentCamera.CameraMode = Enum.CameraMode.Classic
+		game.Players.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 		workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
 		game:GetService("UserInputService").MouseIconEnabled = true
 	end
@@ -1226,10 +1226,10 @@ camera:AddDropdown({
 })
 camera:AddDropdown({
 	Name = "Camera Mode",
-	Default = workspace.CurrentCamera.CameraMode.Name,
+	Default = game.Players.LocalPlayer.CameraMode.Name,
 	Options = {"Classic", "LockFirstPerson"},
 	Callback = function(cam)
-		workspace.CurrentCamera.CameraMode = cam
+		game.Players.LocalPlayer.CameraMode = Enum.CameraMode[cam]
 	end
 })
 camera:AddToggle({
