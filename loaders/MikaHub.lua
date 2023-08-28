@@ -139,6 +139,12 @@ Game:AddButton({
 	end
 })
 Game:AddButton({
+	Name = "Arsenal",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
+	end
+})
+Game:AddButton({
 	Name = "dingus",
 	Callback = function()
 		loadstring(game:HttpGet(dingus))()
