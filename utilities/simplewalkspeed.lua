@@ -1129,6 +1129,17 @@ local camera = sws:MakeTab({
 	Icon = "rbxassetid://7733708692",
 	PremiumOnly = false
 })
+local fc = false
+local fx = false
+camera:AddButton({
+	Name = "Quick Third-Person",
+	Callback = function()
+		game.Players.LocalPlayer.CameraMinZoomDistance = 0
+		game.Players.LocalPlayer.CameraMaxZoomDistance = 90
+		workspace.CurrentCamera.CameraMode = Enum.CameraMode.Classic
+		workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+	end
+})
 camera:AddSlider({
 	Name = "Minimum ThirdPerson Zoom",
 	Min = 0,
@@ -1138,7 +1149,10 @@ camera:AddSlider({
 	Save = false,
 	ValueName = "studs",
 	Callback = function(value)
+		if fc then
 		game.Players.LocalPlayer.CameraMinZoomDistance = value
+		else
+		fc = true end
 	end
 })
 camera:AddSlider({
@@ -1150,9 +1164,13 @@ camera:AddSlider({
 	Increment = 1,
 	ValueName = "studs",
 	Callback = function(value)
+		if fx then
 		game.Players.LocalPlayer.CameraMaxZoomDistance = value
+		else
+		fx = true end
 	end
 })
+local zls = false
 camera:AddSlider({
 	Name = "Zoom Level",
 	Min = 0,
@@ -1162,6 +1180,7 @@ camera:AddSlider({
 	Increment = 1,
 	ValueName = "studs",
 	Callback = function(value)
+		if zls then
 		local speaker = game.Players.LocalPlayer
 		local camMax = speaker.CameraMaxZoomDistance
 		local camMin = speaker.CameraMinZoomDistance
@@ -1173,6 +1192,8 @@ camera:AddSlider({
 		wait()
 		speaker.CameraMaxZoomDistance = camMax
 		speaker.CameraMinZoomDistance = camMin
+		else
+		zls = true end
 	end
 })
 camera:AddToggle({
@@ -1202,11 +1223,11 @@ camera:AddDropdown({
 	end
 })
 camera:AddDropdown({
-	Name = "Camera Type",
-	Default = game.Players.LocalPlayer.CameraMode,
+	Name = "Camera Mode",
+	Default = workspace.CurrentCamera.CameraMode.Name,
 	Options = {"Classic", "LockFirstPerson"},
 	Callback = function(cam)
-		game.Players.LocalPlayer.CameraMode = cam
+		workspace.CurrentCamera.CameraMode = cam
 	end
 })
 camera:AddToggle({
