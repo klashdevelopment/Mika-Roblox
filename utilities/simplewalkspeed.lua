@@ -1,3 +1,4 @@
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local CJRPGameId = 6843988672
@@ -1138,6 +1139,7 @@ camera:AddButton({
 		game.Players.LocalPlayer.CameraMaxZoomDistance = 90
 		workspace.CurrentCamera.CameraMode = Enum.CameraMode.Classic
 		workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+		game:GetService("UserInputService").MouseIconEnabled = true
 	end
 })
 camera:AddSlider({
