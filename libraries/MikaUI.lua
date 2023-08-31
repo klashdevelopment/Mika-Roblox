@@ -4,7 +4,7 @@ local mikate = nil
 function SetupDarken()
 	local darken = Instance.new("ScreenGui")
 	darken.Name = "Darken"
-	darken.Enabled = true
+	darken.Enabled = false
 	darken.ResetOnSpawn = false
 	darken.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -355,12 +355,15 @@ function SetupDarken()
 	uICorner11.Parent = loadingFrame
 
 	loadingFrame.Parent = darken
-	darken.Parent = game.Players.LocalPlayer.PlayerGui
+	
 	mikate = darken
+	mikate.Enabled = true
+	mikate.Parent = game.Players.LocalPlayer.PlayerGui
 end
 function SetupBlackout()
 	local blackout = Instance.new("ScreenGui")
 	blackout.Name = "Blackout"
+	blackout.Enabled = false
 	blackout.ResetOnSpawn = false
 	blackout.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -654,7 +657,7 @@ function SetupBlackout()
 	minBtn.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
 	minBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	minBtn.BorderSizePixel = 0
-	minBtn.Position = UDim2.fromScale(0.902, -0.0526)
+	minBtn.Position = UDim2.fromScale(0.902, -0.053)
 	minBtn.Size = UDim2.fromOffset(33, 33)
 	minBtn.ZIndex = 4
 
@@ -722,13 +725,15 @@ function SetupBlackout()
 	uICorner11.Parent = loadingFrame
 
 	loadingFrame.Parent = blackout
-	blackout.Parent = game.Players.LocalPlayer.PlayerGui
+	
 	mikate = blackout
+	mikate.Enabled = true
+	mikate.Parent = game.Players.LocalPlayer.PlayerGui
 end
 function SetupSunshine()
 	local sunshine = Instance.new("ScreenGui")
 	sunshine.Name = "Sunshine"
-	sunshine.Enabled = true
+	sunshine.Enabled = false
 	sunshine.ResetOnSpawn = false
 	sunshine.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1075,9 +1080,12 @@ function SetupSunshine()
 	uICorner11.Parent = loadingFrame
 
 	loadingFrame.Parent = sunshine
-	sunshine.Parent = game.Players.LocalPlayer.PlayerGui
+	
 	mikate = sunshine
+	mikate.Enabled = true
+	mikate.Parent = game.Players.LocalPlayer.PlayerGui
 end
+
 
 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 	game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript"):Destroy()
@@ -1087,7 +1095,7 @@ if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
 	})
 end
 
--- SETUP MIKAUI OF CHOICE
+
 if game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Darken" or game.Players.LocalPlayer:GetAttribute("themeOfMika") == nil then
 	SetupDarken()
 elseif game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Sunshine" then
@@ -1095,6 +1103,7 @@ elseif game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Sunshine" then
 elseif game.Players.LocalPlayer:GetAttribute("themeOfMika") == "Blackout" then
 	SetupBlackout()
 end
+
 
 local UDim2_new = UDim2.new
 
@@ -1244,6 +1253,10 @@ function Setup()
 			end
 			gui.BackgroundTransparency = 1
 			gui.MinBtn.Text = "+"
+
+			game:GetService("TweenService"):Create(gui.MinBtn, TweenInfo.new(0.5),  {Position = UDim2.new(0, -3,   -0.053, 0)}):Play()
+			game:GetService("TweenService"):Create(gui.ExitBtn, TweenInfo.new(0.5), {Position = UDim2.new(0, 36, -0.053, 0)}):Play()
+			game:GetService("TweenService"):Create(gui.Bgframe, TweenInfo.new(0.5), {Position = UDim2.new(0, -10, -0.076, 0)}):Play()
 		else
 			gui.Tabs.Visible = true
 			for _,x in pairs(gui:GetChildren()) do
@@ -1253,6 +1266,10 @@ function Setup()
 			end
 			gui.BackgroundTransparency = 0
 			gui.MinBtn.Text = "-"
+
+			game:GetService("TweenService"):Create(gui.MinBtn, TweenInfo.new(0.5), {Position = UDim2.new(0.902, 0, -0.053, 0)}):Play()
+			game:GetService("TweenService"):Create(gui.ExitBtn, TweenInfo.new(0.5), {Position = UDim2.new(0.97, 0, -0.053, 0)}):Play()
+			game:GetService("TweenService"):Create(gui.Bgframe, TweenInfo.new(0.5), {Position = UDim2.new(0.89, 0, -0.076, 0)}):Play()
 		end
 	end)
 	game:GetService("UserInputService").InputBegan:Connect(function(input, nobodyUses)
@@ -1412,4 +1429,5 @@ function MikaUI:Init(title)
 	mikate.LoadingFrame.Visible = false
 end
 -- END MIKAUI
+
 return MikaUI
