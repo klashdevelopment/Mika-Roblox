@@ -13,6 +13,7 @@ local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/m
 local dingus = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua"
 local bpb1 = loadstring(game:HttpGet("https://scriptblox.com/raw/BIG-Paintball!-Novice-Hub-4906"))
 local bpb2 = loadstring(game:HttpGet("https://x.klash.dev/scripts/BIGPBAutoKill"))
+local hoho = loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))
 
 local uix = game.Players.LocalPlayer.PlayerGui
 local screen = Instance.new("ScreenGui")
@@ -114,44 +115,50 @@ local Game = GameTab:AddSection({
 	Name = "Games"
 })
 Game:AddButton({
-	Name = "Doors",
+	Name = "Doors (MIKA)",
 	Callback = function()
 		loadstring(game:HttpGet(DoorsHub))()
 	end
 })
 Game:AddButton({
-	Name = "BIG Painball",
+	Name = "Blox Fruits (HOHO)",
+	Callback = function()
+		hoho()
+	end
+})
+Game:AddButton({
+	Name = "BIG Painball (MIKA/NOV)",
 	Callback = function()
 		bpb1()
 		bpb2()
 	end
 })
 Game:AddButton({
-	Name = "Notoriety",
+	Name = "Notoriety (MIKA)",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
 	end
 })
 Game:AddButton({
-	Name = "Vape V4 Bedwars",
+	Name = "Vape V4 (BEDWARS)",
 	Callback = function()
 		loadstring(game:HttpGet(VapeV4))()
 	end
 })
 Game:AddButton({
-	Name = "Arsenal",
+	Name = "Arsenal (OWL)",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
 	end
 })
 Game:AddButton({
-	Name = "dingus",
+	Name = "Dingus",
 	Callback = function()
 		loadstring(game:HttpGet(dingus))()
 	end
 })
 Game:AddButton({
-	Name = "MM2",
+	Name = "Murder Mystery 2 (VYN)",
 	Callback = function()
 		loadstring(game:GetObjects("rbxassetid://4001118261")[1].Source)()
 	end
