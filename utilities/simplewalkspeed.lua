@@ -772,7 +772,7 @@ expi:AddButton({
 local playerIcon = 7743871002
 
 local PlayerMan = sws:MakeTab({
-	Name = "Fake Players",
+	Name = "Players",
 	Icon = "rbxassetid://"..playerIcon,
 	PremiumOnly = false
 })
@@ -787,7 +787,7 @@ local data = HttpService:JSONDecode(response)
 pid = data.data[1].id
 
 PlayerMan:AddTextbox({
-	Name = "Player Name",
+	Name = "Target Name",
 	Default = game.Players.LocalPlayer.Name,
 	TextDisappear = false,
 	Callback = function(Value)
@@ -803,8 +803,25 @@ PlayerMan:AddTextbox({
 		})
 	end	  
 })
-
 PlayerMan:AddButton({
+	Name = "Teleport To Player (Risky)",
+	Callback = function()
+		if workspace[pname] then
+			game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = workspace[pname]:WaitForChild("HumanoidRootPart").CFrame
+		end
+	end
+})
+PlayerMan:AddButton({
+	Name = "Teleport To Player (Tween)",
+	Callback = function()
+		if workspace[pname] then
+			tweenTp(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace[pname]:WaitForChild("HumanoidRootPart").CFrame, 1):Play()
+		end
+	end
+})
+
+local PlayerMulMan = PlayerMan:AddSection({Name = "Fake Players"})
+PlayerMulMan:AddButton({
 	Name = "Spawn Fake Player",
 	Callback = function()
 		
@@ -828,7 +845,6 @@ PlayerMan:AddButton({
 		latestplr = clonedCharacter
 	end
 })
-local PlayerMulMan = PlayerMan:AddSection({Name = "Despawns"})
 PlayerMulMan:AddButton({
 	Name = "Despawn All Fake Players",
 	Callback = function()
@@ -847,8 +863,7 @@ PlayerMulMan:AddButton({
 		end
 	end
 })
-local PlayerManTPS = PlayerMan:AddSection({Name = "Teleport Fake Players"})
-PlayerManTPS:AddButton({
+PlayerMulMan:AddButton({
 	Name = "TP to Most Recent",
 	Callback = function()
 		if latestplr then
@@ -857,14 +872,27 @@ PlayerManTPS:AddButton({
 		end
 	end
 })
-PlayerManTPS:AddButton({
-	Name = "TP to All Fakes (1-by-1)",
+
+PlayerMulMan:AddButton({
+	Name = "TP to All Fakes (risky)",
 	Callback = function()
 		for k, v in pairs(workspace:GetChildren()) do
 			if v.Name == "MikaDummy" then
-				print("found")
+				print("Found fake - TPing")
 				wait(0.1)
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[1].HumanoidRootPart.CFrame
+			end
+		end
+	end
+})
+PlayerMulMan:AddButton({
+	Name = "TweenTP to All Fakes (better)",
+	Callback = function()
+		for k, v in pairs(workspace:GetChildren()) do
+			if v.Name == "MikaDummy" then
+				print("Found fake - TweenTPing")
+				wait(0.1)
+				tweenTp(game.Players.LocalPlayer.Character.HumanoidRootPart,v:GetChildren()[1].HumanoidRootPart.CFrame,1)
 			end
 		end
 	end
@@ -1498,6 +1526,43 @@ parts2:AddButton({
 	end
 })
 
+local actions = sws:MakeTab({
+	Name = "Detectors",
+	Icon = "rbxassetid://7734010488",
+	PremiumOnly = false
+})
+actions:AddToggle({
+	Name = "TouchInterest ESP",
+	Default = false,
+	Callback = function(value)
+		local function runitquickidk1(object, callback)
+			for k,v in pairs(object:GetChildren()) do
+				if v:IsA("TouchTransmitter") then
+					callback(v)
+				end
+				if #v:GetChildren()>0 then
+					runitquickidk1(v,callback)
+				end
+			end
+		end
+		if value then
+			runitquickidk1(workspace, function(obj)
+				if not obj.Parent:FindFirstChild("TIESP") then
+					local hl = Instance.new("Highlight")
+					hl.Parent = obj.Parent
+					hl.Name = "TIESP"
+				end
+			end)
+		else
+			runitquickidk1(workspace, function(obj)
+				if obj.Parent:FindFirstChild("TIESP") then
+					obj.Parent.TIESP:Destroy()
+				end
+			end)
+		end
+	end
+})
+
 local tools = sws:MakeTab({
 	Name = "Tools",
 	Icon = "rbxassetid://7733955511",
@@ -1546,7 +1611,7 @@ end
 
 local givers = tools:AddSection({Name = "Tool Givers"})
 givers:AddDropdown({
-	Name = "ReplFirst, ReplStorage, Lighting Tools",
+	Name = "In-Storage Tools (CLIENT)",
 	Flag = "rpdd",
 	Options = replToolsNames,
 	Callback = function(option)
@@ -1556,7 +1621,7 @@ givers:AddDropdown({
 	end
 })
 givers:AddDropdown({
-	Name = "Workspace Tools",
+	Name = "Workspace Tools (SERVER)",
 	Flag = "wtdd",
 	Options = workToolsNames,
 	Callback = function(option)
@@ -1565,6 +1630,38 @@ givers:AddDropdown({
 			game.Players.LocalPlayer.Character.Humanoid:EquipTool(child)
 		end
 		OrionLib.Flags["wtdd"]:Set("None")
+	end
+})
+givers:AddToggle({
+	Name = "Workspace Tool ESP",
+	Default = false,
+	Callback = function(value)
+		local function runitquickidk1(object, callback)
+			for k,v in pairs(object:GetChildren()) do
+				if v:IsA("Tool") then
+					if not v.Parent.Name == "Backpack" then
+						callback(v)	
+					end
+				end
+				if #v:GetChildren()>0 then
+					runitquickidk1(v,callback)
+				end
+			end
+		end
+		if value then
+			runitquickidk1(workspace, function(obj)
+				if not obj:FindFirstChild("WTESP") then
+					local hl = Instance.new("Highlight")
+					hl.Parent = obj
+				end
+			end)
+		else
+			runitquickidk1(workspace, function(obj)
+				if obj:FindFirstChild("WTESP") then
+					obj.WTESP:Destroy()
+				end
+			end)
+		end
 	end
 })
 workspace.ChildAdded:Connect(function(child)
