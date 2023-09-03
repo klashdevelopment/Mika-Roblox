@@ -1,6 +1,7 @@
 local MikaTAS = {}
 local Running = false
 local Frames = {}
+local Saved = {}
 local TimeStart = tick()
 
 local Player = game:GetService("Players").LocalPlayer
@@ -14,6 +15,33 @@ local getChar = function()
     end
 end
 
+function MikaTAS:SavePosition(key, cframe)
+    if typeof(cframe) ~= CFrame then
+        error("MIKATAS - Saving position - cannot save non-cframes")
+    end
+    Saved[key] = cframe
+end
+function MikaTAS:UnsavePosition(key)
+    Saved[key] = nil
+end
+function MikaTAS:TeleportTo(key)
+    if Saved[key] == nil then
+        error("MIKATAS - Teleporting - key is not saved")
+    end
+    if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        error("MIKATAS - Teleporting - No HumanoidRootPart")
+    end
+    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = Saved[key]
+end
+function MikaTAS:TweenTo(key, duration)
+    if Saved[key] == nil then
+        error("MIKATAS - Teleporting - key is not saved")
+    end
+    if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        error("MIKATAS - Teleporting - No HumanoidRootPart")
+    end
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), TweenInfo.new(duration), {CFrame = Saved[key]})
+end
 
 function MikaTAS:StartRecord()
     Frames = {}
