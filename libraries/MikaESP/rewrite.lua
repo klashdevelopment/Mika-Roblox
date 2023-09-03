@@ -1,4 +1,4 @@
-local MikaUI = {
+local MikaESP = {
 	players = {},
 	parts = {},
 	enabled = true
@@ -82,7 +82,7 @@ local function RunFrame()
 	end
 	wait()
 	-- Create new rendered
-	for k, v in pairs(MikaUI.parts) do
+	for k, v in pairs(MikaESP.parts) do
 		local Highlight = AddPartESP(v.Part, v.Color)
 		local Tracer = DrawLine(worldToViewportPoint(v.Part.Position), centerScreen, v.Color, 1)
 		local Text = DrawText(v.Text, worldToViewportPoint(v.Part.Position), v.Color)
@@ -94,33 +94,33 @@ local function RunFrame()
 	end
 end
 
-function MikaUI:Insert(part, text, color)
+function MikaESP:Insert(part, text, color)
 	if part:IsA("Part") or part:IsA("MeshPart") or part:IsA("TrussPart") or part:IsA("BasePart") or part:IsA("Part") then
-		table.insert(MikaUI.parts, {
+		table.insert(MikaESP.parts, {
 			Part = part,
 			Color = color,
 			Text = text
 		})
 	end
 end
-function MikaUI:RemovePartUsingText(text)
-	for k, v in pairs(MikaUI.parts) do
+function MikaESP:RemovePartUsingText(text)
+	for k, v in pairs(MikaESP.parts) do
 		if v.Text == text then
-			table.remove(MikaUI.parts, table.find(v))
+			table.remove(MikaESP.parts, table.find(v))
 		end
 	end
 end
-function MikaUI:RemovePartUsingPart(part)
-	for k, v in pairs(MikaUI.parts) do
+function MikaESP:RemovePartUsingPart(part)
+	for k, v in pairs(MikaESP.parts) do
 		if v.Part == part then
-			table.remove(MikaUI.parts, table.find(v))
+			table.remove(MikaESP.parts, table.find(v))
 		end
 	end
 end
 
-function MikaUI:Init()
+function MikaESP:Init()
 	local RunService = game:GetService("RunService")
 	runframeevent = RunService.RenderStepped:Connect(RunFrame)
 end
 
-return MikaUI
+return MikaESP
