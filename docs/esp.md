@@ -33,7 +33,7 @@ Stopper.Name = "Stopmui"
 Stopper.Parent = game.Players.LocalPlayer
 ```
 
-### Finally, Init (ReqESPred)
+### Finally, Init (Required)
 ```lua
 MikaESP:Init()
 ```
