@@ -1,6 +1,6 @@
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-
+local MikaTAS = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaTAS"))()
 local CJRPGameId = 6843988672
 
 local loadingText = "KlashDevelopment"
@@ -1856,7 +1856,9 @@ playerlps:AddToggle({
 	end
 })
 end
-local MikaTAS = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaTAS"))()
+local keystp = {}
+
+
 local TAS = sws:MakeTab({
 	Name = "TAS/Teleports",
 	Icon = "rbxassetid://7743870505",
@@ -1925,7 +1927,7 @@ local cfZ = Teleport:AddSlider({
 	end
 })
 Teleport:AddButton({
-	Name = "Set to Current Position",
+	Name = "Set to Current",
 	Callback = function()
 		cfX:Set(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X)
 		cfY:Set(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y)
@@ -1940,6 +1942,54 @@ Teleport:AddButton({
 			tweenTp(game.Players.LocalPlayer.Character.HumanoidRootPart, CFrame.new(cfXValue, cfYValue, cfZValue), tweenDuration):Play()
 		else
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(cfXValue, cfYValue, cfZValue)
+		end
+	end
+})
+local saving = TAS:AddSection({Name = "Saving/Loading"})
+local selKey = ""
+local Dropdown = saving:AddDropdown({
+	Name = "Teleport Key",
+	Default = "",
+	Options = {},
+	Flag = "keyname",
+	Save = false,
+	Callback = function(Value)
+		selKey = Value
+	end
+})
+local kntosave = ""
+saving:AddTextbox({
+	Name = "Key Name to Save",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(Value)
+		kntosave = Value
+	end	  
+})
+wait()
+saving:AddButton({
+	Name = "Save Key",
+	Callback = function()
+		table.insert(keystp, kntosave)
+		MikaTAS:SavePosition(kntosave, CFrame.new(cfXValue, cfYValue, cfZValue))
+		Dropdown:Refresh(keystp, true)
+	end
+})
+saving:AddButton({
+	Name = "Unsave Selected",
+	Callback = function()
+		MikaTAS:UnsavePosition(selKey)
+		table.remove(keystp, table.find(keystp, selKey))
+		Dropdown:Refresh(keystp, true)
+	end
+})
+saving:AddButton({
+	Name = "Teleport To",
+	Callback = function()
+		if useTween then
+			MikaTAS:TweenTo(selKey)
+		else
+			MikaTAS:TeleportTo(selKey)
 		end
 	end
 })
@@ -1998,7 +2048,7 @@ Sitewide:AddButton({
 
 local loadedesp;
 local espLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/main/library/esp/esp.lua"))();
-wait(0.1)
+wait(0.01)
 local visuals = sws:MakeTab({ Name = "ESPs",
 	Icon = "rbxassetid://7733799682" });
     do
