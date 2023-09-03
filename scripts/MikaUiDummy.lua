@@ -19,6 +19,12 @@ CoolTab.InsertButton("Notify Me", function()
 end)
 MainTab.InsertLabel("Mika UI - Welcome")
 MainTab.InsertLabel("This is an example script.")
+CoolTab.InsertTextInput("Text thing", "placehldr", "", false, function(value)
+	game.StarterGui:SetCore("SendNotification", {Title = "Updated", Text = value})
+end)
+CoolTab.InsertTextInput("Clearing text", "wow cool", "", true, function(value)
+	game.StarterGui:SetCore("SendNotification", {Title = "Updated", Text = value})
+end)
 CoolTab.InsertCheckbox("Notifications", true, function(value)
 	if value then
 		game.StarterGui:SetCore("SendNotification", {Title = "Cog", Text = "WOW!"})
@@ -28,4 +34,4 @@ CoolTab.InsertSlider("Slider", "studs/s", 0, 100, 1, 16, Color3.fromRGB(255, 255
 	print("Value ".. value)
 end)
 
-MikaUI:Init("Darken UI")
+MikaUI:Init("Mika UI")
