@@ -1254,8 +1254,22 @@ function SetupSunshine()
 end
 
 
-if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript") then
-	game.Players.LocalPlayer.PlayerGui:FindFirstChild("MikaUIScript"):Destroy()
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Darken") then
+	game.Players.LocalPlayer.PlayerGui:FindFirstChild("Darken"):Destroy()
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Mika Script Already Loaded",
+		Text = "We have deleted your previously loaded MikaUI script."
+	})
+end
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Blackout") then
+	game.Players.LocalPlayer.PlayerGui:FindFirstChild("Blackout"):Destroy()
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Mika Script Already Loaded",
+		Text = "We have deleted your previously loaded MikaUI script."
+	})
+end
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Sunshine") then
+	game.Players.LocalPlayer.PlayerGui:FindFirstChild("Sunshine"):Destroy()
 	game.StarterGui:SetCore("SendNotification", {
 		Title = "Mika Script Already Loaded",
 		Text = "We have deleted your previously loaded MikaUI script."
