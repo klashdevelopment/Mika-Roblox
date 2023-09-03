@@ -1,10 +1,9 @@
--- Spin up a base Mika UI
--- If we are in studio we just use script.parent, if we are in a solo localscript we use Codify 
+
 local mikate = nil
 function SetupDarken()
 	local darken = Instance.new("ScreenGui")
 	darken.Name = "Darken"
-	darken.Enabled = false
+	darken.Enabled = true
 	darken.ResetOnSpawn = false
 	darken.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -286,6 +285,63 @@ function SetupDarken()
 
 	tabLabelExample.Parent = tabContent
 
+	local tabTextExample = Instance.new("Frame")
+	tabTextExample.Name = "TabTextExample"
+	tabTextExample.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+	tabTextExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabTextExample.BorderSizePixel = 0
+	tabTextExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabTextExample.Size = UDim2.fromOffset(354, 33)
+	tabTextExample.Visible = false
+
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.Parent = tabTextExample
+
+	local uIStroke2 = Instance.new("UIStroke")
+	uIStroke2.Name = "UIStroke"
+	uIStroke2.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke2.Thickness = 0.6
+	uIStroke2.Parent = tabTextExample
+
+	local valueText1 = Instance.new("TextLabel")
+	valueText1.Name = "ValueText"
+	valueText1.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText1.TextColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.TextSize = 19
+	valueText1.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.TextXAlignment = Enum.TextXAlignment.Left
+	valueText1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.BackgroundTransparency = 1
+	valueText1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText1.BorderSizePixel = 0
+	valueText1.Size = UDim2.fromScale(0.5, 1)
+
+	local uIPadding1 = Instance.new("UIPadding")
+	uIPadding1.Name = "UIPadding"
+	uIPadding1.PaddingLeft = UDim.new(0, 10)
+	uIPadding1.Parent = valueText1
+
+	valueText1.Parent = tabTextExample
+
+	local content = Instance.new("TextBox")
+	content.Name = "Content"
+	content.FontFace = Font.new("rbxasset://fonts/families/Inconsolata.json")
+	content.PlaceholderColor3 = Color3.fromRGB(186, 186, 186)
+	content.PlaceholderText = "Label..."
+	content.Text = ""
+	content.TextColor3 = Color3.fromRGB(255, 255, 255)
+	content.TextSize = 14
+	content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	content.BackgroundTransparency = 0.9
+	content.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	content.BorderSizePixel = 0
+	content.Position = UDim2.fromScale(0.5, 0)
+	content.Size = UDim2.fromScale(0.5, 1)
+	content.Parent = tabTextExample
+
+	tabTextExample.Parent = tabContent
+
 	tabContent.Parent = frame
 
 	local minBtn = Instance.new("TextButton")
@@ -302,10 +358,10 @@ function SetupDarken()
 	minBtn.Size = UDim2.fromOffset(33, 33)
 	minBtn.ZIndex = 4
 
-	local uICorner9 = Instance.new("UICorner")
-	uICorner9.Name = "UICorner"
-	uICorner9.CornerRadius = UDim.new(0, 12)
-	uICorner9.Parent = minBtn
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 12)
+	uICorner10.Parent = minBtn
 
 	minBtn.Parent = frame
 
@@ -318,10 +374,10 @@ function SetupDarken()
 	bgframe.Size = UDim2.fromOffset(87, 49)
 	bgframe.ZIndex = 3
 
-	local uICorner10 = Instance.new("UICorner")
-	uICorner10.Name = "UICorner"
-	uICorner10.CornerRadius = UDim.new(0, 15)
-	uICorner10.Parent = bgframe
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.CornerRadius = UDim.new(0, 15)
+	uICorner11.Parent = bgframe
 
 	bgframe.Parent = frame
 
@@ -350,20 +406,19 @@ function SetupDarken()
 	textLabel1.Size = UDim2.fromOffset(124, 50)
 	textLabel1.Parent = loadingFrame
 
-	local uICorner11 = Instance.new("UICorner")
-	uICorner11.Name = "UICorner"
-	uICorner11.Parent = loadingFrame
+	local uICorner12 = Instance.new("UICorner")
+	uICorner12.Name = "UICorner"
+	uICorner12.Parent = loadingFrame
 
 	loadingFrame.Parent = darken
 	
 	mikate = darken
-	mikate.Enabled = true
-	mikate.Parent = game.Players.LocalPlayer.PlayerGui
+	darken.Parent = game.Players.LocalPlayer.PlayerGui
 end
 function SetupBlackout()
 	local blackout = Instance.new("ScreenGui")
 	blackout.Name = "Blackout"
-	blackout.Enabled = false
+	blackout.Enabled = true
 	blackout.ResetOnSpawn = false
 	blackout.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -645,6 +700,63 @@ function SetupBlackout()
 
 	tabLabelExample.Parent = tabContent
 
+	local tabTextExample = Instance.new("Frame")
+	tabTextExample.Name = "TabTextExample"
+	tabTextExample.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+	tabTextExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabTextExample.BorderSizePixel = 0
+	tabTextExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabTextExample.Size = UDim2.fromOffset(354, 33)
+	tabTextExample.Visible = false
+
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.Parent = tabTextExample
+
+	local uIStroke2 = Instance.new("UIStroke")
+	uIStroke2.Name = "UIStroke"
+	uIStroke2.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke2.Thickness = 0.6
+	uIStroke2.Parent = tabTextExample
+
+	local valueText1 = Instance.new("TextLabel")
+	valueText1.Name = "ValueText"
+	valueText1.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText1.TextColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.TextSize = 19
+	valueText1.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.TextXAlignment = Enum.TextXAlignment.Left
+	valueText1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.BackgroundTransparency = 1
+	valueText1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText1.BorderSizePixel = 0
+	valueText1.Size = UDim2.fromScale(0.5, 1)
+
+	local uIPadding1 = Instance.new("UIPadding")
+	uIPadding1.Name = "UIPadding"
+	uIPadding1.PaddingLeft = UDim.new(0, 10)
+	uIPadding1.Parent = valueText1
+
+	valueText1.Parent = tabTextExample
+
+	local content = Instance.new("TextBox")
+	content.Name = "Content"
+	content.FontFace = Font.new("rbxasset://fonts/families/Inconsolata.json")
+	content.PlaceholderColor3 = Color3.fromRGB(186, 186, 186)
+	content.PlaceholderText = "Label..."
+	content.Text = ""
+	content.TextColor3 = Color3.fromRGB(255, 255, 255)
+	content.TextSize = 14
+	content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	content.BackgroundTransparency = 0.9
+	content.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	content.BorderSizePixel = 0
+	content.Position = UDim2.fromScale(0.5, 0)
+	content.Size = UDim2.fromScale(0.5, 1)
+	content.Parent = tabTextExample
+
+	tabTextExample.Parent = tabContent
+
 	tabContent.Parent = frame
 
 	local minBtn = Instance.new("TextButton")
@@ -661,10 +773,10 @@ function SetupBlackout()
 	minBtn.Size = UDim2.fromOffset(33, 33)
 	minBtn.ZIndex = 4
 
-	local uICorner9 = Instance.new("UICorner")
-	uICorner9.Name = "UICorner"
-	uICorner9.CornerRadius = UDim.new(0, 12)
-	uICorner9.Parent = minBtn
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 12)
+	uICorner10.Parent = minBtn
 
 	minBtn.Parent = frame
 
@@ -677,10 +789,10 @@ function SetupBlackout()
 	bgframe.Size = UDim2.fromOffset(87, 49)
 	bgframe.ZIndex = 3
 
-	local uICorner10 = Instance.new("UICorner")
-	uICorner10.Name = "UICorner"
-	uICorner10.CornerRadius = UDim.new(0, 15)
-	uICorner10.Parent = bgframe
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.CornerRadius = UDim.new(0, 15)
+	uICorner11.Parent = bgframe
 
 	bgframe.Parent = frame
 
@@ -719,21 +831,20 @@ function SetupBlackout()
 	textLabel1.Size = UDim2.fromOffset(128, 50)
 	textLabel1.Parent = loadingFrame
 
-	local uICorner11 = Instance.new("UICorner")
-	uICorner11.Name = "UICorner"
-	uICorner11.CornerRadius = UDim.new(0, 15)
-	uICorner11.Parent = loadingFrame
+	local uICorner12 = Instance.new("UICorner")
+	uICorner12.Name = "UICorner"
+	uICorner12.CornerRadius = UDim.new(0, 15)
+	uICorner12.Parent = loadingFrame
 
 	loadingFrame.Parent = blackout
 	
 	mikate = blackout
-	mikate.Enabled = true
 	mikate.Parent = game.Players.LocalPlayer.PlayerGui
 end
 function SetupSunshine()
 	local sunshine = Instance.new("ScreenGui")
 	sunshine.Name = "Sunshine"
-	sunshine.Enabled = false
+	sunshine.Enabled = true
 	sunshine.ResetOnSpawn = false
 	sunshine.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1011,6 +1122,63 @@ function SetupSunshine()
 
 	tabLabelExample.Parent = tabContent
 
+	local tabTextExample = Instance.new("Frame")
+	tabTextExample.Name = "TabTextExample"
+	tabTextExample.BackgroundColor3 = Color3.fromRGB(247, 238, 191)
+	tabTextExample.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	tabTextExample.BorderSizePixel = 0
+	tabTextExample.Position = UDim2.fromScale(0.057, 0.142)
+	tabTextExample.Size = UDim2.fromOffset(354, 33)
+	tabTextExample.Visible = false
+
+	local uICorner9 = Instance.new("UICorner")
+	uICorner9.Name = "UICorner"
+	uICorner9.Parent = tabTextExample
+
+	local uIStroke2 = Instance.new("UIStroke")
+	uIStroke2.Name = "UIStroke"
+	uIStroke2.Color = Color3.fromRGB(255, 255, 255)
+	uIStroke2.Thickness = 0.6
+	uIStroke2.Parent = tabTextExample
+
+	local valueText1 = Instance.new("TextLabel")
+	valueText1.Name = "ValueText"
+	valueText1.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
+	valueText1.TextColor3 = Color3.fromRGB(0, 0, 0)
+	valueText1.TextSize = 19
+	valueText1.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.TextXAlignment = Enum.TextXAlignment.Left
+	valueText1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	valueText1.BackgroundTransparency = 1
+	valueText1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	valueText1.BorderSizePixel = 0
+	valueText1.Size = UDim2.fromScale(0.5, 1)
+
+	local uIPadding1 = Instance.new("UIPadding")
+	uIPadding1.Name = "UIPadding"
+	uIPadding1.PaddingLeft = UDim.new(0, 10)
+	uIPadding1.Parent = valueText1
+
+	valueText1.Parent = tabTextExample
+
+	local content = Instance.new("TextBox")
+	content.Name = "Content"
+	content.FontFace = Font.new("rbxasset://fonts/families/Inconsolata.json")
+	content.PlaceholderColor3 = Color3.fromRGB(90, 90, 90)
+	content.PlaceholderText = "Label..."
+	content.Text = ""
+	content.TextColor3 = Color3.fromRGB(0, 0, 0)
+	content.TextSize = 14
+	content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	content.BackgroundTransparency = 0.9
+	content.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	content.BorderSizePixel = 0
+	content.Position = UDim2.fromScale(0.5, 0)
+	content.Size = UDim2.fromScale(0.5, 1)
+	content.Parent = tabTextExample
+
+	tabTextExample.Parent = tabContent
+
 	tabContent.Parent = frame
 
 	local minBtn = Instance.new("TextButton")
@@ -1027,10 +1195,10 @@ function SetupSunshine()
 	minBtn.Size = UDim2.fromOffset(33, 33)
 	minBtn.ZIndex = 4
 
-	local uICorner9 = Instance.new("UICorner")
-	uICorner9.Name = "UICorner"
-	uICorner9.CornerRadius = UDim.new(0, 12)
-	uICorner9.Parent = minBtn
+	local uICorner10 = Instance.new("UICorner")
+	uICorner10.Name = "UICorner"
+	uICorner10.CornerRadius = UDim.new(0, 12)
+	uICorner10.Parent = minBtn
 
 	minBtn.Parent = frame
 
@@ -1043,10 +1211,10 @@ function SetupSunshine()
 	bgframe.Size = UDim2.fromOffset(87, 49)
 	bgframe.ZIndex = 3
 
-	local uICorner10 = Instance.new("UICorner")
-	uICorner10.Name = "UICorner"
-	uICorner10.CornerRadius = UDim.new(0, 15)
-	uICorner10.Parent = bgframe
+	local uICorner11 = Instance.new("UICorner")
+	uICorner11.Name = "UICorner"
+	uICorner11.CornerRadius = UDim.new(0, 15)
+	uICorner11.Parent = bgframe
 
 	bgframe.Parent = frame
 
@@ -1075,15 +1243,14 @@ function SetupSunshine()
 	textLabel1.Size = UDim2.fromOffset(124, 50)
 	textLabel1.Parent = loadingFrame
 
-	local uICorner11 = Instance.new("UICorner")
-	uICorner11.Name = "UICorner"
-	uICorner11.Parent = loadingFrame
+	local uICorner12 = Instance.new("UICorner")
+	uICorner12.Name = "UICorner"
+	uICorner12.Parent = loadingFrame
 
 	loadingFrame.Parent = sunshine
 	
 	mikate = sunshine
-	mikate.Enabled = true
-	mikate.Parent = game.Players.LocalPlayer.PlayerGui
+	sunshine.Parent = game.Players.LocalPlayer.PlayerGui
 end
 
 
@@ -1351,6 +1518,26 @@ function MikaUI:AddTab(tabName)
 				end
 			end
 		end,
+		InsertTextInput = function(inputName, placeholder, default, clearonlost, callback)
+			for _,tab in pairs(MikaUI.tabs) do
+				if tab.Name == tabName then 
+					local yLevel = 0.142*(#tab.elements+1)
+					local newButton = tab.tab.TabTextExample:Clone()
+					newButton.ValueText.Text = inputName
+					newButton.Content.Text = default
+					newButton.Position = UDim2.fromScale(0.057, yLevel)
+					newButton.Parent = tab.tab
+					newButton.Name = "TabTextInput"
+					newButton.Content.ClearTextOnFocus = clearonlost
+					newButton.Visible = true
+					newButton.Content.PlaceholderText = placeholder
+					newButton.Content.FocusLost:Connect(function()
+						callback(newButton.Content.Text)
+					end)
+					table.insert(tab.elements, newButton)
+				end
+			end
+		end,
 		InsertSlider = function(sliderName, sliderValueType, min, max, increment, default, color, callback)
 			for _,tab in pairs(MikaUI.tabs) do
 				if tab.Name == tabName then 
@@ -1428,6 +1615,5 @@ function MikaUI:Init(title)
 	mikate.Frame.Visible = true
 	mikate.LoadingFrame.Visible = false
 end
--- END MIKAUI
 
 return MikaUI
