@@ -16,9 +16,6 @@ local getChar = function()
 end
 
 function MikaTAS:SavePosition(key, cframe)
-    if typeof(cframe) ~= CFrame then
-        error("MIKATAS - Saving position - cannot save non-cframes")
-    end
     Saved[key] = cframe
 end
 function MikaTAS:UnsavePosition(key)
