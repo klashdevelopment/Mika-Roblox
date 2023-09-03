@@ -12,7 +12,7 @@ Inserting takes:
 - Object Name
 - Color
 ```lua
-MikaUI:Insert(part, "Part Name", Color3.fromRGB(255,255,255))
+MikaESP:Insert(part, "Part Name", Color3.fromRGB(255,255,255))
 ```
 
 ### Removing ESP Objects
@@ -20,22 +20,22 @@ Two ways:
 - using the text
 - using the part/player
 ```lua
-MikaUI:RemovePartUsingText("Part Name")
-MikaUI:RemovePartUsingPart(part)
+MikaESP:RemovePartUsingText("Part Name")
+MikaESP:RemovePartUsingPart(part)
 ```
 
-### Disabling MikaUI
+### Disabling MikaESP
 To disable, we need a Stopmui value under the player.
-If MikaUI ever finds a Stopmui it will instantly stop as soon as possible.
+If MikaESP ever finds a Stopmui it will instantly stop as soon as possible.
 ```lua
 local Stopper = Instance.new("NumberValue")
 Stopper.Name = "Stopmui"
 Stopper.Parent = game.Players.LocalPlayer
 ```
 
-### Finally, Init (Required)
+### Finally, Init (ReqESPred)
 ```lua
-MikaUI:Init()
+MikaESP:Init()
 ```
 
 ## Looking for the OG?
