@@ -1,6 +1,6 @@
 # Mika Roblox
 Mika supports [Roblox](https://github.com/klashdevelopment/Mika-Roblox), [Muck](https://github.com/klashdevelopment/Mika), [Unity](https://github.com/klashdevelopment/Mika-Others), and [multipurpose games](#).
-With documentation for [our roblox scripts](https://pages.klash.dev/Mika-Roblox) and [our roblox libraries](https://pages.klash.dev/Mika-Roblox/ilbs).
+With documentation for [our roblox scripts](https://pages.klash.dev/Mika-Roblox) and [our roblox libraries](https://pages.klash.dev/Mika-Roblox/libs).
 
 
 
