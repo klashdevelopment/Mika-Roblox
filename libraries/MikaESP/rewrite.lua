@@ -123,5 +123,4 @@ function MikaUI:Init()
 	runframeevent = RunService.RenderStepped:Connect(RunFrame)
 end
 
-MikaUI:Insert(workspace.Bacongoodboi8.Head, "esp", Color3.fromRGB(255, 255, 0))
-MikaUI:Init()
+return MikaUI
