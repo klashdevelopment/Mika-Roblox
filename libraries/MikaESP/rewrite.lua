@@ -106,14 +106,14 @@ end
 function MikaESP:RemovePartUsingText(text)
 	for k, v in pairs(MikaESP.parts) do
 		if v.Text == text then
-			table.remove(MikaESP.parts, table.find(v))
+			table.remove(MikaESP.parts, table.find(MikaESP.parts, v))
 		end
 	end
 end
 function MikaESP:RemovePartUsingPart(part)
 	for k, v in pairs(MikaESP.parts) do
 		if v.Part == part then
-			table.remove(MikaESP.parts, table.find(v))
+			table.remove(MikaESP.parts, table.find(MikaESP.parts, v))
 		end
 	end
 end
