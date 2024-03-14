@@ -2,7 +2,7 @@
 Mika supports [Roblox](https://github.com/klashdevelopment/Mika-Roblox), [Muck](https://github.com/klashdevelopment/Mika), [Unity](https://github.com/klashdevelopment/Mika-Others), and [multipurpose games](#).
 With documentation for [our roblox scripts](https://pages.klash.dev/Mika-Roblox) and [our roblox libraries](https://pages.klash.dev/Mika-Roblox/libs).
 
-
+# NO SCRIPTS ARE GUARENTEED TO WORK. ONCE BYFRON CAME OUT, I HAVE STOPPED UPDATING MIKA ROBLOX.
 
 ## Loading
 All of Mika's scripts are in a bundle, MikaHub.
@@ -54,14 +54,8 @@ If you need to rollback roblox to use one, follow these instructions [in this vi
 
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
-| [Mikan](https://mika.fly.dev) | [Web Client](https://mika.fly.dev)([Web Source](https://github.com/klashdevelopment/Mikan)) [Windows Client](https://github.com/klashdevelopment/Mikan-Desktop/releases/latest)([Windows Source](https://github.com/klashdevelopment/Mikan-Desktop)) | **SCRIPT EDITOR ONLY** | Custom-made script editor, fully open sourced. |
-| ~~Comet 3~~ | https://cometrbx.xyz | Decent UI, gets the job done | Comet 5 is WAY better |
-| Comet 5 ([download in #download](https://cometrbx.xyz/discord.html)) | [WAD](https://wearedevs.net/d/Comet) or [Official](https://cometrbx.xyz/discord.html) | Nice UI, SAVEINSTANCE, easy keys, byfron bypass (Requires MS Store) | Free & Easy (my personal favorite)|
-| [Fluxus](https://fluxteam.net) | [Windows](https://fluxteam.net/dl) or [Android](https://fluxteam.net/android) | Simple&Fast inject, bypass byfron, android support | Free  |
-| [Electron](https://ryos.lol/) | [WAD](https://wearedevs.net/d/Electron) or [Official](https://ryos.lol/) | Simple UI, byfron, Stability, LuaU | Free |
-| [Hydrogen](https://hydrogen.sh/) | [MacOs/Android Download](https://hydrogen.sh/download) | Mac OS & Android support | Android Free, Mac paid |
-| PAID [Script-Ware](https://script-ware.com/) | [purchasable](https://script-ware.com/) | Paid version for Mac, Windows | works well |
-| [Script-Ware iOS](https://script-ware.com/ios) | [Download](https://dev.script-ware.com/docs/iOS/install-guide) | FREE, and the only ios executor | Free |
+| [Aimmy AI](https://aimmy.dev) | aimmy.dev | Made by Comet devs, aimbot/uni hack | Useful for ESP, Tracers, Aimbot, etc. in multi-game. |
+| [Hydrogen](https://hydrogen.sh/) | [MacOs/Android Download](https://hydrogen.sh/download) | Mac OS & Android support | Free! |
 
 
 
