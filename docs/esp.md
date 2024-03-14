@@ -3,7 +3,7 @@
 
 ## Mika ESP v2
 ```lua
-local MikaESP = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaESP/rewrite"))()
+local MikaESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/MikaESP/rewrite"))()
 ```
 
 ### Inserting ESP Objects
