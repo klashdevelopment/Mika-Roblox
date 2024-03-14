@@ -7,15 +7,12 @@ With documentation for [our roblox scripts](https://pages.klash.dev/Mika-Roblox)
 ## Loading
 All of Mika's scripts are in a bundle, MikaHub.
 ```lua
-loadstring(game:HttpGet("https://x.klash.dev"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/MikaHub.lua"))()
 ```
 Or - to quick access Mikate do:
 ```lua
-loadstring(game:HttpGet("https://x.klash.dev/mikate"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/simplewalkspeed.lua"))()
 ```
-Or - look at the path to a script's file in github (ex. /scripts/ScriptName.lua) and put that on the end of either `https://x.klash.dev` or `https://script.klash.dev` in your loadstring.
-Example:
-`loadstring(game:HttpGet("https://x.klash.dev/scripts/TheScriptName"))()`
 
 ## Script List
 - MikaHub (Script Hub)
