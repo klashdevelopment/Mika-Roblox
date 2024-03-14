@@ -12,9 +12,9 @@ local Quillo = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/m
 local VapeV4 = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"
 local dingus = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/saves/dingus.lua"
 local bpb1 = loadstring(game:HttpGet("https://scriptblox.com/raw/BIG-Paintball!-Novice-Hub-4906"))
-local bpb2 = loadstring(game:HttpGet("https://x.klash.dev/scripts/BIGPBAutoKill"))
+local bpb2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/BIGPBAutoKill"))
 local hoho = loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))
-local muicreator = loadstring(game:HttpGet('https://x.klash.dev/scripts/MikaUiCreator'))
+local muicreator = loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/MikaUiCreator'))
 
 local uix = game.Players.LocalPlayer.PlayerGui
 local screen = Instance.new("ScreenGui")
@@ -31,7 +31,7 @@ btn.Parent = screen
 btn.Position = UDim2.new(1, -80, 0, -30)
 btn.MouseButton1Click:Connect(function()
 	screen:Destroy()
-	loadstring(game:HttpGet("https://x.klash.dev/quillo"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/quillo"))()
 end)
 local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 12)
@@ -79,7 +79,7 @@ Utils:AddButton({
 Utils:AddButton({
 	Name = "orca",
 	Callback = function()
-		loadstring(game:HttpGet("https://x.klash.dev/utilities/orca"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/orca"))()
 	end
 })
 Utils:AddButton({
