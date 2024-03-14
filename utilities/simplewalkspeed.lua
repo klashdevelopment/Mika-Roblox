@@ -780,11 +780,11 @@ local pname = game.Players.LocalPlayer.Name
 local pid = 0
 local latestplr = nil
 
-local HttpService = game:GetService("HttpService")
-local URL = "https://users.roblox.com/v1/usernames/users"
-local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
-local data = HttpService:JSONDecode(response)
-pid = data.data[1].id
+-- local HttpService = game:GetService("HttpService")
+-- local URL = "https://users.roblox.com/v1/usernames/users"
+-- local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
+-- local data = HttpService:JSONDecode(response)
+-- pid = data.data[1].id
 
 PlayerMan:AddTextbox({
 	Name = "Target Name",
@@ -792,15 +792,15 @@ PlayerMan:AddTextbox({
 	TextDisappear = false,
 	Callback = function(Value)
 		pname = Value
-		local HttpService = game:GetService("HttpService")
-		local URL = "https://users.roblox.com/v1/usernames/users"
-		local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
-		local data = HttpService:JSONDecode(response)
-		pid = data.data[1].id
-		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "Fake Name Updated",
-			Text = pname.." - "..pid
-		})
+		-- local HttpService = game:GetService("HttpService")
+		-- local URL = "https://users.roblox.com/v1/usernames/users"
+		-- local response = game:HttpPost(URL, '{"usernames": ["'..pname..'"],"excludeBannedUsers": true}')
+		-- local data = HttpService:JSONDecode(response)
+		-- pid = data.data[1].id
+		-- game:GetService("StarterGui"):SetCore("SendNotification", {
+		-- 	Title = "Fake Name Updated",
+		-- 	Text = pname.." - "..pid
+		-- })
 	end	  
 })
 PlayerMan:AddButton({
@@ -820,83 +820,83 @@ PlayerMan:AddButton({
 	end
 })
 
-local PlayerMulMan = PlayerMan:AddSection({Name = "Fake Players"})
-PlayerMulMan:AddButton({
-	Name = "Spawn Fake Player",
-	Callback = function()
+-- local PlayerMulMan = PlayerMan:AddSection({Name = "Fake Players"})
+-- PlayerMulMan:AddButton({
+-- 	Name = "Spawn Fake Player",
+-- 	Callback = function()
 		
-		local player = game.Players.LocalPlayer
-		local character = player.Character
-		character.Archivable = true
-		local dummy = Instance.new("Part")
-		dummy.Name = "MikaDummy"
-		dummy.Size = Vector3.new(0, 0, 0)
-		dummy.Anchored = true
-		dummy.CanCollide = false
-		dummy.CFrame = character.HumanoidRootPart.CFrame
-		dummy.Parent = workspace
-		local clonedCharacter = character:Clone()
-		clonedCharacter.Parent = dummy
-		local temp_hum_desc = game.Players:GetHumanoidDescriptionFromUserId(1)
-		local hum_desc = game.Players:GetHumanoidDescriptionFromUserId(pid)
-		clonedCharacter.Humanoid:ApplyDescription(temp_hum_desc)
-		wait(0.05)
-		clonedCharacter.Humanoid:ApplyDescription(hum_desc)
-		latestplr = clonedCharacter
-	end
-})
-PlayerMulMan:AddButton({
-	Name = "Despawn All Fake Players",
-	Callback = function()
-		for k, v in pairs(workspace:GetChildren()) do
-			if v.Name == "MikaDummy" then
-				v:Destroy()
-			end
-		end
-	end
-})
-PlayerMulMan:AddButton({
-	Name = "Despawn Most Recent Fake Player",
-	Callback = function()
-		if latestplr then
-			latestplr:Destroy()
-		end
-	end
-})
-PlayerMulMan:AddButton({
-	Name = "TP to Most Recent",
-	Callback = function()
-		if latestplr then
-			print("found")
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= latestplr.HumanoidRootPart.CFrame
-		end
-	end
-})
+-- 		local player = game.Players.LocalPlayer
+-- 		local character = player.Character
+-- 		character.Archivable = true
+-- 		local dummy = Instance.new("Part")
+-- 		dummy.Name = "MikaDummy"
+-- 		dummy.Size = Vector3.new(0, 0, 0)
+-- 		dummy.Anchored = true
+-- 		dummy.CanCollide = false
+-- 		dummy.CFrame = character.HumanoidRootPart.CFrame
+-- 		dummy.Parent = workspace
+-- 		local clonedCharacter = character:Clone()
+-- 		clonedCharacter.Parent = dummy
+-- 		local temp_hum_desc = game.Players:GetHumanoidDescriptionFromUserId(1)
+-- 		local hum_desc = game.Players:GetHumanoidDescriptionFromUserId(pid)
+-- 		clonedCharacter.Humanoid:ApplyDescription(temp_hum_desc)
+-- 		wait(0.05)
+-- 		clonedCharacter.Humanoid:ApplyDescription(hum_desc)
+-- 		latestplr = clonedCharacter
+-- 	end
+-- })
+-- PlayerMulMan:AddButton({
+-- 	Name = "Despawn All Fake Players",
+-- 	Callback = function()
+-- 		for k, v in pairs(workspace:GetChildren()) do
+-- 			if v.Name == "MikaDummy" then
+-- 				v:Destroy()
+-- 			end
+-- 		end
+-- 	end
+-- })
+-- PlayerMulMan:AddButton({
+-- 	Name = "Despawn Most Recent Fake Player",
+-- 	Callback = function()
+-- 		if latestplr then
+-- 			latestplr:Destroy()
+-- 		end
+-- 	end
+-- })
+-- PlayerMulMan:AddButton({
+-- 	Name = "TP to Most Recent",
+-- 	Callback = function()
+-- 		if latestplr then
+-- 			print("found")
+-- 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= latestplr.HumanoidRootPart.CFrame
+-- 		end
+-- 	end
+-- })
 
-PlayerMulMan:AddButton({
-	Name = "TP to All Fakes (risky)",
-	Callback = function()
-		for k, v in pairs(workspace:GetChildren()) do
-			if v.Name == "MikaDummy" then
-				print("Found fake - TPing")
-				wait(0.1)
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[1].HumanoidRootPart.CFrame
-			end
-		end
-	end
-})
-PlayerMulMan:AddButton({
-	Name = "TweenTP to All Fakes (better)",
-	Callback = function()
-		for k, v in pairs(workspace:GetChildren()) do
-			if v.Name == "MikaDummy" then
-				print("Found fake - TweenTPing")
-				wait(0.1)
-				tweenTp(game.Players.LocalPlayer.Character.HumanoidRootPart,v:GetChildren()[1].HumanoidRootPart.CFrame,1)
-			end
-		end
-	end
-})
+-- PlayerMulMan:AddButton({
+-- 	Name = "TP to All Fakes (risky)",
+-- 	Callback = function()
+-- 		for k, v in pairs(workspace:GetChildren()) do
+-- 			if v.Name == "MikaDummy" then
+-- 				print("Found fake - TPing")
+-- 				wait(0.1)
+-- 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:GetChildren()[1].HumanoidRootPart.CFrame
+-- 			end
+-- 		end
+-- 	end
+-- })
+-- PlayerMulMan:AddButton({
+-- 	Name = "TweenTP to All Fakes (better)",
+-- 	Callback = function()
+-- 		for k, v in pairs(workspace:GetChildren()) do
+-- 			if v.Name == "MikaDummy" then
+-- 				print("Found fake - TweenTPing")
+-- 				wait(0.1)
+-- 				tweenTp(game.Players.LocalPlayer.Character.HumanoidRootPart,v:GetChildren()[1].HumanoidRootPart.CFrame,1)
+-- 			end
+-- 		end
+-- 	end
+-- })
 
 local fcRunning = false
 
