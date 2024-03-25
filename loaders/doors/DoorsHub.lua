@@ -2,7 +2,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/kla
 
 OrionLib:MakeNotification({
 	Name = "Mika",
-	Content = "Doors Injection",
+	Content = "Doors Injection Archive",
 	Image = "rbxassetid://4483345998",
 	Time = 5
 })
@@ -21,40 +21,34 @@ local PlayerTab2 = Window:MakeTab({
 local PlayerSection2 = PlayerTab2:AddSection({
 	Name = "Scripts"
 })
-PlayerSection2:AddButton({
-	Name = "Load All (minus morphs)",
-	Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/doors/Loader.lua"))()
-  	end    
-})
-PlayerSection2:AddButton({
-
-		Name="Doors Morphs",Callback=function()
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorMorph.lua"))()
-		end
-	})
-PlayerSection2:AddButton({
-	Name = "Doors Mikamod",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
-  	end    
-})
+-- PlayerSection2:AddButton({
+-- 	Name = "Doors Mikamod",
+-- 	Callback = function()
+-- 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
+--   	end    
+-- })
 PlayerSection2:AddButton({
 	Name = "Rooms Auto-Farm",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/DaRealGeo/roblox/master/rooms-autowalk"))()
   	end    
 })
-PlayerSection2:AddButton({
-	Name = "PlamenUtil",
-	Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI'))()
-  	end    
-})
+-- PlayerSection2:AddButton({
+-- 	Name = "PlamenUtil",
+-- 	Callback = function()
+--         loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI'))()
+--   	end    
+-- })
 PlayerSection2:AddButton({
 	Name = "Vynixius",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Loader.lua"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua"))()
+  	end    
+})
+PlayerSection2:AddButton({
+	Name = "Vynixius Rooms",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/The%20Rooms/Script.lua"))()
   	end    
 })
 PlayerSection2:AddButton({
