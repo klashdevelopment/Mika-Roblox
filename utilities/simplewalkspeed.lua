@@ -1,6 +1,6 @@
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/Orion.lua')))()
-local MikaTAS = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/MikaTAS"))()
+local MikaTAS = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/MikaTAS.lua"))()
 local CJRPGameId = 6843988672
 
 local loadingText = "KlashDevelopment"
