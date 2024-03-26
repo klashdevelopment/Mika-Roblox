@@ -58,6 +58,12 @@ PlayerSection2:AddButton({
   	end    
 })
 PlayerSection2:AddButton({
+	Name = "King (Kardin's Choice)",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Doors%20Blackking%20And%20BobHub"))()
+  	end    
+})
+PlayerSection2:AddButton({
 	Name = "Destroy",
 	Callback = function()
         OrionLib:Destroy()
