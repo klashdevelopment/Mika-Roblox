@@ -58,9 +58,9 @@ PlayerSection2:AddButton({
   	end    
 })
 PlayerSection2:AddButton({
-	Name = "King (Kardin's Choice)",
+	Name = "King Script (OP)",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Doors%20Blackking%20And%20BobHub"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
   	end    
 })
 PlayerSection2:AddButton({
@@ -93,12 +93,6 @@ PlayerSection:AddButton({
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorMorph.lua"))()
 		end
 	})
-PlayerSection:AddButton({
-	Name = "Doors Mikamod",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
-  	end    
-})
 PlayerSection:AddButton({
 	Name = "Rooms Autowalk",
 	Callback = function()
