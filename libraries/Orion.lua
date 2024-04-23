@@ -48,8 +48,8 @@ end
 
 local Orion = Instance.new("ScreenGui")
 local randomn = math.random(1,1000)
-Orion.Name = "Orion" .. randomn
-print("Created new Orion with id " + randomn)
+Orion.Name = "MikaOrion" .. randomn
+print("Created new Orion with name " .. Orion.Name)
 Orion.Parent = game.CoreGui
 
 function OrionLib:IsRunning()
