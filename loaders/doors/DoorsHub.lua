@@ -17,7 +17,7 @@ local PlayerTab2 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-
+PlayerTab2:AddLabel("Vynixus is broken on all main executors.")
 local PlayerSection2 = PlayerTab2:AddSection({
 	Name = "Scripts"
 })
