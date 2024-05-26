@@ -17,25 +17,25 @@ local hoho = loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/
 local muicreator = loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/MikaUiCreator'))
 
 local uix = game.Players.LocalPlayer.PlayerGui
-local screen = Instance.new("ScreenGui")
-screen.Parent = uix
-screen.Name = "MikaHubUiButtons"
-local btn = Instance.new("TextButton")
-btn.Size = UDim2.fromOffset(40, 40)
-btn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-btn.BorderSizePixel = 1
-btn.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-btn.Text = "Quillo"
-btn.Parent = screen
-btn.Position = UDim2.new(1, -80, 0, -30)
-btn.MouseButton1Click:Connect(function()
-	screen:Destroy()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/quillo"))()
-end)
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 12)
-corner.Parent = btn
+-- local screen = Instance.new("ScreenGui")
+-- screen.Parent = uix
+-- screen.Name = "MikaHubUiButtons"
+-- local btn = Instance.new("TextButton")
+-- btn.Size = UDim2.fromOffset(40, 40)
+-- btn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+-- btn.BorderSizePixel = 1
+-- btn.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+-- btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+-- btn.Text = "Quillo"
+-- btn.Parent = screen
+-- btn.Position = UDim2.new(1, -80, 0, -30)
+-- btn.MouseButton1Click:Connect(function()
+-- 	screen:Destroy()
+-- 	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/quillo"))()
+-- end)
+-- local corner = Instance.new("UICorner")
+-- corner.CornerRadius = UDim.new(0, 12)
+-- corner.Parent = btn
 
 local Window = OrionLib:MakeWindow({Name = "Mika Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MIKAHUB", IntroText="KlashDevelopment", IntroIcon = "rbxassetid://7733965313"})
 local PlayerTab = Window:MakeTab({
@@ -149,12 +149,12 @@ Game:AddButton({
 		bpb2()
 	end
 })
-Game:AddButton({
-	Name = "Notoriety (MIKA)",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
-	end
-})
+-- Game:AddButton({
+-- 	Name = "Notoriety (MIKA)",
+-- 	Callback = function()
+-- 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
+-- 	end
+-- })
 Game:AddButton({
 	Name = "Vape V4 (BEDWARS)",
 	Callback = function()
@@ -162,9 +162,9 @@ Game:AddButton({
 	end
 })
 Game:AddButton({
-	Name = "Arsenal (OWL)",
+	Name = "Arsenal (MIKA)",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/Arsenal.lua"))();
 	end
 })
 Game:AddButton({
