@@ -60,7 +60,7 @@ PlayerSection2:AddButton({
 PlayerSection2:AddButton({
 	Name = "King Script (OP)",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsMikamod.lua"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/DoorsClutch.lua"))()
   	end    
 })
 PlayerSection2:AddButton({
