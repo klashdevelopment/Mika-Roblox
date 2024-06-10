@@ -45,15 +45,9 @@ local PlayerTab = Window:MakeTab({
 })
 
 local PlayerSection = PlayerTab:AddSection({
-	Name = "Explorers"
+	Name = "Hot & Fresh"
 })
 
-PlayerSection:AddButton({
-	Name = "Infinite Yield",
-	Callback = function()
-		loadstring(game:HttpGet(InfiniteYield))()
-	end
-})
 PlayerSection:AddButton({
 	Name = "Mikate",
 	Callback = function()
@@ -61,19 +55,31 @@ PlayerSection:AddButton({
 	end
 })
 PlayerSection:AddButton({
-	Name = "Mika Script Maker",
+	Name = "MIKAim",
 	Callback = function()
-		muicreator()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/Aimbot.lua"))()
+	end
+})
+PlayerSection:AddButton({
+	Name = "Infinite Yield",
+	Callback = function()
+		loadstring(game:HttpGet(InfiniteYield))()
+	end
+})
+Utils:AddButton({
+	Name = "Dex V5 (cleaner)",
+	Callback = function()
+		loadstring(game:HttpGet(OldDarkDexV5))()
 	end
 })
 
 local Utils = PlayerTab:AddSection({
 	Name = "Miscellaneous"
 })
-Utils:AddButton({
-	Name = "Dex V5 (cleaner)",
+PlayerSection:AddButton({
+	Name = "Mika Script Maker",
 	Callback = function()
-		loadstring(game:HttpGet(OldDarkDexV5))()
+		muicreator()
 	end
 })
 Utils:AddButton({
@@ -89,24 +95,13 @@ Utils:AddButton({
 	end
 })
 Utils:AddButton({
-	Name = "How To Stream Snipe",
-	Callback = function()
-		OrionLib:MakeNotification({
-			Name = "Infinite yield",
-			Content = "command to teleport to player's server exists",
-			Image = "rbxassetid://4483345998",
-			Time = 5
-		})
-	end
-})
-Utils:AddButton({
 	Name = "Cinema Freecam (Shift+P)",
 	Callback = function()
 		loadstring(game:HttpGet(CFC))() 
 	end
 })
 Utils:AddButton({
-	Name = "SecDarkDex",
+	Name = "Dex V3 (Secure)",
 	Callback = function()
 		loadstring(game:HttpGet(DarkDexV5))()
 	end
@@ -114,7 +109,7 @@ Utils:AddButton({
 Utils:AddButton({
 	Name = "ChatBypass",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/synnyyy/synergy/additional/betterbypasser", true))({
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua", true))({
 		    Method = 3, -- Method 1 is the main method. Method two is emojis. Method 3 is full transparency, no special symbols. Method 3 has been improved!
 		    Keybind = "F", -- Usually defaulted to F. You can change this keybind by replacing the string with a letter. Works for uppercase and lowercase.
 		    ShowMethodDictionary = true -- Shows you the full list of words that you can say with the method. Press FN + F9 to see this dictionary.
@@ -159,12 +154,6 @@ Game:AddButton({
 	Name = "Vape V4 (BEDWARS)",
 	Callback = function()
 		loadstring(game:HttpGet(VapeV4))()
-	end
-})
-Game:AddButton({
-	Name = "Arsenal (MIKA)",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/Arsenal.lua"))();
 	end
 })
 Game:AddButton({
