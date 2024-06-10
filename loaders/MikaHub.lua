@@ -66,7 +66,7 @@ PlayerSection:AddButton({
 		loadstring(game:HttpGet(InfiniteYield))()
 	end
 })
-Utils:AddButton({
+PlayerSection:AddButton({
 	Name = "Dex V5 (cleaner)",
 	Callback = function()
 		loadstring(game:HttpGet(OldDarkDexV5))()
