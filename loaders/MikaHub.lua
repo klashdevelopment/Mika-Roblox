@@ -14,7 +14,7 @@ local dingus = "https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/m
 local bpb1 = loadstring(game:HttpGet("https://scriptblox.com/raw/BIG-Paintball!-Novice-Hub-4906"))
 local bpb2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/BIGPBAutoKill.lua"))
 local hoho = loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))
-local muicreator = loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/MikaUiCreator'))
+local muicreator = loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/MikaUiCreator.lua'))
 
 local uix = game.Players.LocalPlayer.PlayerGui
 -- local screen = Instance.new("ScreenGui")
