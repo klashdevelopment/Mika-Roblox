@@ -128,7 +128,7 @@ OptionsSection:AddSlider({
     Color = Color3.fromRGB(246, 66, 114),
     Increment = 1,
     Callback = function(value)
-        smoothing = value/2
+        smoothing = value/100
     end
 })
 OptionsSection:AddToggle({
