@@ -1,6 +1,7 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/Orion.lua')))()
 local Sense = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
 
+local UIS = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 OrionLib:MakeNotification({
@@ -10,11 +11,11 @@ OrionLib:MakeNotification({
 	Time = 5
 })
 
-local Window = OrionLib:MakeWindow({Name = "MIKAim", HidePremium = false, SaveConfig = true, ConfigFolder = "mikaaim"})
+local Window = OrionLib:MakeWindow({Name = "MIKAim", HidePremium = false, SaveConfig = true, ConfigFolder = "mikaaim", IntroText="MIKAim", IntroIcon="rbxassetid://7743878496"})
 
 local Aim = Window:MakeTab({
     Name = "Configuration",
-    Icon = "rbxassetid://7743878496",
+    Icon = "rbxassetid://7734053495",
     PremiumOnly = false
 })
 
@@ -23,7 +24,7 @@ local OptionsSection = Aim:AddSection({
 })
 
 local fov = 150
-local smoothing = 1
+local smoothing = 0
 local teamCheck = true
 
 local FOVring = Drawing.new("Circle")
@@ -73,12 +74,27 @@ function setup()
     local zz = workspace.CurrentCamera.ViewportSize/2
     
     if pressed then
-        local Line = Drawing.new("Line")
-        local curTar = getClosest(cam.CFrame)
-        local ssHeadPoint = cam:WorldToScreenPoint(curTar.Character.Head.Position)
-        ssHeadPoint = Vector2.new(ssHeadPoint.X, ssHeadPoint.Y)
-        if (ssHeadPoint - zz).Magnitude < fov then
-            workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, curTar.Character.Head.Position), smoothing)
+        -- local Line = Drawing.new("Line")
+        -- local curTar = getClosest(cam.CFrame)
+        -- local ssHeadPoint = cam:WorldToScreenPoint(curTar.Character.Head.Position)
+        -- ssHeadPoint = Vector2.new(ssHeadPoint.X, ssHeadPoint.Y)
+        -- if (ssHeadPoint - zz).Magnitude < fov then
+        --     workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, curTar.Character.Head.Position), smoothing)
+        -- end
+        local pos = getClosest(cam.CFrame)
+        local CurrentCam = cam
+        local AimPart = pos.Character:FindFirstChild("Head")
+        if AimPart then
+            local LookAt = nil
+            local Distance = math.floor(0.5+(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position - pos.Character:FindFirstChild("HumanoidRootPart").Position).magnitude)
+            if Distance > 100 then
+                local distChangeBig = Distance / 10
+                LookAt = CurrentCam.CFrame:PointToWorldSpace(Vector3.new(0,0,-smoothing * distChangeBig)):Lerp(AimPart.Position,.01) -- No one esle do camera smoothing ? tf
+            else
+                local distChangeSmall = Distance / 10
+                LookAt = CurrentCam.CFrame:PointToWorldSpace(Vector3.new(0,0,-smoothing * distChangeSmall)):Lerp(AimPart.Position,.01) -- No one esle do camera smoothing ? tf
+            end
+            CurrentCam.CFrame = CFrame.lookAt(CurrentCam.CFrame.Position, LookAt)
         end
     end
     
@@ -107,12 +123,12 @@ OptionsSection:AddSlider({
 OptionsSection:AddSlider({
     Name = "Smoothing",
     Min = 0,
-    Max = 50,
+    Max = 100,
     Default = 1,
     Color = Color3.fromRGB(246, 66, 114),
     Increment = 1,
     Callback = function(value)
-        smoothing = value
+        smoothing = value/2
     end
 })
 OptionsSection:AddToggle({
@@ -129,23 +145,23 @@ OptionsSection:AddToggle({
         FOVring.Visible = value
     end
 })
-
-local ESPs = Window:MakeTab({
-    Name = "ESPs",
-    Icon = "rbxassetid://7733696665",
-    PremiumOnly = false
-})
-
-local globalsTab = ESPs:AddSection({Name="Global Settings"})
-local enemiesTab = ESPs:AddSection({Name="Enemy Team"})
-local friendlyTab = ESPs:AddSection({Name="Friendly Team"})
-
-globalsTab:AddToggle({
-    Name = "Use Team Colors",
+OptionsSection:AddToggle({
+    Name = "Team Colors",
     Default = false,
     Callback = function(value)
         Sense.sharedSettings.useTeamColor = value
     end
+})
+
+local enemiesTab = Window:MakeTab({
+    Name = "Enemy ESPs",
+    Icon = "rbxassetid://7733696665",
+    PremiumOnly = false
+})
+local friendlyTab = Window:MakeTab({
+    Name = "Friendly ESPs",
+    Icon = "rbxassetid://7733696665",
+    PremiumOnly = false
 })
 
 function espSections(enemies, defaults)
@@ -220,27 +236,13 @@ espSections(enemiesTab, true)
 espSections(friendlyTab, false)
 
 local Buttons = Window:MakeTab({
-    Name = "Buttons",
-    Icon = "rbxassetid://7743878496",
+    Name = "UI Options",
+    Icon = "rbxassetid://7743867310",
     PremiumOnly = false
 })
 
 Buttons:AddButton({
-    Name = "Destroy - Remove",
-    Callback = function()
-        loop:Disconnect()
-        FOVring:Remove()
-        Sense.Unload()
-    end
-})
-Buttons:AddButton({
-    Name = "Destroy - Bring Back",
-    Callback = function()
-        setup()
-    end
-})
-Buttons:AddButton({
-    Name = "Destroy - Everything",
+    Name = "Destroy All",
     Callback = function()
         loop:Disconnect()
         FOVring:Remove()
@@ -248,6 +250,42 @@ Buttons:AddButton({
         OrionLib:Destroy()
     end
 })
+
+local Tutorial = Window:MakeTab({
+    Name = "Recommended",
+    Icon = "rbxassetid://7733956210",
+    PremiumOnly = false
+})
+local Guide = Tutorial:AddSection({
+    Name = "Recommended Settings"
+})
+Guide:AddLabel("FOV: 80 (small), 150 (regular), 210 (large)")
+Guide:AddLabel("Smoothing: 0-1 (risky), 3 (regular), 5+ (safe)")
+Guide:AddLabel("Enemy ESP: Enabled, leave defaults")
+Guide:AddLabel("Friendly ESP: Disabled (unless FFA), leave defaults")
+
+local Credits = Tutorial:AddSection({
+    Name = "Credits"
+})
+Credits:AddLabel("GavinGoGaming - Developer of all things Mika")
+Credits:AddLabel("Reality - Playtester of all things Mika")
+Credits:AddLabel("Thank you for choosing & using Mika!")
+
+local Links = Tutorial:AddSection({
+    Name = "Links"
+})
+Links:AddLabel("[MIKA]")
+Links:AddLabel("Github - klashdevelopment/Mika-Roblox")
+Links:AddLabel("")
+Links:AddLabel("[KLASH]")
+Links:AddLabel("Discord - .gg/epBXp5hHBQ")
+Links:AddLabel("Website - klash.dev")
+Links:AddLabel("Twitter - klashdev")
+Links:AddLabel("")
+Links:AddLabel("[GAVIN]")
+Links:AddLabel("Github - gavingogaming")
+Links:AddLabel("Twitter - gavingogaming")
+Links:AddLabel("Website - pages.gavingogaming.com")
 
 OrionLib:Init()
 Sense.Load()
