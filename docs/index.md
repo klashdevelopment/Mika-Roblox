@@ -43,17 +43,17 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika
     - Novice Gun Mods
 
 
-## I need an executor/scripting software/injector!
-Alrighty! No problem. I personally use Comet (https://cometrbx.xyz)
-You can choose from some below (**Click "LinkVertize" or "LV", NOT "LV Installer" or "LinkVertize Intaller"**)
+## I need an executor/scripting software/exploit!
 
-If you need to rollback roblox to use one, follow these instructions [in this video.](https://www.youtube.com/watch?v=1kLGEQHzjZs) Install the msix, and then follow the fiddler steps. Roblox recently patched msix and this spoof is a workaround.
+** This information could be out of data. I will try to keep it updated, but you may refer to [robloxhackers](https://robloxhackers.lol/exploits) for updated info **
 
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
+| [Solara](https://discord.gg/realsolara) | [Windows](https://github.com/quivings/Solara/raw/main/Files/SolaraB2.zip) | New, trustable owner, Level 3 | Free |
+| [Celery](https://celery.zip) | [Windows](https://discord.gg/celery) | New, trustable owner, Level 8 | Free! |
+| [Wave](https://getwave.gg) | [Windows](https://discord.gg/getwave) | Could exit, irreputable owners | Freemium :/ |
 | [Aimmy AI](https://aimmy.dev) | aimmy.dev | Made by Comet devs, aimbot/uni hack | Useful for ESP, Tracers, Aimbot, etc. in multi-game. |
 | [Hydrogen](https://hydrogen.sh/) | [MacOs/Android Download](https://hydrogen.sh/download) | Mac OS & Android support | Free! |
-
 
 
 ## Game list 
