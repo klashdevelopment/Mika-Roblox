@@ -45,7 +45,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika
 
 ## I need an executor/scripting software/exploit!
 
-** This information could be out of data. I will try to keep it updated, but you may refer to [robloxhackers](https://robloxhackers.lol/exploits) for updated info **
+**This information could be out of data. I will try to keep it updated, but you may refer to [robloxhackers](https://robloxhackers.lol/exploits) for updated info**
+
+
+
+Personally, **I use solara and celery** to develop Mika.
+
+Why do I use two? Solara has better auto complete and Level 3 UNC for more user support in the future, but Celery is L8 with high UNC.
 
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
