@@ -1,5 +1,5 @@
 # Mika Roblox - Evaluated Script Enviornments
-## .gg/getsolara
+## See wiki below for executors
 
 Mika is the #1 fully open-sourced utility client for [Roblox](https://github.com/klashdevelopment/Mika-Roblox), [Unity](https://github.com/klashdevelopment/Mika-Others), and [Muck](https://github.com/klashdevelopment/Mika).
 
