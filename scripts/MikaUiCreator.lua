@@ -4,7 +4,7 @@
 -- Blackout (ultra dark)
 MikaUITheme = "Blackout"
 game.Players.LocalPlayer:SetAttribute("themeOfMika", MikaUITheme)
-local MikaUI = loadstring(game:HttpGet("https://x.klash.dev/libraries/MikaUI.lua"))()
+local MikaUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/MikaUI.lua"))()
 
 local scriptName = "My Script"
 local scriptTheme = "Darken"
