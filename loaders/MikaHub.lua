@@ -16,7 +16,7 @@ local bpb2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdev
 local hoho = loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))
 local muicreator = loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/MikaUiCreator.lua'))
 
-local uix = game.Players.LocalPlayer.PlayerGui
+-- local uix = game.Players.LocalPlayer.PlayerGui
 -- local screen = Instance.new("ScreenGui")
 -- screen.Parent = uix
 -- screen.Name = "MikaHubUiButtons"
