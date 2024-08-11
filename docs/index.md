@@ -2,8 +2,6 @@
 Mika supports [Roblox](https://github.com/klashdevelopment/Mika-Roblox), [Muck](https://github.com/klashdevelopment/Mika), [Unity](https://github.com/klashdevelopment/Mika-Others), and [multipurpose games](#).
 With documentation for [our roblox scripts](https://pages.klash.dev/Mika-Roblox) and [our roblox libraries](https://pages.klash.dev/Mika-Roblox/libs).
 
-# NO SCRIPTS ARE GUARENTEED TO WORK. MIKA ROBLOX IS UNMAINTAINED WITH THE UNRELIABILITY OF EXECUTORS.
-
 ## Loading
 All of Mika's scripts are in a bundle, MikaHub.
 ```lua
@@ -55,7 +53,7 @@ Why do I use two? Solara has better auto complete and Level 3 UNC for more user 
 
 | Name | Download | Features | Reason to use |
 | --- | --- | --- | --- |
-| [Solara](https://discord.gg/realsolara) | [Windows](https://github.com/quivings/Solara/raw/main/Files/SolaraB2.zip) | New, trustable owner, Level 3 | Free |
+| [Solara](https://getsolara.dev) | [Windows](https://getsolara.dev/download) | New, trustable owner, Level 3 | Free |
 | [Celery](https://celery.zip) | [Windows](https://discord.gg/celery) | New, trustable owner, Level 8 | Free! |
 | [Wave](https://getwave.gg) | [Windows](https://discord.gg/getwave) | Could exit, irreputable owners | Freemium :/ |
 | [Aimmy AI](https://aimmy.dev) | aimmy.dev | Made by Comet devs, aimbot/uni hack | Useful for ESP, Tracers, Aimbot, etc. in multi-game. |
