@@ -5,7 +5,9 @@ Get started by importing:
 local JoyUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/libraries/JoyUI.lua"))()
 ```
 
-Make a window. It's reccomended to only have 1 window atm cuz making draggable scrollable frames sucks
+Or use the example script [found here](https://github.com/klashdevelopment/Mika-Roblox/blob/main/scripts/JoyUIExample.lua)
+
+Make a window. It's reccomended to only have 1 window atm cuz draggability is WIP
 ```lua
 local Window = JoyUI:createWindow({
     title = "My Script"
