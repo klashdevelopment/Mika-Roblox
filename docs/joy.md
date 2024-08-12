@@ -7,7 +7,7 @@ local JoyUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/klashde
 
 Make a window. It's reccomended to only have 1 window atm cuz making draggable scrollable frames sucks
 ```lua
-local Window = JoyUI.createWindow({
+local Window = JoyUI:createWindow({
     title = "My Script"
 })
 ```
