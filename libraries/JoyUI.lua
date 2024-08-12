@@ -910,7 +910,7 @@ end
 local JoyUI = {}
 
 function JoyUI:createWindow(options)
-	createWindow(options)
+	return createWindow(options)
 end
 
 return JoyUI
