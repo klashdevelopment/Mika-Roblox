@@ -907,6 +907,10 @@ function createWindow(options)
 	}
 end
 
-return {
-	createWindow
-}
+local JoyUI = {}
+
+function JoyUI:createWindow(options)
+	createWindow(options)
+end
+
+return JoyUI
