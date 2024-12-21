@@ -17,6 +17,11 @@ local PlayerTab = sws:MakeTab({
 	PremiumOnly = false
 })
 
+if not player.Character then
+	print("mikate cant function without character! wait a moment until loaded")
+	player.CharacterAdded:Wait()
+end
+
 function tweenTp(part, cframe, duration)
 	local ts = game:GetService("TweenService")
 	local tw = ts:Create(part,TweenInfo.new(duration),{CFrame = cframe})
@@ -24,7 +29,7 @@ function tweenTp(part, cframe, duration)
 end
 local Noclip = nil
 local Clip = nil
-    
+
 function noclip()
 	Clip = false
 	local function Nocl()
@@ -87,7 +92,7 @@ if game.PlaceId == CJRPGameId then
 	PlayerSection:AddParagraph("County Jail Roleplay - Warnings", "You are in a high-anicheat game. Your options are limited. See the CJRP tab for this game's exploits. JumpHeight, JumpPower, and Gravity are locked. Walkspeed is capped, and bannable cheats are disabled.")
 end
 
-PlayerSection:AddSlider({
+local wsSlider = PlayerSection:AddSlider({
 	Name = "Walkspeed",
 	Min = minws,
 	Max = maxws,
@@ -2309,6 +2314,7 @@ OrionLib:Init()
 local hls = {}
 
 while true do
+	wsSlider:Set(game.Players.LocalPlayer.Character.Humanoid.WalkSpeed)
 	if OrionLib.Flags["selPart"].Value or OrionLib.Flags["selParts"].Value then
 		local part, pos = getMouseTarget()
 		for k, v in pairs(hls) do
