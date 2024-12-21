@@ -8,7 +8,6 @@ local titleText = "Mikate"
 if game.PlaceId == CJRPGameId then
 	loadingText = "Mikate for County Jail RP"
 	titleText = "Mikate for CJRP"
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/scripts/CJRPBypassScript.lua'))()
 end
 local sws = OrionLib:MakeWindow({Name = titleText, Icon = "rbxassetid://7733965386", HidePremium = false, SaveConfig = true, ConfigFolder = "Mikate", IntroText = loadingText, IntroIcon = "rbxassetid://7733965386"})
 
