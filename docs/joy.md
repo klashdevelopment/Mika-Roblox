@@ -35,6 +35,7 @@ Window.AddButton(
 
 ### Inputs
 Inputs come in 2 colors, danger and normal
+
 ![image](https://github.com/user-attachments/assets/440a486f-30f1-4582-a115-03505670d0ef)
 
 Here's the implementation:
@@ -50,6 +51,7 @@ Window.AddInput(
 
 ### Inputs with Nested Buttons
 Nesteds dont support colors:
+
 ![image](https://github.com/user-attachments/assets/20e2b49e-3634-4bc5-ae11-58a700139586)
 
 
@@ -67,6 +69,7 @@ Window.AddInputWithButton(
 
 ### Switches or Checkboxes
 AddSwitch and AddCheckbox have the same syntax, just a different look:
+
 ![image](https://github.com/user-attachments/assets/aef603e9-9cf1-4760-bd44-f91203936d06)
 
 Here's the implementation - Swap AddSwitch and AddCheckbox in:
