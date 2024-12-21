@@ -17,9 +17,9 @@ local PlayerTab = sws:MakeTab({
 	PremiumOnly = false
 })
 
-if not player.Character then
+if not game.Players.LocalPlayer.Character then
 	print("mikate cant function without character! wait a moment until loaded")
-	player.CharacterAdded:Wait()
+	game.Players.LocalPlayer.CharacterAdded:Wait()
 end
 
 function tweenTp(part, cframe, duration)
