@@ -3,7 +3,7 @@
 print("PlaceID = "..game.PlaceId)
 wait()
 task.spawn(function()
-	loadstring(game:HttpGet("https://x.klash.dev/mikate"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/utilities/simplewalkspeed.lua"))()
 end)
 wait()
 task.spawn(function()
