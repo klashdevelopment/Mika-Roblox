@@ -1,4 +1,3 @@
--- handmade latest for noto
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/refs/heads/main/libraries/Orion.lua')))()
 local Window = OrionLib:MakeWindow({Name = "NotyPayday | mika", HidePremium = false, SaveConfig = true, ConfigFolder = "NotoGuiMika", IntroEnabled = true, IntroText = "KlashDevelopment" })
 
@@ -20,6 +19,22 @@ Tab:AddButton({
             if v.Name == "KeyCard" then
                 found = true
                 game.Players.LocalPlayer.Character:MoveTo(v.KeyCard.Position)
+            end
+        end
+        if found == false then
+            
+        end
+    end
+})
+Tab:AddButton({
+	Name = "Find & Goto first key found",
+	Callback = function()
+        local found = false
+      	for i, v in pairs(game.Workspace.Map.Keys:GetChildren()) do
+            if v.Name == "Key" then
+                found = true
+                game.Players.LocalPlayer.Character:MoveTo(v.Hitbox.Position)
+                break
             end
         end
         if found == false then
