@@ -144,12 +144,12 @@ Game:AddButton({
 		bpb2()
 	end
 })
--- Game:AddButton({
--- 	Name = "Notoriety (MIKA)",
--- 	Callback = function()
--- 		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
--- 	end
--- })
+Game:AddButton({
+	Name = "Notoriety (MIKA)",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/klashdevelopment/Mika-Roblox/main/loaders/notoriety/Loader.lua"))()
+	end
+})
 Game:AddButton({
 	Name = "Vape V4 (BEDWARS)",
 	Callback = function()
