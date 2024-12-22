@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ValoddVSC/NtrietyGUI/main/ValoddVSC"))()
+loadstring(game:HttpGet("https://github.com/klashdevelopment/Mika-Roblox/raw/refs/heads/main/scripts/notoriety.lua"))()
